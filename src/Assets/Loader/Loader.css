@@ -1,0 +1,52 @@
+.FadeInLoader{
+    background-color: rgba(0, 0, 0, 0.945);
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 900;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s;
+    transform: translateX(0);
+    transition: all 2s;
+}
+.FadeOutLoader{
+    background-color: rgba(0, 0, 0, 0.699);
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    display: flex;
+    z-index: 900;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 2s;
+    transform: translateX(-100%);
+    animation: fadeOut 3s;opacity: 0;
+}
+.LinttContainer{
+    width: 40%;
+    animation-name: breatheMboy;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes breatheMboy{
+    0% {transform: rotate(0);}
+    25% {transform: rotate(90deg);}
+    50% {transform: rotate(0deg);}
+    75% {transform: rotate(-90deg);}
+    100% {transform: scale(1);}
+}
+@keyframes fadeIn{
+    0% {background-color: aliceblue;}    
+    100% {background-color: rgba(0, 0, 0, 0.945);}
+}
+@keyframes fadeOut{
+    0% {opacity: 100%;}
+    100% {opacity: 0; transform: translateX(-100%);}    
+}

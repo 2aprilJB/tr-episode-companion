@@ -1,0 +1,20 @@
+.ShowUserCredentials{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.UserCredentials{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 0.8rem;
+    height: 1.6rem;
+    border: 0.5px solid #000;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+}
+.UserDetails{
+    width: 20%;
+}

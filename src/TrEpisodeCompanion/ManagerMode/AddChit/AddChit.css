@@ -1,0 +1,38 @@
+.AddChitWrapper{
+    margin-top: 1rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.247);
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.AddChitHead{
+    font-size: 2rem;
+}
+.ChitTypeSelect{
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    display: flex;
+    height: 2rem;
+    flex-direction: row;
+}
+.ChitTypeSelect select{
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+}
+.SubmitChit{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(20, 123, 220);
+    background-color: #fff;
+    border-radius: 100%;
+    border: 3px solid rgb(20, 123, 220);
+    font-size: 2rem;
+}

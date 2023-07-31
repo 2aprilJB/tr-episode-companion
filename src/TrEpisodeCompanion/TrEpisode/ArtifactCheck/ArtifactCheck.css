@@ -1,0 +1,70 @@
+.ArtifactModuleWrapper{
+    animation: fadeIn 1.8s;
+    width: 95%;
+    background-color: aliceblue;
+    border-radius: 20px;
+    margin-top: 1.5rem;
+    padding: 1rem 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ChitTypeHeading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.7rem;
+}
+.ChitContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.RefreshDiv{
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly;
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+}
+.RefreshCollection{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    font-size: 3rem;
+    animation: refreshRotate 2s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+@keyframes refreshRotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(90deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}

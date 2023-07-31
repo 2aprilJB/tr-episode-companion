@@ -1,0 +1,96 @@
+.Showcase2{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: antiquewhite;
+    border-radius: 40px;
+    padding:2rem 0;
+}
+.Tab{
+  cursor: pointer;
+  width: 17rem;
+  height: 3rem;
+  margin: 0.3rem auto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 100px 0 150px 0;
+  transition: all 1.5s ;
+}
+.ContentName{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lato';
+  font-weight: lighter  ;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+  width: 70%;
+}
+.Showing{
+  width: 100%;
+}
+.ActiveTab{
+    background-color: rgb(206, 40, 117);
+    border-radius: 100px;
+}
+.PlusMinusContainer{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+/*Just For Plus-Minus*/
+.PlusMinus {
+    box-sizing: border-box;
+    transition: transform 0.3s;
+    width: 24px;
+    height: 24px;
+    transform: rotate(180deg);
+    position: relative;
+  }
+  .ActiveTab .PlusMinus {
+    transform: rotate(0deg);
+  }
+  .PlusMinus::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 0px;
+    border-bottom: solid 4px #000000;
+    position: absolute;
+    bottom: 11px;
+    transform: rotate(90deg);
+    transition: width 0.3s;
+  }
+  .ActiveTab .PlusMinus::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-bottom: solid 4px #000000;
+    position: absolute;
+    bottom: 11px;
+    transform: rotate(90deg);
+  }
+  .PlusMinus::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 0px;
+    border-bottom: solid 4px #000000;
+    position: absolute;
+    bottom: 11px;
+  }
+
+

@@ -1,0 +1,43 @@
+.IssueAlert{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 1rem 0;
+}
+.AlertText{
+    width: 60%;
+    font-size: 1rem;
+    border-radius: 4px;
+    padding: 0.2rem;
+    border: 2px solid crimson;
+}
+.SubmitAlert{
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: crimson;
+    background-color: #fff;
+    border-radius: 100%;
+    box-shadow: 0 0 0 #000;
+    border: 3px solid crimson;
+    transition: all 0.4s;
+    font-size: 2rem;
+}
+.SubmitAlert :hover{
+    box-shadow: 0 0 10px #00000094;
+    border-radius: 100%;
+    background-color: beige;
+    transition: all 0.1s;
+}
+.AddAlertWrapper{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+}

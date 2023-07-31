@@ -1,0 +1,15 @@
+.ActualChitContainer{
+    width: 22rem;
+    height: 15rem;
+    background-color: antiquewhite;
+    border: 5px solid rgb(0, 119, 255);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 0.9rem;
+}
+.ActualChitContainer div{
+    width: 100%;
+}

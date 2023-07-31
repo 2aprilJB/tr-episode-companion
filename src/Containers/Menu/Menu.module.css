@@ -1,0 +1,104 @@
+.Menu{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(179.97deg, rgba(255, 255, 255, 0.99) 30.14%, rgba(255, 255, 255, 0.86) 51.43%, rgba(255, 255, 255, 0.65) 68.68%, rgba(255, 255, 255, 0.44) 80.79%, rgba(255, 255, 255, 0) 94.34%);
+    z-index: 10000;
+    top: 0;
+    animation: fadeIn 1s ease;
+}
+.ThirtyContainer{
+    margin-top: 1rem;
+    height: 4rem;
+    width: 8rem;
+}
+.ThirtyContainer a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-size: 2rem;
+    font-family: 'Lato';
+    text-shadow: 1px 0 2px red;
+}
+.Menu__elements{
+    font-family: 'Oswald';
+    font-size: 1.5rem;
+    margin: 28% 0 20% 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+.Menu__elements li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.Menu__elements li a{
+    text-decoration: none;
+    color: black;
+}
+
+.Menu__videos{
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.432);
+    border-radius: 20px;
+    height: 10rem;
+}
+
+
+.Menu__backDrop{
+    position: absolute;
+    bottom: 10rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    background-color: rgb(255, 255, 255);
+    border: transparent;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px #000;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: bounceIn 1.5s ease-out;
+}
+
+
+
+
+
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+        transform: translateY(-10rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes bounceIn{
+    0%{
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    80%{
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}

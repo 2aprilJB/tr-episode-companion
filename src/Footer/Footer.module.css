@@ -1,0 +1,100 @@
+.Footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 40px 40px 0 0 ;
+    background-color: #000;
+    color: lavender;
+    width: 97%;
+    margin: 0 auto;
+}
+
+.LinttHere{
+    color: #fff;
+    font-family: 'Oswald';
+    font-size: 2rem;
+    letter-spacing: 0.3rem;
+    margin: 0.8rem;
+    padding: 0;
+}
+.Motto{
+    margin: 0;
+    padding: 0;
+    font-size: 1.8rem;
+    font-family: 'YellowTail';
+    font-weight: lighter;
+    letter-spacing: 0.1rem;
+    color: #ff414d;
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.432);
+}
+.MottoExplainer{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Lato';
+    font-weight: lighter;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+    line-height: 1.5rem;
+    width: 70%;
+}
+
+
+/*----The Styling Line that Divides----*/
+
+/*----The Styling Line that Divides----*/
+
+
+.Intro{
+    margin-top: 2rem;
+    font-family: 'Lato';
+    font-weight: lighter;
+    text-align: center;
+    letter-spacing: 0.2rem;
+}
+.LwdnLogo{
+    width: 10rem;
+    height: 8rem;
+}
+.Stick{
+    background: linear-gradient(64.24deg, #FCDE0B 37.81%, #E03027 77.58%);
+    width: 0.4rem;
+    height: 2.5375rem;
+}
+.AboutContact{
+    margin-top: 2rem;
+    background: linear-gradient(180deg, #FCDC0D 0%, #DA241F 72.01%);
+    width: 100%;
+    height: 10rem;
+    border-radius: 100px 100px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.AboutButt{
+    margin-top: -2rem;
+    background: linear-gradient(180deg, #FCDE0B 10.81%, #E03027 77.58%);;
+    border-radius: 40px;
+    width: 6.5rem;
+    padding: 0.6rem 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.About{
+    letter-spacing: 0.2rem;
+    color: #fff;
+    text-shadow: 2px 3px 6px #000;
+    font-size: 1.4rem;
+    font-family: 'Oswald';
+    font-weight: bolder;
+    border-radius: 40px;
+    text-align: center;
+    background-color: #fff;
+    border: 3px solid rgb(255, 255, 255);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.336);
+    margin: 0 auto;
+
+}

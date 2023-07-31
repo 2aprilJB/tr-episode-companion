@@ -1,0 +1,25 @@
+.ArTechContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    font-family: 'Lato';
+    font-weight: lighter;
+}
+.MainLogo{
+    width: 4rem;
+}
+.ArTechClassic{
+    margin: 2rem 0;
+    width: 87%;
+    height: 12rem;
+}
+.ArHeading{
+    font-weight: 100;
+    line-height: 1.8rem;
+    letter-spacing: 0.1rem;
+    color: rgb(54, 54, 54);
+    margin-top: 1rem;
+}

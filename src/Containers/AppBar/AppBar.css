@@ -1,0 +1,81 @@
+.AppBarWrapper{
+    border-bottom: 2px solid #000;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    animation: chameleon 5s;
+    animation-iteration-count: infinite;
+}
+.AppBarWrapper div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+.MenuButt,.NewsButt{
+    padding: 0 1rem;
+}
+.LinttLogo{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    margin-top: -1.6rem;
+    box-shadow: 0 0 30px #00000059;
+    transition: all 1s;
+    position: absolute;
+    padding: 2rem;
+    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f3044755-af49-4c2a-ad31-04eedff25830/dcgbvjn-35e722f1-76e0-4b55-8e1f-1a512b15e2a9.png/v1/fill/w_894,h_894/flat_design___earth_by_namethisgraphicsco_dcgbvjn-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNCIsInBhdGgiOiJcL2ZcL2YzMDQ0NzU1LWFmNDktNGMyYS1hZDMxLTA0ZWVkZmYyNTgzMFwvZGNnYnZqbi0zNWU3MjJmMS03NmUwLTRiNTUtOGUxZi0xYTUxMmIxNWUyYTkucG5nIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.HT8XE6YaXS7iYWNq9nGcKQCxGjRrEEPJW3PR33V3zz8');
+    background-position: center;
+    background-size: cover;
+    animation: grow 6s;
+    animation-iteration-count: infinite;
+  }
+  .LinttLogo img{
+    margin-top: 30%;
+  }
+  /* @keyframes chameleon{
+    0%{
+        background-image: linear-gradient(45deg,#FF2171,#0A6EBD);
+        border-bottom: 5px solid #FF2171;
+    }
+    50%{
+        border-bottom: 5px solid #d4ff15;
+        background-image: linear-gradient(90deg,#0A6EBD,#FF2171);
+    }
+    100%{
+        border-bottom: 5px solid #FF2171;
+        background-image: linear-gradient(45deg,#FF2171,#0A6EBD);
+    }
+  } */
+  @keyframes chameleon{
+    0%{
+        border-bottom: 5px solid #FF2171;
+        background-color: #0A6EBD;
+    }
+    50%{
+        border-bottom: 5px solid #d4ff15;
+        background-color:#FF2171;
+    }
+    100%{
+        border-bottom: 5px solid #FF2171;
+        background-color: #0A6EBD;
+    }
+  }
+  @keyframes grow{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.04);
+    }
+    100%{
+        transform: scale(1);
+    }
+  }

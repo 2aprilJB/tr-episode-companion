@@ -1,0 +1,69 @@
+.MapCvmWrapper{
+    width: 100%;
+    min-height: 100vh;
+}
+.MapCvmTitle{
+    text-decoration: underline #fff 0.4rem ;
+    margin: 2rem 0 ;
+    font-size: 2rem;
+    animation: textGlow 3s infinite;
+    color: #c7004c;
+}
+.MapInfoContainer{
+    border-radius: 20px;
+    width: 90%;
+    margin: 1rem auto;
+    min-height: 35rem;
+    background-image: linear-gradient(45deg,rgb(0, 0, 63),red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.MapContainer{
+    height: 25rem;
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgba(255, 228, 196, 0.418);
+}
+.MapInfo{
+    position: relative;
+    width: 100%;
+    min-height: 10rem;
+    padding: 2.5rem 0;
+}
+
+.TeamDetailsMap{
+    top: -15%;
+    left: 38%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 5rem;
+    height: 5rem;
+    background-color:antiquewhite;
+    font-size: 1.2rem;
+    font-family: 'Lato';
+    font-weight: 800;
+    background-image: linear-gradient(110deg,#025dc4,#c7004c);
+    box-shadow: 0 4px 10px #ffffff4d;
+    animation: float 3s infinite;
+    border: 3px solid #fff;
+    animation: keepFloat 5s infinite;
+    z-index: 999;
+}
+.TeamDetailsMap h5{
+    border-bottom: 3px solid rgb(183, 231, 10);
+    color: antiquewhite;
+    font-family: 'Lato';
+    font-weight: lighter;
+}
+.TeamCodeMap{
+    font-size: 2.5rem;
+    font-family: 'Lato';
+    font-weight: bolder;
+    color: rgb(255, 209, 209);
+    animation: textGlow 3s infinite;
+}

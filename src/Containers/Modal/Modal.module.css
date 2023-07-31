@@ -1,0 +1,68 @@
+.BackDrop{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.219);
+    width: 100%;
+    animation: appear 0.3s;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+}
+.Cross{
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100px;
+    background-color: brown;
+    border: 4px solid#000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0.4rem;
+    right: 0.4rem;
+}
+.Cross ion-icon{
+    color: #fff;
+    transform: translate(5%,-10%);
+}
+.ModalWrapper{
+    top:0%;
+    position: relative;
+    background-color: #fff;
+    height: max-content;
+    padding: 3rem 0.5rem 1rem 0.5rem;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px #000;
+    transition: all 0.3s;
+    z-index: 10000;
+    animation: fadeIn 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes fadeIn{
+    0%{
+        transform: scale(1.4);
+        opacity: 0;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,46 @@
+.MainContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
+    justify-content: center;
+}
+.LoginPage{
+    padding-top: 7.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 40px 40px;
+}
+
+@media (min-width: 540px) {
+    .MainContainer{
+        width: 540px;
+    }
+}
+
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float{
+    0%{
+        transform: translateY(-0.5rem);
+    }
+    50%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-0.5rem);
+    }
+}

@@ -1,0 +1,32 @@
+.AlertModuleContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.AlertHead{
+    font-size: 2rem;
+    color: crimson;
+    padding: 0;
+    margin-bottom: -3%;
+}
+.AlertModule{
+    width: 18rem;
+    background-color: aliceblue;
+    border-radius: 20px;
+    border: 3px solid crimson;
+    min-height: 5rem;
+    font-size: 1.2rem;
+    font-family: 'Lato';
+}
+.AlertRefresh{
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 0;
+    color: crimson;
+}

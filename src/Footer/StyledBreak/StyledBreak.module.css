@@ -1,0 +1,9 @@
+.StylingIconsLines{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+.StylingLine{
+    transform: translateY(-40%);
+}

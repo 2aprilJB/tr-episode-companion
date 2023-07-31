@@ -1,0 +1,39 @@
+.AddUser{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.247);
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.AddUserHead{
+    font-size: 2rem;
+}
+.ShowButt{
+    margin-top: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    border: transparent;
+    box-shadow: 4px 8px 10px #0000006c;
+    font-size: 2rem;
+}
+.ShowButt ion-icon{
+    transform: translateY(15%);
+}
+
+.SubmitUser{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(20, 123, 220);
+    background-color: #fff;
+    border-radius: 100%;
+    border: 3px solid rgb(20, 123, 220);
+    font-size: 2rem;
+}

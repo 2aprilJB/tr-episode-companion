@@ -1,0 +1,189 @@
+.TrEpisodeMainContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.LogoutButtContainer{
+    position: absolute;
+    top: 5.2rem;
+    left: 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.LogoutButt{
+    border: 2px solid rgb(255,230,0);
+    width: 4.5rem;
+    height: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0 20px 20px 0;
+    align-items: center;
+    color: rgb(255, 230, 0);
+    background-color: #fff;
+    box-shadow: -2px 4px 10px #ffffff44;
+    transition: all 0.4s;
+    font-size: 2rem;
+    background-image: linear-gradient(90deg,#ff5050,rgb(109, 184, 255));
+}
+.ShowChitContainer{
+    position: absolute;
+    top: 5.2rem;
+    right: 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ShowChit{
+    border: 2px solid rgb(255,230,0);
+    width: 4.5rem;
+    height: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #fff;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -2px 4px 10px #ffffff44;
+    transition: all 0.4s;
+    font-size: 2rem;
+    background-image: linear-gradient(270deg,#ff5050,rgb(109, 184, 255));
+}
+.ButtText{
+    font-family: 'Lato';
+    font-weight: lighter;
+    letter-spacing: 0.2rem;
+    margin-top: 0.5rem;
+    color: #fff;
+    text-shadow: 2px 0 0 #000;
+    font-size: 0.6rem;
+}
+
+
+.Timer{
+    font-size: 2rem;
+    width: 10rem;
+    background-color: rgba(13, 46, 156, 0.5);
+    border: 2px solid #00116e;
+    border-radius: 7px;
+    box-shadow: 0 10px 20px #00000042;
+    margin-bottom: 2rem;
+}
+.TeamDetails{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 5rem;
+    border-radius: 20px;
+    width: 6rem;
+    height: 7rem;
+    background-color:antiquewhite;
+    font-size: 1.2rem;
+    font-family: 'Lato';
+    font-weight: 800;
+    margin-bottom: 2rem;
+    background-image: linear-gradient(110deg,#025dc4,#c7004c);
+    box-shadow: 0 4px 10px #ffffff4d;
+    animation: float 3s infinite;
+    border: 3px solid #fff;
+    animation: keepFloat 5s infinite;
+
+}
+.TeamDetails h5{
+    border-bottom: 3px solid rgb(183, 231, 10);
+    color: antiquewhite;
+    font-family: 'Lato';
+    font-weight: lighter;
+}
+.TeamCode{
+    font-size: 3rem;
+    font-family: 'Lato';
+    font-weight: bolder;
+    color: rgb(255, 209, 209);
+    animation: textGlow 3s infinite;
+}
+
+
+
+/* BOAT Collection and type - I */
+.BoatSection, .PlaneSection{
+    width: 100%;
+    margin-bottom: 2rem;
+}
+.ChitTypeHeading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.7rem;
+}
+.ChitContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.RefreshDiv{
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly;
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+}
+.RefreshCollection{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    font-size: 3rem;
+}
+
+
+.ArtifactsContainer{
+    width: 95%;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+@keyframes keepFloat{
+    0%{
+        box-shadow: 0 4px 10px #ffffff4d;
+        transform: scale(1);
+        border: 3px solid #025dc4;
+    }
+    50%{
+        box-shadow: 0 8px 30px #ffffff73;
+        border: 3px solid #c7004c;
+        transform: scale(1.1);
+    }
+    100%{
+        box-shadow: 0 4px 10px #ffffff4d;
+        border: 3px solid #025dc4;
+        transform: scale(1);
+    }
+}
+@keyframes textGlow{
+    0%{
+        color: #0077c7;
+    }
+    50%{
+        color: #029dc4;
+    }
+    100%{
+        color: #0077c7;
+    }
+}

@@ -1,0 +1,164 @@
+.HeroWrapper{
+    text-align: center;
+    width: 21rem;
+    height: 16rem;
+    border-radius: 20px;    
+    box-shadow: 5px 10px 20px #00000071;
+    font-family: 'Lato';
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.6rem;
+    animation-name: float;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+.BillBoard{
+    width: 100%;
+    height: 76%;
+    border-radius: 20px;
+    background-color: #0000006c;
+    background-image: linear-gradient(#000000d5,#00000000);
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    text-align: left;
+    padding: 0.6rem 0rem 0rem 0.8rem;
+    font-family: 'Lato';
+}
+.LinkTab{
+    width: max-content;
+    padding: 0.2rem 1rem;
+    height: max-content;
+    margin-top: -10%;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 -6px 10px #272727;
+    animation-name: float2;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 2rem;
+}
+.LinkTab h3{
+    margin: 0;
+    margin-bottom: 0.4rem;
+    padding: 0;
+    font-size: 1.2rem;
+    font-family: 'Lato';
+    font-weight: lighter;
+    word-spacing: 0.4rem;
+}
+.LinksModule{
+    display: flex;
+    flex-direction: row;
+}
+.LinkButt{
+    margin: 0 0.5rem;
+    background-image: linear-gradient(45deg,#ffffff,rgba(41, 100, 209, 0.404));
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    border: 2px solid #ff2172;
+    border-radius: 100%;
+    animation: glow 2s;
+    animation-iteration-count: infinite;
+}
+.LinkButt ion-icon{
+    transform: translateX(6%);
+    color: #000000;
+}
+.LinkButt p{
+    font-size: 0.7rem;
+}
+.BillBoardHead{
+    color: #fff;
+    font-size: 1.8rem;
+    text-align: left;
+    padding: 0.6rem 0rem 0rem 0.4rem;
+    font-family: 'Lato';
+    letter-spacing: 0.1rem;
+}
+.BillBoardPar{
+    text-shadow: 0 0 10px #000;
+    font-size: 1rem;
+    padding: 0.6rem 0rem 0rem 0.4rem;
+    width: 60%;
+}
+.ModalContent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.ModalContentTitle{
+    font-size: 2.2rem;
+    font-family: 'Lato';
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+}
+.ModalContentDetails{
+    margin:1rem 0;
+    font-size: 1rem;
+}
+.IdeaCoverImg{
+    width: 16rem;
+    height: 10rem;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #0000007e;
+    background-position: center;
+    background-size: cover;
+}
+.IdeaButtContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.IdeaButtName{
+    font-size: 0.8rem;
+}
+.ModalLink{
+    font-size: 1.2rem;
+}
+@keyframes float{   
+    0%{
+        transform: translateY(-0.5rem);
+    }
+    50%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-0.5rem);
+    }
+}
+@keyframes float2{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-0.2rem);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+@keyframes glow{
+    0%{
+        border: 2px solid #ff2172;
+    }
+    50%{
+        border: 2px solid #d1ff02;
+    }
+    100%{
+        border: 2px solid #ff2172;
+    }
+}
