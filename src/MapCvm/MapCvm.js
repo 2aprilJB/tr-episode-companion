@@ -17,6 +17,7 @@ class MapCvm extends Component{
     render(){
         return(
             <div className="MapCvmWrapper">
+                <a href = "/polygonGen" className="PolygonGenButt">Poly</a>
                 <h2 className="MapCvmTitle">CV Map</h2>
                 <div className="MapInfoContainer">
                     <div className="MapContainer">

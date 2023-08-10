@@ -1,3 +1,4 @@
+//Git token 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
 import TrCompanion from './TrEpisodeCompanion/TrCompanion';
 import './App.css';
 import HawkMode from './TrEpisodeCompanion/HawkMode/HawkMode';
@@ -95,6 +96,7 @@ class App extends Component {
                   </div>
     let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrl + 'billBoards/managerMode'}/></div>
     let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm baseUrl = {this.state.baseUrl} /></div>
+    // let polygonGen = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><PolygonGen /></div>
     let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrl + 'billBoards/contactUs'}/></div>
       return (
         <BrowserRouter>
@@ -115,6 +117,7 @@ class App extends Component {
               <Route path='/login' exact element = {mainApp}/>
               <Route path='/managerMode' exact element = {managerMode}/>
               <Route path='/mapCVM' exact element = {mapCVM}/>
+              {/* <Route path='/polygonGen' exact element = {polygonGen}/> */}
             </Routes>
         </BrowserRouter>
       );

@@ -8,7 +8,7 @@ const introInfo = (props)=>{
             <div className="InfoShowcase" style={{backgroundImage: infoShowcaseImg}}>here We go</div>
             <h4 className="IntroTagline">Enter the world with<br/>A new Perspective</h4>
             <div className="StylingLine"></div>
-            <h2 className="HeadingTitle">TREASURE<br/>ROYALE</h2>
+            <h2 className="HeadingTitle"><b style={{color: "#045aa1"}}>TREASURE</b><br/><b style={{color:"#c70039"}}>ROYALE</b></h2>
         </div>
     );
 }

@@ -6,6 +6,8 @@ import SlideShowcase from "./SLideShow/SlideShowcase";
 import ArTech from "./ArTech/ArTech";
 import './Landing.css';
 import { Component } from "react";
+import Showcase from "../Containers/Showcase/Showcase";
+import TheQuote from "./TheQuote/TheQuote";
 
 class NewMay extends Component{
     state = {
@@ -34,28 +36,31 @@ class NewMay extends Component{
                 
                 <IntroInfo infoShowcaseImg = {this.state.infoShowcase[0]} />
 
-                <div className="PageNav">
+                {/* <div className="PageNav">
                     <div className="ToSection">1</div>
                     <div className="ToSection">3</div>
                     <div className="ToSection">2</div>
-                </div>
+                </div> */}
 
-                <p className="IntroBrief">
-                    An AR based semi-mobile game 
-                    <br/>that is meant to offer the
-                    <br/>rich experience of the BATTLE ROYALE</p>
+                <Showcase top>
+                    <p className="IntroBrief">
+                        An AR based semi-mobile game 
+                        <br/>that is meant to offer the
+                        <br/>rich experience of the BATTLE ROYALE
+                    </p>
+                    <p className="IntroBrief">
+                        The FUSION of two great concepts..
+                        <br/>Treasuer Hunt
+                        <br/>Battle Royale
+                    </p>
+                </Showcase>
                 
                 <ArTech/>
 
                 <SlideShowcase/>
-                {/*
 
-
-                <div className="SlideShowcase">
-                    <div className="ShowcaseTagline"></div>
-                    <div className="Events"></div>
-                    <div className="TheApp"></div>
-                </div> */}
+                <TheQuote/>
+                
             </div>
         );
     }

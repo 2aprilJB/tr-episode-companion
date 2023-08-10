@@ -9,6 +9,11 @@
     animation: textGlow 3s infinite;
     color: #c7004c;
 }
+.PolygonGenButt{
+    width: 3rem;
+    height: 3rem;
+    background-color: aqua;
+}
 .MapInfoContainer{
     border-radius: 20px;
     width: 90%;

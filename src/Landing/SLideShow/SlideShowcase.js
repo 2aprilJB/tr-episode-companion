@@ -1,5 +1,6 @@
 import React from 'react';
 import './SlideShowcase.css';
+import Showcase2 from '../../Containers/Showcase2/Showcase2';
 
 const slideShowcase = ()=>{
     return(
@@ -11,8 +12,10 @@ const slideShowcase = ()=>{
                 OFF YOUR<br/>
                 SCREEN SCROLLING.
             </div>
-            <div className="Events">Events</div>
-            <div className="TheApp">TheApp</div>
+            <Showcase2 colors = {['#c70039','#1eb2a6']} activeSub = {0} modules = {['Events','The App']}>
+                <div className="Events">Events</div>
+                <div className="TheApp">TheApp</div>
+            </Showcase2>
         </div>
     );
 }

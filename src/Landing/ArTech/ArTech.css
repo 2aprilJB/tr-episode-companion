@@ -10,6 +10,7 @@
 }
 .MainLogo{
     width: 4rem;
+    animation: growNshrink 5s infinite;
 }
 .ArTechClassic{
     margin: 2rem 0;
@@ -22,4 +23,16 @@
     letter-spacing: 0.1rem;
     color: rgb(54, 54, 54);
     margin-top: 1rem;
+}
+
+@keyframes growNshrink{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
