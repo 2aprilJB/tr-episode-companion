@@ -11,7 +11,7 @@ import TheQuote from "./TheQuote/TheQuote";
 
 class NewMay extends Component{
     state = {
-        infoShowcase: ['https://th.bing.com/th/id/OIP.4YCFKCKnBstxpzZ5yz5FqQHaE8?pid=ImgDet&rs=1'],
+        infoShowcase: ['https://thumbs.dreamstime.com/b/businessmen-businesswomen-performing-group-activity-creative-office-65404221.jpg'],
         showMenu : false,
         menuLinks : [
             ['PARTICIPATION','https://treasureroyale-lintt.web.app'],

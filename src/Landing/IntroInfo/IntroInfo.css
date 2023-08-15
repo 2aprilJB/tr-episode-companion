@@ -11,8 +11,8 @@
     padding: 0;
     margin-top: -42%;
     box-shadow: 1px 1px #000;
-    height: 27rem;
-    background-position: center;
+    height: 26rem;
+    background-position:30%;
     background-size: cover;
     clip-path: polygon(50% 35%, 100% 35%, 100% 70%, 80% 90%, 49% 95%, 20% 90%, 0% 70%, 0% 35%);
 }
@@ -39,6 +39,6 @@
     font-weight: 900;
     letter-spacing: 0.6rem;
     margin-top: 1rem;
-    line-height: 2.4rem;
-    font-size: 2rem;
+    line-height: 3rem;
+    font-size: 2.8rem;
 }

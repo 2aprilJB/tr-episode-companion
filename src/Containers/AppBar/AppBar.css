@@ -6,8 +6,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    animation: chameleon 5s;
+    animation: chameleon 5s;    
     animation-iteration-count: infinite;
+    background-color: rgb(49, 49, 49);
 }
 .AppBarWrapper div{
     display: flex;
@@ -18,8 +19,10 @@
 }
 .MenuButt,.NewsButt{
     padding: 0 1rem;
+    color: aliceblue;
 }
 .LinttLogo{
+    animation: chameleon 5s;    
     width: 7rem;
     height: 7rem;
     border-radius: 100%;
@@ -57,15 +60,12 @@
   @keyframes chameleon{
     0%{
         border-bottom: 5px solid #FF2171;
-        background-color: #0A6EBD;
     }
     50%{
-        border-bottom: 5px solid #d4ff15;
-        background-color:#FF2171;
+        border-bottom: 5px solid #0A6EBD;
     }
     100%{
         border-bottom: 5px solid #FF2171;
-        background-color: #0A6EBD;
     }
   }
   @keyframes grow{

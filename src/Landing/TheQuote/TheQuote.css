@@ -41,18 +41,18 @@
     animation: ARupDown 3s infinite;
 }
 .ArLogo2{
-    position: fixed;
+    position: absolute;
     top: 28%;
-    right: -3%;
+    right: -8%;
     width: 6rem;
     height: 6rem;
     animation: ARupDown 3s infinite;
     transform: rotate(-40deg);
 }
 .ArLogo4{
-    position: fixed;
-    top: 50%;
-    left: -3%;
+    position: absolute;
+    top: 70%;
+    left: -25%;
     width: 4rem;
     height: 4rem;
     animation: ARupDown 3s infinite;

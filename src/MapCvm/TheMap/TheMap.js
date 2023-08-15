@@ -27,7 +27,7 @@ class TheMap extends Component{
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
-          }
+        }
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(position=>{
                 const latitude = position.coords.latitude;
@@ -42,7 +42,37 @@ class TheMap extends Component{
                 if(err.code===2)
                     console.log("Unable to retrieve your location");
                 else if(err.code===3)
-                    console.log('Its in good direction');
+                    console.log('Shits happening');
+            },options);
+          }
+
+        else {
+            console.log("Geolocation not supported");
+        }
+    }
+
+    refreshCoords = ()=>{
+        console.log('O YAa')
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position=>{
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                this.setState({
+                    coords: [latitude,longitude]
+                })
+                
+            },err=>{
+                
+                if(err.code===2)
+                    console.log("Unable to retrieve your location");
+                else if(err.code===3)
+                    console.log("Timeout error");
             },options);
           }
 
@@ -66,6 +96,7 @@ class TheMap extends Component{
         }),3000)
         return(
             <div className="TheMapContainer">
+                <button onClick={this.refreshCoords} className="RefreshCoords">ASD</button>
                 <LeafletMap center={this.state.coords} zoom={15}>
                     <TileLayer
                     maxZoom={21}
