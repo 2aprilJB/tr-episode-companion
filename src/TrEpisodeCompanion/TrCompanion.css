@@ -3,8 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aliceblue;
+    background-color: rgb(219, 219, 219);
     justify-content: center;
+    border-radius: 20px;
 }
 .LoginPage{
     padding-top: 7.5rem;

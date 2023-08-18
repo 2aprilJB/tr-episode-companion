@@ -10,9 +10,6 @@
     flex-direction: column;
     align-items: center;
     font-size: 1.6rem;
-    animation-name: float;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
 }
 .BillBoard{
     width: 100%;

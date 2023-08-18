@@ -84,7 +84,7 @@ class TrCompanion extends Component{
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true} />}
                 {this.state.loggedIn[0]?<TrEpisode loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} activeTeam = {this.state.loggedIn[1]}/>:
                     <div className="LoginPage">
-                        <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/homePage'} />
+                        <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/loginPage'} />
                         <LoginPopup credentialsUrl = {this.state.credentialsUrl} loggedInHandler={this.loggedInHandler} loggedIn = {this.state.loggedIn} />
                     </div>
                 }

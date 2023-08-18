@@ -22,7 +22,8 @@
     text-decoration: none;
     color: black;
     font-size: 2rem;
-    font-family: 'Lato';
+    letter-spacing: 0.3rem;
+    font-family: 'Yellowtail';
     text-shadow: 1px 0 2px red;
 }
 .Menu__elements{
@@ -53,9 +54,8 @@
     width: 100%;
     background-color: rgba(128, 128, 128, 0.432);
     border-radius: 20px;
-    height: 10rem;
+    height: 13rem;
 }
-
 
 .Menu__backDrop{
     position: absolute;

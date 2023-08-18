@@ -87,7 +87,7 @@ class App extends Component {
     }
     let back = 'url("' + this.state.backImgs + '")'; 
 
-    let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing/><Footer /></div>
+    let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing baseUrl = {this.state.baseUrl} /><Footer /></div>
     let mainApp = <div style={{backgroundImage:back}} className="App">
                     
                     
@@ -101,7 +101,7 @@ class App extends Component {
       return (
         <BrowserRouter>
             {/* If Menu or News icons are clicked they are handled here.... */}
-            {this.state.showMenu?<Menu backDrop = {this.onMenuBackDrop}/>:null}
+            {this.state.showMenu?<Menu baseUrl = {this.state.baseUrl} backDrop = {this.onMenuBackDrop}/>:null}
                     {this.state.showNews?<Modal show = {this.state.showNews} onBackDrop = {this.onNewsBackDrop}>
                       <h2 className='NewsHead'>Latest Updates</h2>
                       {this.state.newsUpdates.map((ele,ind)=>{

@@ -94,7 +94,7 @@ class TrEpisode extends Component{
                     <div onClick={()=>showChitCount(true)} className="ShowChit">
                         <ion-icon name="checkbox-outline"></ion-icon>
                     </div>
-                    <h3 className="ButtText">Show<br/   >Chits</h3>
+                    <h3 className="ButtText">Show<br/>Chits</h3>
                 </div>
                 <Modal show = {this.state.showChit} onBackDrop = {()=>showChitCount(false)}>
                     {/*ChitCount Module*/}

@@ -27,8 +27,15 @@ const footer = (props)=>{
             <div className = {classes.Stick}></div>
             <div className = {classes.AboutContact}>
                 <div className = {classes.AboutButt}>
-                    <button onClick = {aboutButtClickHandler} className = {classes.About}>ABOUT</button>
+                    <button onClick = {()=>alert('You will Come to know soon..')} className = {classes.About}>ABOUT</button>
                 </div>
+
+                <div className={classes.InstaContact}>
+                    <h3>TO KNOW MORE<br/>WHATS HAPPENING..<br/>FOLLOW US..</h3>
+                    <a href='https://www.instagram.com/treasureroyalelintt00/' className={classes.InstaIcon}><ion-icon name="logo-instagram"></ion-icon></a>
+                    <p className={classes.LinttLookout}>!!   Lintt is always on the LOOKOUT  !!</p>
+                </div>
+
             </div>
         </div>
     );

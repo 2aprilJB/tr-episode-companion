@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
+    margin-bottom: 2rem;
 }
 .InfoShowcase{
     padding: 0;
@@ -15,6 +16,16 @@
     background-position:30%;
     background-size: cover;
     clip-path: polygon(50% 35%, 100% 35%, 100% 70%, 80% 90%, 49% 95%, 20% 90%, 0% 70%, 0% 35%);
+}
+.Planeterium img{
+    width: 100%;
+    position: relative;
+}
+.Planeterium div{
+    animation: float 3s infinite;
+}
+.Planeterium{
+    z-index: 99;
 }
 
 .IntroTagline{
@@ -41,4 +52,39 @@
     margin-top: 1rem;
     line-height: 3rem;
     font-size: 2.8rem;
+}
+/*Arranging the planets in our planeterium*/
+
+.Jupiter{
+    position: absolute;
+    width: 4rem;
+    top: 15rem;
+    left: 0.4rem;
+}
+.Mars{
+    position: absolute;
+    width: 5rem;
+    top : 16rem;
+    right: 2rem;
+}
+.Saturn{
+    display: none;
+}
+.Uranus{
+    position: absolute;
+    width: 4rem;
+    top : 6rem;
+    right: 0.2rem;
+}
+.Moon{
+    position: absolute;
+    width: 3rem;
+    top : 6rem;
+    left: 0.2rem;
+}
+.Neptune{
+    position: absolute;
+    width: 3rem;
+    top : 15rem;
+    left: 10rem;
 }
