@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import { MapContainer as LeafletMap, TileLayer, Polygon, Circle, Marker, Popup, ImageOverlay } from 'react-leaflet';
 import "leaflet/dist/leaflet.css"
 import "./TheMap.css";
-import {  iconPerson  } from './Icon/Icon';
+import {  iconPerson, iconChar  } from './Icon/Icon';
 import Lintt from "../../Assets/Lintt/Lintt";
 import axios from "axios";
 class TheMap extends Component{
 
     state = {
-        coords:[23.235297, 72.669065]
+        coords: null
     }
 
     componentDidMount(){
-        // setTimeout(this.setCoords,5000);
-        axios.get(this.props.baseUrl + '/coords.json')
+        axios.get(this.props.baseUrl + '/coords/publicCoords.json')
              .then(resp=>{
                 this.setState({
                     coords: resp.data
@@ -51,35 +50,32 @@ class TheMap extends Component{
         }
     }
 
-    
-    setCoords = ()=>{
-        if(window.confirm('Shall i go next')){
-            this.setState({
-                coords: [23.241250, 72.662359]
-            })
-        }
-    }
     render(){
-        setTimeout(()=>axios.put(this.props.baseUrl + '/coords.json',this.state.coords)
-        .catch(err=>{
-           console.log(err);
-           alert('Error has occcurred that too in connection with MAp')
-        }),3000)
+        // setTimeout(()=>axios.put(this.props.baseUrl + '/coords.json',this.state.coords)
+        // .catch(err=>{
+        //    console.log(err);
+        //    alert('Error has occcurred that too in connection with MAp')
+        // }),3000)
         return(
-            <div className="TheMapContainer">
-                <LeafletMap center={this.state.coords} zoom={15}>
+            this.state.coords?<div className="TheMapContainer">
+                <LeafletMap center={this.state.coords.mapCenter} zoom={15}>
                     <TileLayer
                     maxZoom={21}
                     url='http://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' 
                     />
-                    <Marker position={this.state.coords} icon={iconPerson}>
-                        <Popup>
-                            See ya
-                        </Popup>
-                    </Marker>
+                    
+                    {this.state.coords.markers.charMarkers.map((ele,ind)=>{
+                        return(
+                            <Marker eventHandlers={{
+                                click: (e)=>{console.log(ele[0])}
+                            }} key={ele[0]} position={ele[3]} icon={iconChar}>
+                                
+                            </Marker>
+                        )
+                    })}
                     <ImageOverlay url = 'https://i.ibb.co/XjXxGkR/sector-16.png' bounds={[[23.232012525273973,72.64771431684495],[23.230016085247495,72.64565974473955]]}></ImageOverlay>
                 </LeafletMap>
-            </div>
+            </div>:<h2>LOADING...</h2>
         );
     }
 }

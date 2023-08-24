@@ -12,5 +12,17 @@ const iconPerson = new L.Icon({
     iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
+const iconChar = new L.Icon({
+    iconUrl: require('../../../Assets/Images/marker2.png'),
+    iconRetinaUrl: require('../../../Assets/Images/marker2.png'),
+    iconAnchor: null,
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    border: 0,
+    iconSize: new L.Point(30, 30),
+    className: 'leaflet-div-icon'
+});
 
-export { iconPerson };
+export { iconPerson, iconChar };
