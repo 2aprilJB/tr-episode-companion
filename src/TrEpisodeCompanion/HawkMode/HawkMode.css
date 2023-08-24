@@ -1,8 +1,11 @@
     .HawkModeContainer{
         min-height: 100vh;
         height: 100%;
-        width: 100%;
+        width: 90%;
         max-width: 25rem;
+    }
+    .CurrCharName{
+        margin-top: 1rem;
     }
     .CodeVerification{
         border-radius: 20px;
@@ -33,8 +36,8 @@
         width: 10rem;
     }
     .VerifyButt{
-        width: 4rem;
-        height: 3.5rem;
+        width: 3rem;
+        height: 2.5rem;
         background-color: aquamarine;
         border-radius: 20px;
         font-size: 2.5rem;
@@ -42,11 +45,11 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: 1.5rem;
+        margin-top: 0.5rem;
     }
 
     .TeamSelector{
-        margin-top: 0.4rem;
+        margin-top: -1.4rem;
     }
     .CodeVerification h3{
         margin-bottom: 2rem;

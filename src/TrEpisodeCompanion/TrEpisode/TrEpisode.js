@@ -6,10 +6,11 @@ import ChitCount from "../ChitCount/ChitCount";
 import ArtifactCheck from "./ArtifactCheck/ArtifactCheck";
 import Modal from "../../Containers/Modal/Modal";
 import HeroDisplay from "../HeroDisplay/HeroDisplay";
+import HawkMode from "../HawkMode/HawkMode";
+import ManagerMode from "../ManagerMode/ManagerMode";
 
 class TrEpisode extends Component{
     state = {
-        baseUrl: 'https://tr-episode-companion-default-rtdb.firebaseio.com/',  //Provide array like as follows: [["BLank",'Z'],["COdE",'Z']...]    
         showChit: false,
         boatValidation: false,
         refreshBoat: false,
@@ -79,7 +80,28 @@ class TrEpisode extends Component{
                 showChit:showOrNot
             })
         }
-        let ArtifactsCodesUrl = this.state.baseUrl + 'artifacts';
+        let ArtifactsCodesUrl = this.props.baseUrl + 'artifacts';
+
+        let UserMode =                     //Assigning UserMode Part to one variable
+        <div className="UserMode">
+            {/*Artifact - I : Five Check*/}
+            <div className="BoatSection">
+                <ArtifactCheck refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/boats'}  
+                toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
+                ValidatedHandler = {boatValidatedHandler} validationLimit = {2} validationFull = {this.state.boatValidation}
+                onRefreshClick = {onBoatRefresh} chitType = {'i'}/>
+            </div>
+            
+            {/*Artifact - I : Three Check*/}
+            <div className="PlaneSection">
+                <ArtifactCheck refresh = {this.state.refreshPlane} refreshed = {planeRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/planes'}  
+                toValidateImgUrl = {this.state.toValidateImgUrl[1]} activeTeam = {this.props.activeTeam}
+                ValidatedHandler = {planeValidatedHandler} validationLimit = {3} validationFull = {this.state.planeValidation}
+                onRefreshClick = {onPlaneRefresh} chitType = {'ii'}/>
+            </div>
+        </div>
+
+
         return(
             <div className="TrEpisodeMainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true}/>}
@@ -107,23 +129,14 @@ class TrEpisode extends Component{
                 </div>
 
                 {/*Alert Module, works currently on refresh click*/}
-                <HeroDisplay baseUrl = {this.state.baseUrl + 'billBoards/gamePage'}/>
-            
-                        {/*Artifact - I : Five Check*/}
-                        <div className="BoatSection">
-                            <ArtifactCheck refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.state.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/boats'}  
-                            toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
-                            ValidatedHandler = {boatValidatedHandler} validationLimit = {2} validationFull = {this.state.boatValidation}
-                            onRefreshClick = {onBoatRefresh} chitType = {'i'}/>
-                        </div>
-                        
-                        {/*Artifact - I : Three Check*/}
-                        <div className="PlaneSection">
-                            <ArtifactCheck refresh = {this.state.refreshPlane} refreshed = {planeRefreshed} baseUrl = {this.state.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/planes'}  
-                            toValidateImgUrl = {this.state.toValidateImgUrl[1]} activeTeam = {this.props.activeTeam}
-                            ValidatedHandler = {planeValidatedHandler} validationLimit = {3} validationFull = {this.state.planeValidation}
-                            onRefreshClick = {onPlaneRefresh} chitType = {'ii'}/>
-                        </div>
+                <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/gamePage'}/>
+                    {this.props.activeTeam.split("").length===1?
+                        UserMode:
+                     this.props.activeTeam==="Z0"?
+                        <ManagerMode baseUrl = {this.props.baseUrl}/>:
+                        <HawkMode activeChar = {this.props.activeTeam}/>
+                    }
+                    
             </div>
         );
     }

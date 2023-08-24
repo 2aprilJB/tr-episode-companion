@@ -34,7 +34,6 @@ class TrCompanion extends Component{
                 let creds = resp.data;          //Retrieving credentials array from server
                 creds.map((ele,ind)=>{
                     if(ele[3]===loggedIn[1]){ //Finding credential using TeamCode
-                        console.log(this.state.credentialsUrl + '/' + ind + '/2' + '.json')
                         creds[ind][2] = false;
                         axios.put(this.state.credentialsUrl + '/' + ind + '.json',creds[ind]) //Updating credentials that user has logged out
                              .then(resp=>{
@@ -82,7 +81,7 @@ class TrCompanion extends Component{
         return(
             <div className="MainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true} />}
-                {this.state.loggedIn[0]?<TrEpisode loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} activeTeam = {this.state.loggedIn[1]}/>:
+                {this.state.loggedIn[0]?<TrEpisode baseUrl = {this.props.baseUrl} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} activeTeam = {this.state.loggedIn[1]}/>:
                     <div className="LoginPage">
                         <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/loginPage'} />
                         <LoginPopup credentialsUrl = {this.state.credentialsUrl} loggedInHandler={this.loggedInHandler} loggedIn = {this.state.loggedIn} />

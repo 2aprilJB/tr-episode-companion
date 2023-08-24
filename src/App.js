@@ -14,6 +14,7 @@ import HeroDisplay from './TrEpisodeCompanion/HeroDisplay/HeroDisplay';
 import MapCvm from './MapCvm/MapCvm';
 import Landing from './Landing/Landing';
 
+
 class App extends Component {
 
   state = {
@@ -69,8 +70,6 @@ class App extends Component {
   }
   
   render(){
-
-    
     
     let onHawkClick=()=>{
       let secretCode = prompt('Enter The Secret Code,If You are a Hawk:');

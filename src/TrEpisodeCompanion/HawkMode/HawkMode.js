@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import "./HawkMode.css";
 import AlertModule from "../AlertModule/AlertModule";
-import PointTable from "../PointTable/PointTable";
+import PointTable from "./PointTable/PointTable";
 
 class HawkMode extends Component{
     state = {
@@ -28,7 +28,6 @@ class HawkMode extends Component{
                     alert('Team ' + currentTeam + ' has wrong Guess, - 5pts');
                     tempPts[currentTeam] = tempPts[currentTeam] -5;
                 }
-                console.log(tempPts)
                 axios.put('https://tr-episode-companion-default-rtdb.firebaseio.com/points.json',tempPts)
                      .catch(err=>{
                         console.log(err);
@@ -86,11 +85,19 @@ class HawkMode extends Component{
     componentDidMount(){
         axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/.json')
              .then(response=>{
-                let credentials = [];
-                credentials = response.data.credentials;
+                let credentials = {};
+                credentials = response.data.points;
                 let characters = [];
                 characters = response.data.characters;
-                
+                characters[0].map(ele=>{
+                    if(this.props.activeChar===ele[0]){
+                        this.setState({
+                            currChar: ele[1]
+                        })
+                    }
+                    else{}
+                })
+
                 this.setState({
                     credArr: credentials,
                     charArr: characters
@@ -120,26 +127,26 @@ class HawkMode extends Component{
             })
         }
 
-        let teamOptions = this.state.credArr.map((ele,ind)=>{
+        let teamOptions = Object.keys(this.state.credArr).map((ele,ind)=>{
             return(
-                <option key = {ind + 65}>{String.fromCharCode(65+ind)}</option>
+                <option key = {ind + 65}>{ele}</option>
             )
         })
-        let charOptions = this.state.charArr.map(ele=>{
-            return(
-                <option key = {ele + '22'}>{ele[0]}</option>
-            )
-        })
+        // let charOptions = this.state.charArr.map(ele=>{
+        //     return(
+        //         <option key = {ele + '22'}>{ele[0]}</option>
+        //     )
+        // })
         let showButton = <button className="VerifyButt" onClick={()=>this.onSubmitHandler(currentCode,currentSelect,currentChar)}><ion-icon name="checkmark-done-outline" /></button>
 
         return(
             <div className="HawkModeContainer">
-                <AlertModule/>
                 <div className="CodeVerification">
-                    Select Your Character
+                    <h2 className="CurrCharName">{this.state.currChar}</h2>
+                    {/* Select Your Character
                     <select onChange={onCharSelectHandler} className="CharSelector">
                         {charOptions}
-                    </select>
+                    </select> */}
                     
                     <h3>Chit Code Verification</h3>
                     <select onChange={onSelectHandler} className="TeamSelector">
