@@ -5,17 +5,21 @@ import "./TheMap.css";
 import {  iconPerson, iconChar  } from './Icon/Icon';
 import Lintt from "../../Assets/Lintt/Lintt";
 import axios from "axios";
+import PublicMarkers from "./PublicMarkers/PublicMarkers";
+import { updateActiveTeamCoords, updateSpecialZones } from "./FireStoreUtils/FireStoreUtils";
 class TheMap extends Component{
 
     state = {
-        coords: null
+        coords: null,
+        activeTeamCoords: null
     }
 
     componentDidMount(){
         axios.get(this.props.baseUrl + '/coords/publicCoords.json')
              .then(resp=>{
                 this.setState({
-                    coords: resp.data
+                    coords: resp.data,
+                    loaded:true
                 })
              })
              .catch(err=>{
@@ -32,10 +36,12 @@ class TheMap extends Component{
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
                 console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                // updateSpecialZones();
+                updateActiveTeamCoords(this.props.activeTeam,[latitude,longitude],this.props.charCodesArr);
                 this.setState({
-                    coords: [latitude,longitude]
+                    activeTeamCoords: [latitude,longitude]
                 })
-                
+
             },err=>{
                 
                 if(err.code===2)
@@ -63,16 +69,9 @@ class TheMap extends Component{
                     maxZoom={21}
                     url='http://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' 
                     />
+
+                    <PublicMarkers activeTeamCoords = {this.state.activeTeamCoords} activeTeam = {this.props.activeTeam}/>
                     
-                    {this.state.coords.markers.charMarkers.map((ele,ind)=>{
-                        return(
-                            <Marker eventHandlers={{
-                                click: (e)=>{console.log(ele[0])}
-                            }} key={ele[0]} position={ele[3]} icon={iconChar}>
-                                
-                            </Marker>
-                        )
-                    })}
                     <ImageOverlay url = 'https://i.ibb.co/XjXxGkR/sector-16.png' bounds={[[23.232012525273973,72.64771431684495],[23.230016085247495,72.64565974473955]]}></ImageOverlay>
                 </LeafletMap>
             </div>:<h2>LOADING...</h2>

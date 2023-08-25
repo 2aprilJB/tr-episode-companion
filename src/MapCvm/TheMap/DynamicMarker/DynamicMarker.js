@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/compat/app';
+import { MapContainer as LeafletMap, TileLayer, Polygon, Circle, Marker, Popup, ImageOverlay } from 'react-leaflet';
+import {  iconPerson, iconChar  } from '../Icon/Icon';
 import 'firebase/compat/firestore';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
 
@@ -14,21 +16,20 @@ firebase.initializeApp({
     measurementId: "G-CDT4DV7F2Y"
 })
 const firestore = firebase.firestore();
-function TestQuote(){
-    const messagesRef = firestore.collection('something@123');
-    const query = messagesRef.orderBy('createdAt').limit(25);
-    const [messages] = useCollectionData(query,{idField:'id'});
+function DynamicMarker(){
+    const coordinatesRef = firestore.collection('characterCoords');
+    const [coordinates] = useCollectionData(coordinatesRef);
+    let mera = coordinates && coordinates.map(msg=>{
+                console.log(msg.coords)
+                return(
+                    <Marker key={msg.id} position={msg.coords} icon={iconChar}></Marker>
+                );
+            })
     return(
         <div>
-            shit
-            {messages && messages.map(msg=>{
-                const {text,id} = msg;
-                return(
-                    <div key = {id}>{text}</div>
-                );
-            })}
+        {mera}
         </div>
     )
 }
 
-export default TestQuote;
+export default DynamicMarker;

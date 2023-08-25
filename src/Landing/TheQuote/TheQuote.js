@@ -1,7 +1,6 @@
 import React from "react";
 import "./TheQuote.css";
 import ArLogo from "../../Assets/ArLogo/ArLogo";
-import TestQuote from "./TestQuote/TestQuote";
 
 const theQuote = ()=>{
     
@@ -28,7 +27,6 @@ const theQuote = ()=>{
                 met?<br/><em className="TheBold">We believe it
                 can.</em></b> 
             </h4>
-            <TestQuote/>
         </div>
     );
 }
