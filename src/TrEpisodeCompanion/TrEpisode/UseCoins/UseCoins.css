@@ -1,0 +1,60 @@
+.UseCoinsContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.RiddleShopHead{
+    margin: auto auto;
+    width: 15rem;
+    height: 3rem;
+    background-color: aqua;
+    border-radius: 15px;
+    color: rgb(15, 14, 14);
+    text-align: center;
+    font-size: 2rem;
+    justify-content: center;
+    font-family: 'Oswald';
+    letter-spacing: 0.3rem;
+    padding: 0.4rem;
+    border: 3px solid brown;
+}
+.RiddleCatalogue{
+    width: 22rem;
+    height: 11rem;
+    background-color: rgb(0, 255, 106);
+    border-radius: 15px;
+    color: rgb(15, 14, 14);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.Riddle{
+    margin: auto 0;
+    background-color: aliceblue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+    width: 7.5rem;
+    height: 9rem;
+}
+.BuyButt{
+    border: none;
+    letter-spacing: 0.2rem;
+    color: #fff;
+    background-image: linear-gradient(90deg,blue,crimson);
+    padding: 0.4rem 0.3rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.8s;
+}
+.BoldParaCenter{
+    text-align: center;
+    font-weight: bolder;
+}
+.LightParaCenter{
+    text-align: center;
+    font-size: 0.7rem;
+    width: 100%;
+}

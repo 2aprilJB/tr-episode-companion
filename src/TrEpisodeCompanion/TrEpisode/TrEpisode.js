@@ -8,6 +8,9 @@ import Modal from "../../Containers/Modal/Modal";
 import HeroDisplay from "../HeroDisplay/HeroDisplay";
 import HawkMode from "../HawkMode/HawkMode";
 import ManagerMode from "../ManagerMode/ManagerMode";
+import { getCoins } from "../../FireStoreUtils/FireStoreUtils";
+import CoinsCollected from "./CoinsCollected/CoinsCollected";
+import UseCoins from "./UseCoins/UseCoins";
 
 class TrEpisode extends Component{
     state = {
@@ -18,6 +21,7 @@ class TrEpisode extends Component{
         planeValidation: false,
         refreshPlane: false,
         loading: true,
+        coinCount: 0,
         toValidateImgUrl: 
         [
             'https://img.freepik.com/premium-vector/paper-airplane-icon-comic-style-plane-vector-cartoon-illustration-white-isolated-background-air-flight-business-concept-splash-effect_157943-6349.jpg?w=2000',
@@ -30,6 +34,7 @@ class TrEpisode extends Component{
         })
     }
     render(){
+        console.log(this.state.coinCount)
         let boatValidatedHandler =()=>{
             this.setState({
                 boatValidation: true
@@ -80,13 +85,18 @@ class TrEpisode extends Component{
                 showChit:showOrNot
             })
         }
+        let updateCoinState = (updatedCoins)=>{  //To update coinCount in our main TREpisode's state
+            this.setState({
+                coinCount: updatedCoins
+            })
+        }
         let ArtifactsCodesUrl = this.props.baseUrl + 'artifacts';
 
         let UserMode =                     //Assigning UserMode Part to one variable
         <div className="UserMode">
             {/*Artifact - I : Five Check*/}
             <div className="BoatSection">
-                <ArtifactCheck refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/boats'}  
+                <ArtifactCheck coinCount = {this.state.coinCount} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/boats'}  
                 toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
                 ValidatedHandler = {boatValidatedHandler} validationLimit = {2} validationFull = {this.state.boatValidation}
                 onRefreshClick = {onBoatRefresh} chitType = {'i'}/>
@@ -94,7 +104,7 @@ class TrEpisode extends Component{
             
             {/*Artifact - I : Three Check*/}
             <div className="PlaneSection">
-                <ArtifactCheck refresh = {this.state.refreshPlane} refreshed = {planeRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/planes'}  
+                <ArtifactCheck coinCount = {this.state.coinCount} refresh = {this.state.refreshPlane} refreshed = {planeRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/planes'}  
                 toValidateImgUrl = {this.state.toValidateImgUrl[1]} activeTeam = {this.props.activeTeam}
                 ValidatedHandler = {planeValidatedHandler} validationLimit = {3} validationFull = {this.state.planeValidation}
                 onRefreshClick = {onPlaneRefresh} chitType = {'ii'}/>
@@ -112,6 +122,7 @@ class TrEpisode extends Component{
                     </div>
                     <h3 className="ButtText">LOGOUT</h3>
                 </div>
+                
                 <div className="ShowChitContainer">
                     <div onClick={()=>showChitCount(true)} className="ShowChit">
                         <ion-icon name="checkbox-outline"></ion-icon>
@@ -128,8 +139,16 @@ class TrEpisode extends Component{
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
 
+                <CoinsCollected updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
+
                 {/*Alert Module, works currently on refresh click*/}
+
+                {/* Lets buy some Riddles */}
+                <UseCoins activeTeam = {this.props.activeTeam} coinCount = {this.state.coinCount} />
+
                 <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/gamePage'}/>
+
+                
                     {this.props.activeTeam.split("").length===1?
                         UserMode:
                      this.props.activeTeam==="Z0"?

@@ -25,6 +25,12 @@ class MapCvm extends Component{
         return(
             <div className="MapCvmWrapper">
                 <a href = "/polygonGen" className="PolygonGenButt">Poly</a>
+                <div className="LogoutButtContainer">
+                    {this.props.loggedIn[0]?<div><div onClick={()=>this.props.logoutHandler(this.props.loggedIn)} className="LogoutButt">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </div><h3 className="ButtText2">LOGOUT</h3></div>:null}
+                    
+                </div>
                 <h2 className="MapCvmTitle">CV Map</h2>
                 <div className="MapInfoContainer">
                     <div className="MapContainer">

@@ -1,3 +1,4 @@
+import {updateAlertMsg} from "../../../FireStoreUtils/FireStoreUtils"
 import React from "react";
 import "./AlertUpdate.css";
 import axios from "axios";
@@ -9,25 +10,30 @@ const alertUpdate = (props)=>{
     }
 
     let onClickHandler = ()=>{
-        let url = props.baseUrl;
-        axios.get(url + 'alertMsg.json')
-             .then(resp=>{
-                let prevMsg = resp.data;
-                console.log(prevMsg);
-                axios.put(url + 'alertMsg.json',{msg: currentAlertInp})
-                     .catch(err=>{
-                        alert('SOme new Network issue has caught up')
-                        console.log(err);
-                    })
-             })
-             .then(resp=>{
-                alert('Alert Has been updated!');
-             })
-             .catch(err=>{
-                alert('SOme new Network issue has caught up')
-                console.log(err);
-             })
-        console.log(currentAlertInp)
+        // let url = props.baseUrl;
+        // axios.get(url + 'alertMsg.json')
+        //      .then(resp=>{
+        //         let prevMsg = resp.data;
+        //         console.log(prevMsg);
+        //         axios.put(url + 'alertMsg.json',{msg: currentAlertInp})
+        //              .catch(err=>{
+        //                 alert('SOme new Network issue has caught up')
+        //                 console.log(err);
+        //             })
+        //      })
+        //      .then(resp=>{
+        //         alert('Alert Has been updated!');
+        //      })
+        //      .catch(err=>{
+        //         alert('SOme new Network issue has caught up')
+        //         console.log(err);
+        //      })
+        // console.log(currentAlertInp)
+        if(window.confirm("Are you sure to send?"))
+            updateAlertMsg(currentAlertInp);
+        else{
+            console.log('Well Its your call')
+        }
     }
     return(
         <div className="IssueAlert">

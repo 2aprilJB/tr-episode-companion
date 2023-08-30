@@ -72,3 +72,12 @@
     color: rgb(255, 209, 209);
     animation: textGlow 3s infinite;
 }
+
+.ButtText2{
+    font-family: 'Lato';
+    font-weight: lighter;
+    letter-spacing: 0.2rem;
+    margin-top: 0.5rem;
+    font-size: 0.6rem;
+    color: aliceblue;
+}

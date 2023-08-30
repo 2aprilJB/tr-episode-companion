@@ -2,6 +2,7 @@ import React from "react";
 import "./CodeValidation.css"
 import axios from 'axios';
 import { Component } from "react";
+import { updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
 
 class CodeValidation extends Component{
 
@@ -46,7 +47,10 @@ class CodeValidation extends Component{
                 artifacts.map((ele,index)=>{
                     if(currentCode===ele[0]&&ele[1]==='Z'){
                         this.validationHandler();
-                        alert('Code Found')
+                        alert('Code Found')     // Here we'll do Firestore Coin Collection
+                        let updatedCoins = this.props.coinCount + 10;
+                        updateCoins(this.props.activeTeam,updatedCoins);
+
                         foundArtifactAt = index;
                     }
                     else if(currentCode===ele[0]&&ele[1]!='Z'){
@@ -64,8 +68,8 @@ class CodeValidation extends Component{
                 let newArtifact = artifacts[foundArtifactAt]; //newArtifact, Copy of Found Artifact
                 newArtifact[1] = this.props.activeTeam;       //Storing Team Code with Artifact's Code
 
-                if(foundArtifactAt===0)
-                    {}
+                if(foundArtifactAt===0)                       //newArtifact will now be updated to the server
+                    {}                                        
                 else{
                     axios.put(this.props.baseUrl + '/' + foundArtifactAt + '.json',newArtifact)
                     .catch(err=>{
