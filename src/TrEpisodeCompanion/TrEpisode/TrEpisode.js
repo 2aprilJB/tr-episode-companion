@@ -11,11 +11,15 @@ import ManagerMode from "../ManagerMode/ManagerMode";
 import { getCoins } from "../../FireStoreUtils/FireStoreUtils";
 import CoinsCollected from "./CoinsCollected/CoinsCollected";
 import UseCoins from "./UseCoins/UseCoins";
+import axios from "axios";
+import AlertModule from "../AlertModule/AlertModule";
 
 class TrEpisode extends Component{
     state = {
+        artifactsCodesUrl: this.props.baseUrl + 'artifacts/boats',
+        chitType: '-',
         showChit: false,
-        boatValidation: false,
+        bought: false,
         refreshBoat: false,
         colorScheme: ['#4FC0D0','#FF8989'],
         planeValidation: false,
@@ -34,22 +38,28 @@ class TrEpisode extends Component{
         })
     }
     render(){
-        console.log(this.state.coinCount)
-        let boatValidatedHandler =()=>{
-            this.setState({
-                boatValidation: true
-            })
+        let buyHandler =(typeOfChit)=>{
+            let tempUrl = this.state.artifactsCodesUrl;
+            if(typeOfChit==='i'){
+                this.setState({
+                    bought: true,
+                    chitType: typeOfChit
+                })
+            }
+            else{
+                this.setState({
+                    bought:true,
+                    chitType: typeOfChit
+                })
+            }
+                
         }
-        let planeValidatedHandler =()=>{
-            this.setState({
-                planeValidation: true
-            })
-        }
+        
         let onBoatRefresh=()=>{
             if(window.confirm('Are you Sure you want to refresh the riddle? This riddle will be Lost !!')){
                 console.log('Boat REfreshed')
                 this.setState({
-                    boatValidation: false,
+                    bought: false,
                     refreshBoat: true
                 })
             }
@@ -62,23 +72,7 @@ class TrEpisode extends Component{
                 refreshBoat: false
             })
         }
-        let onPlaneRefresh=()=>{
-            if(window.confirm('Are you sure you want to refresh the riddle? This riddle will be Lost??')){
-                console.log('Plane REfreshed')
-                this.setState({
-                    planeValidation: false,
-                    refreshPlane: true
-                })
-            }
-            else{
-                console.log('Refresh of Planes Cancelled');
-            }
-        }
-        let planeRefreshed=()=>{
-            this.setState({
-                refreshPlane: false
-            })
-        }
+        
 
         let showChitCount = (showOrNot)=>{
             this.setState({
@@ -90,25 +84,27 @@ class TrEpisode extends Component{
                 coinCount: updatedCoins
             })
         }
-        let ArtifactsCodesUrl = this.props.baseUrl + 'artifacts';
+        let showPoints = (activeTeam)=>{
+            axios.get(this.props.baseUrl + '/points.json')
+                 .then(resp=>{
+                    alert("Your team's points : " + resp.data[activeTeam]);
+                 })
+                 .catch(err=>{
+                    console.log(err);
+                    alert("Uff Ye Network errors");
+                 })
+        }
 
         let UserMode =                     //Assigning UserMode Part to one variable
         <div className="UserMode">
             {/*Artifact - I : Five Check*/}
             <div className="BoatSection">
-                <ArtifactCheck coinCount = {this.state.coinCount} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/boats'}  
-                toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
-                ValidatedHandler = {boatValidatedHandler} validationLimit = {2} validationFull = {this.state.boatValidation}
-                onRefreshClick = {onBoatRefresh} chitType = {'i'}/>
+                <ArtifactCheck coinCount = {this.state.coinCount} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl}   
+                codeValidBaseUrl = {this.state.artifactsCodesUrl} toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
+                buyHandler = {buyHandler} validationLimit = {2} bought = {this.state.bought}
+                onRefreshClick = {onBoatRefresh} chitType = {this.state.chitType}/>
             </div>
             
-            {/*Artifact - I : Three Check*/}
-            <div className="PlaneSection">
-                <ArtifactCheck coinCount = {this.state.coinCount} refresh = {this.state.refreshPlane} refreshed = {planeRefreshed} baseUrl = {this.props.baseUrl} codeValidBaseUrl = {ArtifactsCodesUrl + '/planes'}  
-                toValidateImgUrl = {this.state.toValidateImgUrl[1]} activeTeam = {this.props.activeTeam}
-                ValidatedHandler = {planeValidatedHandler} validationLimit = {3} validationFull = {this.state.planeValidation}
-                onRefreshClick = {onPlaneRefresh} chitType = {'ii'}/>
-            </div>
         </div>
 
 
@@ -138,15 +134,34 @@ class TrEpisode extends Component{
                     <h5>TEAM</h5>
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
+                <AlertModule/>
+                <div className="ShowMapContainer">
+                    <div className="ShowMap">
+                        <a href='/mapCVM'><ion-icon name="map-outline"></ion-icon></a>
+                    </div>
+                    <h3 className="ButtText">Show<br/>Map</h3>
+                </div>
+                <div className="ShowPointsContainer">
+                    <div onClick={()=>showPoints(this.props.activeTeam)} className="ShowPoints">
+                        <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+                    </div>
+                    <h3 className="ButtText">Show<br/>Points</h3>
+                </div>
 
-                <CoinsCollected updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
-
+                <h3 className="CoinsHead">TR COINS</h3>
+                <div className="CoinsCollectedWrapper">
+                    <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
+                    <CoinsCollected updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
+                    <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
+                </div>
                 {/*Alert Module, works currently on refresh click*/}
 
                 {/* Lets buy some Riddles */}
-                <UseCoins activeTeam = {this.props.activeTeam} coinCount = {this.state.coinCount} />
+                <UseCoins buyHandler = {buyHandler} 
+                activeTeam = {this.props.activeTeam} 
+                coinCount = {this.state.coinCount}
+                bought = {this.state.bought} />
 
-                <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/gamePage'}/>
 
                 
                     {this.props.activeTeam.split("").length===1?
@@ -155,7 +170,9 @@ class TrEpisode extends Component{
                         <ManagerMode baseUrl = {this.props.baseUrl}/>:
                         <HawkMode activeChar = {this.props.activeTeam}/>
                     }
-                    
+                
+                <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/gamePage'}/>
+
             </div>
         );
     }

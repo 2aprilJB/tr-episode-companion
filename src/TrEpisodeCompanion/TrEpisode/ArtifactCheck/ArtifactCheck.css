@@ -1,7 +1,7 @@
 .ArtifactModuleWrapper{
     animation: fadeIn 1.8s;
     width: 95%;
-    background-color: aliceblue;
+    background-color: rgb(87, 177, 255);
     border-radius: 20px;
     margin-top: 1.5rem;
     padding: 1rem 0;

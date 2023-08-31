@@ -13,13 +13,13 @@ class ManagerMode extends Component{
     render(){
         let updateArtifacts=()=>{
             if(window.confirm("You are making a terrible mistake if u dont know what you are doing..")){
-                if(prompt('Enter the Atomic PassCode: ')==='LinShaye'){
-                    this.setState({
-                        updateArtifactsCode:true
-                      })
-                }
-                else{}
-
+                // if(prompt('Enter the Atomic PassCode: ')==='LinShaye'){
+                    
+                // }
+                // else{}
+                this.setState({
+                    updateArtifactsCode:true
+                  })
             }
             else{}
         }

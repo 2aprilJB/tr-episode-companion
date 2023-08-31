@@ -36,10 +36,6 @@ const CoinsCollected = (props)=>{
             })
         })
     },[])
-    if(coins){
-        console.log(coins);
-    }
-    else{}
 
     return(
         

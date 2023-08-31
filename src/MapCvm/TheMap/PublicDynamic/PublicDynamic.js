@@ -3,7 +3,7 @@ import db from '../../../firebase';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { Marker, Polygon, Polyline } from 'react-leaflet';
-import {  iconPerson, iconChar, iconSpecial  } from '../Icon/Icon';
+import {  iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconManager, iconSpecial  } from '../Icon/Icon';
 import axios from 'axios';
 
 const PublicMarkers = (props)=>{
@@ -15,6 +15,7 @@ const PublicMarkers = (props)=>{
     
     const [polyCoords,setPolyCoords] = useState();         //Storing static Polygon Coordinates  
     const [charCoords,setCharCoords] = useState();         //Storing Character Coordinates
+    const [usersCoords,setUsersCoords] = useState();         //Storing users Coordinates
     const [specialCoords,setSpecialCoords] = useState();   //Storing Special Coordinates
     let activeCoords = props.activeTeamCoords;
     
@@ -37,35 +38,64 @@ const PublicMarkers = (props)=>{
         onSnapshot(collection(db,"characterCoords"), (snapshot)=>{
             setCharCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
         })
+        onSnapshot(collection(db,"participantsCoords"), (snapshot)=>{
+            setUsersCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
+        })
         onSnapshot(collection(db,"specialCoords"), (snapshot)=>{
             setSpecialCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
         })
     },[])
-    
+    let showUsers = false;
+    if(props.activeTeam==="Z0")
+        showUsers = true;
+    else{}
 
     return(
         <div className="PublicMarkersContainer">
+            {/* All Characters Markers that are public and dynamic in nature, including Manager */}
             {charCoords?charCoords.map(ele=>{
                 let problemIcon = null;
                 if(ele.id===props.activeTeam){
                     problemIcon = iconPerson;
                 }
-                else{
-                    problemIcon = iconChar;             //Till this part we have solved problem
+                else if(ele.id==="Z0"){
+                    problemIcon = iconManager;             //Till this part we have solved problem
+                }
+                else if(ele.id==="Z1"){
+                    problemIcon = iconChar1;             //Till this part we have solved problem
+                }
+                else if(ele.id==="Z2"){
+                    problemIcon = iconChar2;             //Till this part we have solved problem
+                }
+                else if(ele.id==="Z3"){
+                    problemIcon = iconChar3;             //Till this part we have solved problem
+                }
+                else if(ele.id==="Z4"){
+                    problemIcon = iconChar4;             //Till this part we have solved problem
+                }
+                else if(ele.id==="Z5"){
+                    problemIcon = iconChar5;             //Till this part we have solved problem
                 }                                       //Where when character becomes active icon should be of activePerson 
                 return(
                     <Marker key={ele.id} eventHandlers={{
-                        click: (e)=>{console.log(ele.characterName)}
+                        click: (e)=>{alert(ele.characterName)}
                     }} position = {ele.coords} icon={problemIcon}></Marker>
                 )
             }):null}
+            {/* Special Markers going to popup and dynamic in nature*/}
             {specialCoords?specialCoords.map(ele=>{
                 return(
                     <Marker key={ele.id} position = {ele.coords} icon={iconSpecial}></Marker>
                 )
             }):null}
 
+            {showUsers?usersCoords?usersCoords.map(ele=>{
+                return(
+                    <Marker key={ele.id} position = {ele.coords} icon={iconChar}></Marker>
+                )
+            }):null:null}
 
+            {/* All polygons that are public and Static in nature */}
             {polyCoords?<Polygon positions={polyCoords.outlineBoundary.polyCoords} pathOptions={polyCoords.outlineBoundary.polyOptions}></Polygon>:null}
             
             <Marker position={activeCoords} icon={iconPerson}></Marker>

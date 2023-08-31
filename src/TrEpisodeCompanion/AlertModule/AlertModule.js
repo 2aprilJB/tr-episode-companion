@@ -1,47 +1,28 @@
 import React, { Component } from "react";
 import "./AlertModule.css";
-import axios from "axios";
+import { collection, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
+import db from '../../firebase';
+import { useEffect, useState } from 'react';
+import Modal from "../../Containers/Modal/Modal";
 
-class AlertModule extends Component{
-    state = {
-        alertMsg: ""
-    }
+const AlertModule = ()=>{
+    const [alertMsg,setAlertMsg] = useState();
+    const [showModal,setShowModal] = useState();
 
-    componentDidMount(){
-        axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/alertMsg.json')
-                 .then(resp=>{
-                    this.setState({
-                        alertMsg: resp.data.msg
-                    })
-                 })
-                 .catch(err=>{
-                    alert('Network Issue');
-                    console.log(err);
-                 })
-    }
-    
-
-    render(){
-        let onRefresh =()=>{
-            axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/alertMsg.json')
-                 .then(resp=>{
-                    this.setState({
-                        alertMsg: resp.data.msg
-                    })
-                 })
-                 .catch(err=>{
-                    alert('Network Issue');
-                    console.log(err);
-                 })
-        }
-        return(
-            <div className="AlertModuleContainer">
-                <h3 className="AlertHead">Alerts</h3>
-                <div className="AlertModule">{this.state.alertMsg}</div>
-                <button onClick={onRefresh} className="AlertRefresh"><ion-icon name="reload-circle-outline"></ion-icon></button>
-            </div>
-        )
-    }
+    useEffect(()=>{
+        onSnapshot(collection(db,"TRalerts"), (snapshot)=>{
+            setAlertMsg(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
+            setShowModal(true);
+        })
+    },[])
+    return(
+        <div>
+            {alertMsg?
+            <Modal show={showModal} onBackDrop = {()=>setShowModal(false)}>
+                {alertMsg[0].message}
+            </Modal>:null}
+        </div>
+    );
 }
 
 export default AlertModule;

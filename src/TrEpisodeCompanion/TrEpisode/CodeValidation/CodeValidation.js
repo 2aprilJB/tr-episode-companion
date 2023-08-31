@@ -8,28 +8,10 @@ class CodeValidation extends Component{
 
     state = {
         baseUrl: null,
-        validated: 0,
-        fullValidation: false,
         isThereError: false,
         disableSubmit: false
     }
-    validationHandler(){
-        
-        let tempValid = this.state.validated + 1;
-        let limit = this.props.validationLimit;
-        if(tempValid<=limit)
-            this.setState({
-                validated: tempValid
-            })
-        else{} 
-        if(tempValid===limit){   
-            this.setState({
-                fullValidation: true
-            })
-            this.props.ValidatedHandler();
-        }
-        else{}
-    }
+    
     onSubmitHandler(currentCode){
         this.setState({
             disableSubmit: true //Disabling Submit button till the response from request arrives
@@ -46,7 +28,6 @@ class CodeValidation extends Component{
                 let foundAlready = false;
                 artifacts.map((ele,index)=>{
                     if(currentCode===ele[0]&&ele[1]==='Z'){
-                        this.validationHandler();
                         alert('Code Found')     // Here we'll do Firestore Coin Collection
                         let updatedCoins = this.props.coinCount + 10;
                         updateCoins(this.props.activeTeam,updatedCoins);
@@ -96,7 +77,7 @@ class CodeValidation extends Component{
             console.log('Here for refresh  ' + this.state.validated);
             this.setState({
                 validated: 0,
-                fullValidation: false,
+                bought: false,
                 disableSubmit: false,
             });
             this.props.refreshed();
@@ -117,18 +98,17 @@ class CodeValidation extends Component{
         return(
             <div className="CValidContainer">
                 <div className="CodeValidationContainer">
-                    <div className="Item" style={{"backgroundImage":"url(" + this.props.toValidateImgUrl + ")"}}></div>
+                    <div className="CodeValidationHeader">
+                        <h3 style={{fontSize: "1.8rem",paddingTop: "0.8rem"}} className="CoinsHead">FIND</h3>
+                        <div className="Item" style={{"backgroundImage":"url(" + this.props.toValidateImgUrl + ")"}}></div>
+                        <h3 style={{fontSize: "1.8rem",paddingTop: "0.8rem"}} className="CoinsHead">COINS</h3>
+                    </div>
                     <div className="EnterCode">
                         <h6 className="Enter">Enter CODE :</h6>
                         <input onChange={onChangeHandler} type = "text" className="CodeInput"></input>
-                        {this.state.fullValidation?null:submitButton}
+                        {submitButton}
                     </div>
                 </div>
-                <div className="Validation"> {/* If code gets valid, validation ticks here. */}
-                    {Array(validated).fill("")
-                        .map((ele,ind)=><div key={validated + ind} className="Valid"><ion-icon name="checkmark-done-outline"></ion-icon></div>)}
-                </div>
-                
             </div>
         );
     }

@@ -14,11 +14,11 @@ class ArtifactCheck extends Component{
             <div className="ArtifactModuleWrapper">
                 <CodeValidation coinCount = {this.props.coinCount} refresh = {this.props.refresh} refreshed = {this.props.refreshed} baseUrl = {this.props.codeValidBaseUrl}  
                     toValidateImgUrl = {this.props.toValidateImgUrl} activeTeam = {this.props.activeTeam}
-                    validationFull = {this.validationFull} ValidatedHandler = {this.props.ValidatedHandler} validationLimit = {this.props.validationLimit}/>   {/* Controlling Factor */}
+                    bought = {this.props.bought} buyHandler = {this.props.buyHandler} validationLimit = {this.props.validationLimit}/>   {/* Controlling Factor */}
                     
                     <h4 className="ChitTypeHeading">Type - {this.props.chitType.toUpperCase()}</h4>
                     <div className="ChitContainer">
-                        {this.props.validationFull?<ActualChit chitType = {this.props.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>:<DummyChit/>}
+                        {this.props.bought?<ActualChit chitType = {this.props.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>:<DummyChit/>}
                     </div>
                     <div className="RefreshDiv">
                         Press This
@@ -32,4 +32,4 @@ class ArtifactCheck extends Component{
     }
 }
 
-export default ArtifactCheck;
+export default ArtifactCheck;   

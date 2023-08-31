@@ -11,6 +11,11 @@
     width: 100%;
     justify-content: space-around;
 }
+.CodeValidationHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .Item{
     margin-bottom: 1rem;
     font-size: 0.81rem;

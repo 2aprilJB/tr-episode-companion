@@ -1,0 +1,107 @@
+svg{
+    margin-top:-10px;
+  }
+  
+  svg path{
+    box-shadow:2px 10px 2px black;
+  }
+  
+  #main {
+     display: block;
+     width: 200px; 
+    height: 200px;
+     top: 10px;
+     left: 10px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    animation:turn 2.5s infinite linear;
+    margin:auto;
+    top:20%;
+  }
+  
+  .coin{
+      display: block;
+      position: absolute;
+      width: 95%;
+      height: 95%;
+      transform-style: preserve-3d;
+      background:radial-gradient(#FFBB5C,#FF9B50,black);
+      border-radius:50%;
+      border:5px solid blue; 
+  }
+  
+  .shadow{
+    background:radial-gradient(rgba(31,56,45,0.7),rgba(31,56,45,0.8),rgba(31,56,45,0.2));
+    width:300px;
+    height:50px;
+    border-radius:50%;
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top:85%;
+    box-shadow:0px 0px 50px rgba(31,56,45);
+  }
+  
+  #child {
+  
+      transform: translateZ(0px);
+  }
+  
+  #child:after{
+    content:'';
+    position:absolute;
+    background:#191919;
+    width:200px;
+    height:20px;
+    top:400px;
+    left:40px;
+    border-radius:50%;
+    box-shadow:0px 0px 10px #191919;
+  }
+  
+  #child1 {
+      transform: translateZ(-10px);
+  }
+  
+  #child2 {
+      transform: translateZ(-5px);
+  
+  }
+  
+  #child3 {
+      transform: translateZ(-2px);
+  }
+  
+  #child4 {
+      transform: translateZ(-8px);
+  }
+  
+  #child5 {
+      transform: translateZ(-12px);
+  }
+  
+  #child6 {
+      transform: translateZ(-14px);
+  }
+  
+  #child7 {
+      transform: translateZ(-16px);
+  }
+  
+  #child8 {
+      transform: translateZ(-18px);
+  }
+  
+  
+  
+    
+    @keyframes turn{
+      0%{
+        transform: rotateY(-180deg);
+      }
+      100%{
+        transform: rotateY(180deg);
+      }
+    }

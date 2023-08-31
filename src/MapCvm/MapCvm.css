@@ -1,6 +1,13 @@
 .MapCvmWrapper{
     width: 100%;
     min-height: 100vh;
+    margin-top: -1rem;
+}
+.MapOverlayFeatures{
+    bottom: 26.5rem;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
 }
 .MapCvmTitle{
     text-decoration: underline #fff 0.4rem ;
@@ -8,6 +15,7 @@
     font-size: 2rem;
     animation: textGlow 3s infinite;
     color: #c7004c;
+    text-shadow: 0 0 10px #000;
 }
 .PolygonGenButt{
     width: 3rem;
@@ -15,8 +23,10 @@
     background-color: aqua;
 }
 .MapInfoContainer{
+    z-index: 9;
+    position: relative;
     border-radius: 20px;
-    width: 90%;
+    width: 100%;
     margin: 1rem auto;
     min-height: 35rem;
     background-image: linear-gradient(45deg,rgb(0, 0, 63),red);
@@ -25,9 +35,10 @@
     align-items: center;
 }
 .MapContainer{
-    height: 25rem;
+    z-index: 9;
+    height: 33rem;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgba(255, 228, 196, 0.418);
 }
 .MapInfo{
