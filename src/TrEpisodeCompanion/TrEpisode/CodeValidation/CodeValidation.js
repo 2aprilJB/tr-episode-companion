@@ -29,7 +29,7 @@ class CodeValidation extends Component{
                 artifacts.map((ele,index)=>{
                     if(currentCode===ele[0]&&ele[1]==='Z'){
                         alert('Code Found')     // Here we'll do Firestore Coin Collection
-                        let updatedCoins = this.props.coinCount + 10;
+                        let updatedCoins = this.props.coinCount + this.props.storeOptions.awardCoins; //Adding the More coins as per DB to the current coins
                         updateCoins(this.props.activeTeam,updatedCoins);
 
                         foundArtifactAt = index;

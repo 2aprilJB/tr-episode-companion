@@ -13,8 +13,10 @@ import Modal from './Containers/Modal/Modal';
 import HeroDisplay from './TrEpisodeCompanion/HeroDisplay/HeroDisplay';
 import MapCvm from './MapCvm/MapCvm';
 import Landing from './Landing/Landing';
+import { updateActiveTeamCoords } from './FireStoreUtils/FireStoreUtils';
 import { popUpAlertMsg } from './FireStoreUtils/FireStoreUtils';
 import AlertMsgPopUp from './Assets/ALertMsgPopUp/AlertMsgPopUp';
+import AlertModule from './TrEpisodeCompanion/AlertModule/AlertModule';
 class App extends Component {
 
   state = {
@@ -27,11 +29,14 @@ class App extends Component {
     showNews:false,
     backImgs: '',
     baseUrl: 'https://tr-episode-companion-default-rtdb.firebaseio.com/',
-
+    activeTeamCoords:['',''],
+    activeTeam: '?',
+    charCodesArr: [],
     alertMsg:"",
     loggedIn: [false,'Z'],
     credentialsUrl: 'https://tr-episode-companion-default-rtdb.firebaseio.com/credentials',
     loading: true,
+    storeOptions: {}
   }
 
   //For Log in And Log out handling
@@ -98,26 +103,82 @@ logoutHandler=(loggedIn)=>{
                 loggedIn: cookArr.split(",")
             })
         }
-        else{
-    }
-    
+        else{}
+    let tempTeam = document.cookie.split(',')[1]?document.cookie.split(',')[1]:'?';
     axios.get(this.state.baseUrl + '.json')
          .then(resp=>{
+            let tempCharCodes = resp.data.characters[0];
             let tempHawkPass = resp.data.hawkPassCode;
             let tempManagerPass = resp.data.managerPassCode;
             this.setState({
+              charCodesArr: tempCharCodes,
+              activeTeam: tempTeam,
               hawkPassCode: tempHawkPass,
               managerPassCode: tempManagerPass,
               backImgs: resp.data.backImgs,
-              newsUpdates:resp.data.newsUpdates
+              newsUpdates:resp.data.newsUpdates,
+              storeOptions: resp.data.storeOptions
             })
          })
          .catch(err=>{
             alert("Network Error");
             console.log(err);
          })
-  }
 
+         const options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+      }
+      if (navigator.geolocation) {
+          if(typeof navigator.geolocation.watchPosition !== 'function'){
+              navigator.geolocation.getCurrentPosition(position=>{
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
+                  this.setState({activeTeamCoords:[latitude,longitude]});
+              },err=>{
+                  
+                  if(err.code===2)
+                      console.log("Unable to retrieve your location");
+                  else if(err.code===3)
+                      console.log('Shits happening');
+              },options)
+          }
+          else{
+              navigator.geolocation.watchPosition(position=>{
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+                  console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                  
+
+                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
+                  this.setState({activeTeamCoords:[latitude,longitude]});
+  
+              },err=>{
+                  
+                  if(err.code===2)
+                      console.log("Unable to retrieve your location");
+                  else if(err.code===3)
+                      console.log('Shits happening');
+              },options);   
+          }
+      }
+
+      else {
+          alert('Not supported in your goddamn browser')
+      }
+
+
+
+
+
+  }
+  setActiveCoords = (coords)=>{
+    this.setState({
+      activeTeamCoords: coords
+    })
+  }
   showMenuHandler = ()=>{
     this.setState({
       showMenu: true
@@ -159,11 +220,11 @@ logoutHandler=(loggedIn)=>{
     let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing baseUrl = {this.state.baseUrl} /><Footer /></div>
     let mainApp = <div style={{backgroundImage:back}} className="App">
                     
-                    {this.state.hawkMode?<HawkMode/>:this.state.managerMode?<ManagerMode baseUrl = {this.state.baseUrl} />:<TrCompanion credentialsUrl= {this.state.credentialsUrl} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrl}  />}
+                    {this.state.hawkMode?<HawkMode/>:this.state.managerMode?<ManagerMode baseUrl = {this.state.baseUrl} />:<TrCompanion storeOptions = {this.state.storeOptions} charCodesArr = {this.state.charCodesArr} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.credentialsUrl} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrl}  />}
                     <Footer />
                   </div>
     let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrl + 'billBoards/managerMode'}/></div>
-    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrl} /></div>
+    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm activeTeam = {this.state.activeTeam} charCodesArr = {this.state.charCodesArr} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrl} /></div>
     // let polygonGen = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><PolygonGen /></div>
     let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrl + 'billBoards/contactUs'}/></div>
       return (
@@ -180,6 +241,7 @@ logoutHandler=(loggedIn)=>{
             
             <div className='AppBarContainer'>
               {/* <AlertMsgPopUp/> */}
+              <AlertModule/>
               <AppBar hawkClick = {onHawkClick} menuClick = {this.showMenuHandler} newsClick = {this.showNewsHandler} />
             </div>
             <Routes>

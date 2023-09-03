@@ -2,8 +2,8 @@ import { collection, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore'
 import db from '../../../firebase';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Marker, Polygon, Polyline } from 'react-leaflet';
-import {  iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconManager, iconSpecial  } from '../Icon/Icon';
+import { Circle, Marker, Polygon, Polyline } from 'react-leaflet';
+import {  iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial  } from '../Icon/Icon';
 import axios from 'axios';
 
 const PublicMarkers = (props)=>{
@@ -75,7 +75,13 @@ const PublicMarkers = (props)=>{
                 }
                 else if(ele.id==="Z5"){
                     problemIcon = iconChar5;             //Till this part we have solved problem
-                }                                       //Where when character becomes active icon should be of activePerson 
+                }  
+                else if(ele.id==="Z6"){
+                    problemIcon = iconKiller1;             //Till this part we have solved problem
+                } 
+                else if(ele.id==="Z7"){
+                    problemIcon = iconKiller2;             //Till this part we have solved problem
+                }                                      //Where when character becomes active icon should be of activePerson 
                 return(
                     <Marker key={ele.id} eventHandlers={{
                         click: (e)=>{alert(ele.characterName)}
@@ -85,7 +91,7 @@ const PublicMarkers = (props)=>{
             {/* Special Markers going to popup and dynamic in nature*/}
             {specialCoords?specialCoords.map(ele=>{
                 return(
-                    <Marker key={ele.id} position = {ele.coords} icon={iconSpecial}></Marker>
+                    <Circle key={ele.id} center = {ele.coords} fillColor='Yellow' color='red' weight={1} opacity={10} radius={7}></Circle>
                 )
             }):null}
 
@@ -97,7 +103,11 @@ const PublicMarkers = (props)=>{
 
             {/* All polygons that are public and Static in nature */}
             {polyCoords?<Polygon positions={polyCoords.outlineBoundary.polyCoords} pathOptions={polyCoords.outlineBoundary.polyOptions}></Polygon>:null}
-            
+            {polyCoords?polyCoords.charZones.map(ele=>{
+                return(
+                    <Polygon positions={ele[2]} pathOptions={ele[1]}/>
+                )
+            }):null}
             <Marker position={activeCoords} icon={iconPerson}></Marker>
         </div>
     );

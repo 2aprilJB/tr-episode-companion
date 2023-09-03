@@ -7,19 +7,10 @@ import axios from "axios";
 
 class MapCvm extends Component{
     state = {
-        activeTeam: '?',
-        charCodesArr:[]
     }
     componentDidMount(){
-        let tempTeam = document.cookie.split(',')[1]?document.cookie.split(',')[1]:'?';
         
-        axios.get(this.props.baseUrl + 'characters/0.json')
-             .then(resp=>{
-                this.setState({
-                    activeTeam:tempTeam,
-                    charCodesArr:resp.data
-                })
-             })
+        
     }
     render(){
         return(
@@ -40,13 +31,13 @@ class MapCvm extends Component{
                         </div>
                     </div>
                     <div className="MapContainer">
-                        <TheMap charCodesArr = {this.state.charCodesArr} activeTeam = {this.state.activeTeam} baseUrl = {this.props.baseUrl} />
+                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} charCodesArr = {this.props.charCodesArr} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl} />
                     </div>
                     
                     <div className="MapInfo">
                         <div className="TeamDetailsMap">
                             <h5>TEAM</h5>
-                            <h3 className="TeamCodeMap">{this.state.activeTeam}
+                            <h3 className="TeamCodeMap">{this.props.activeTeam}
                             </h3>
                         </div>
                         <HeroDisplay addSpace baseUrl = {this.props.baseUrl + 'billBoards/mapCVM'}/>

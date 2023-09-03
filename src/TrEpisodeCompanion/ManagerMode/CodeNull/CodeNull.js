@@ -4,7 +4,7 @@ import axios from "axios";
 
 class CodeNull extends Component{
     state = { //Put array of codes to be updated
-        artifactsCode: [["2JLMJQHthTtyvkj"],["2kDf2B5cVp9iZ4t"],["2xxtC9qZYwajq78"],["4Hz9VbHxBnQWVVX"],["4QcPy3GnBbx4Sx2"],["67jA3EZK2xHB3YA"],["82ABsLxDjRs9auy"],["8mYjE9WrvsJgvKS"],["APPDt9fNsEZTGFZ"],["AYbXhgdq2MJDDdT"],["BK245SvNXon8ur7"],["BPYKSmJC35rHWcs"],["BRALduwbKGQNk6E"],["Cm4hdcR4iiwtwpj"],["CtC4jupb5PQt6w7"],["CwiD6DwYYCKhA6q"],["D77mQM4i9SyaYzg"],["DaU6zDrS4uhM4ff"],["Dwf3LbVG5XTgxFo"],["EdCnfCz96Vw6cwB"],["EdEZfriijVzoPYg"],["ExsFFRZhUsEZgBV"],["FexxD2qiZvp4po5"],["G6oyQc5wmhauC8X"],["Gf759a5PUxL6NXE"],["H7aMmGUoN4sZgdt"],["HD8kEW7oNQGro55"],["HpGQN8jkhcmdnmb"],["JMDqgpP94QKoEeH"],["KKaRtSF9QNpKUYK"],["KvyFkQZuziYWCYa"],["L78TjCXg7Eyux8M"],["LTh7q5QEgK52Hca"],["LovCakMrYnZZ5cy"],["MJDM3mXskaPPt8C"],["MXSNHHUVQSmEJ5U"],["QKoBdYdBgxaAYMv"],["QSFeZgKDzziiWNX"],["Qa7gRNFEfmUPUSG"],["Qv6DrgfHWivob77"],["RKTaBLq5HuGWPNn"],["RjBi7c4Ff9rmPiC"],["SDbi3tB5aJyGqWJ"],["SS5REaCugG4PjyG"],["SVWsxdLxzpBNfeo"],["SZz3PcZJh5euBk2"],["UUJAfcAgUhYnYvu"],["UVsskeyw5jwLMNG"],["UWqz7Xwzqm7hSCA"],["V5KTFqy3QjqVeGD"],["VRj28PfE8bA7z9w"],["WcjrafLQA4ise3w"],["Wuhp9b9JK86mHbY"],["Xhqy7KyXmb2AC3r"],["YbRrCZauFDT7ekr"],["YdqvxxUuzkXgxPC"],["Yp6AvqHEEe4ihM5"],["ZQmAoLfDREctjR8"],["ZUG3xiwyXuG9EX6"],["ZjZWpcAuMqBu7sA"],["a63wdGbNERHMpa5"],["aCrEahwmLWnrEYk"],["b5RLrSWpuUA2xDJ"],["bbTqjAtUhBixvsA"],["bza5NNzwUcDGxjZ"],["cSuNdR3gM2yuhno"],["dvqrTPaYCbu9T83"],["eXpL2bTtqrJonfb"],["foYN97mrvgzxzfw"],["gW7ga3dwaYk4hfx"],["gqAaugd5Qxp49Qj"],["gtaNzg4gpSmknmC"],["hJBPtEuC5h7RUFp"],["hgxq4KDDQnLfDdt"],["hqfxkrJQWUySWrF"],["jjUX2TMExwDtacb"],["jvrcE3pVMgTWvsv"],["kGvs3kKPBRiy5gh"],["kJtmEhtJw2ejJEV"],["kmvqfevENfsFPAP"],["kqdqnxMFFJkyniW"],["kvz8FYgH7k4cKA3"],["mAMxZWF3MpVmGVW"],["mgnZKBCHCRr6J3U"],["mq8E4JwZjsC3EgA"],["muyQwyGhLXBcygT"],["nBUHKgNiTxgKfQT"],["nUKGRNBDCgZKjsc"],["nyQrM9tnSnKQnJR"],["ohhExfYetv3eYBU"],["ootDX8x8SGJxMUR"],["pRdJeoNkkQe543y"],["pRrZmbZjLbVZVWV"],["pbqjhNuNtAT77xF"],["pzrUd7ThTqF5rKD"],["q82SRp3qXgffQtG"],["r99FJzPh8u9bUy8"],["riwVLxaVz77qQTZ"],["ruHR4xBaQbnmchD"],["sXi35xooa3ZiT4A"],["sdawYAQWMEfjgJs"],["swjPPH8TzLQEaZd"],["tgziBNhoy6w5vHK"],["uVoyYaqET9ao8Zt"],["uokJh8abQzADFmR"],["v2YB7uY3bwvonCS"],["ww3JhcTYGatBoxb"],["x5mtu2ABVjfkjXn"],["x9CLJZ7HBDucjyS"],["xSWQPuWRYdon4w8"],["xXuTdzPfU8ksiy3"],["xqFuHJkzMDUQxMm"],["xtMkWjtq8RksQnS"],["y96xnv9gwjGbMqS"],["yBhdDyzyXYuyRty"],["yEqkFByQAFoSczB"],["ynXouk6pswt77fL"],["z3qdkJUoFEFaRqH"],["znTx6Mrwshfm5mp"],["zrTH9MYN5YgmPDL"]]
+        artifactsCode: {boats:[["Blank","Z"],["2JLMJQHthTtyvkj","Z","0000"],["2kDf2B5cVp9iZ4t","Z","0000"],["2xxtC9qZYwajq78","Z","0000"],["4Hz9VbHxBnQWVVX","Z","0000"],["4QcPy3GnBbx4Sx2","Z","0000"],["67jA3EZK2xHB3YA","Z","0000"],["82ABsLxDjRs9auy","Z","0000"],["8mYjE9WrvsJgvKS","Z","0000"],["APPDt9fNsEZTGFZ","Z","0000"],["AYbXhgdq2MJDDdT","Z","0000"],["BK245SvNXon8ur7","Z","0000"],["BPYKSmJC35rHWcs","Z","0000"],["BRALduwbKGQNk6E","Z","0000"],["Cm4hdcR4iiwtwpj","Z","0000"],["CtC4jupb5PQt6w7","Z","0000"],["CwiD6DwYYCKhA6q","Z","0000"],["D77mQM4i9SyaYzg","Z","0000"],["DaU6zDrS4uhM4ff","Z","0000"],["Dwf3LbVG5XTgxFo","Z","0000"],["EdCnfCz96Vw6cwB","Z","0000"],["EdEZfriijVzoPYg","Z","0000"],["ExsFFRZhUsEZgBV","Z","0000"],["FexxD2qiZvp4po5","Z","0000"],["G6oyQc5wmhauC8X","Z","0000"],["Gf759a5PUxL6NXE","Z","0000"],["H7aMmGUoN4sZgdt","Z","0000"],["HD8kEW7oNQGro55","Z","0000"],["HpGQN8jkhcmdnmb","Z","0000"],["JMDqgpP94QKoEeH","Z","0000"],["KKaRtSF9QNpKUYK","Z","0000"],["KvyFkQZuziYWCYa","Z","0000"],["L78TjCXg7Eyux8M","Z","0000"],["LTh7q5QEgK52Hca","Z","0000"],["LovCakMrYnZZ5cy","Z","0000"],["MJDM3mXskaPPt8C","Z","0000"],["MXSNHHUVQSmEJ5U","Z","0000"],["QKoBdYdBgxaAYMv","Z","0000"],["QSFeZgKDzziiWNX","Z","0000"],["Qa7gRNFEfmUPUSG","Z","0000"],["Qv6DrgfHWivob77","Z","0000"],["RKTaBLq5HuGWPNn","Z","0000"],["RjBi7c4Ff9rmPiC","Z","0000"],["SDbi3tB5aJyGqWJ","Z","0000"],["SS5REaCugG4PjyG","Z","0000"],["SVWsxdLxzpBNfeo","Z","0000"],["SZz3PcZJh5euBk2","Z","0000"],["UUJAfcAgUhYnYvu","Z","0000"],["UVsskeyw5jwLMNG","Z","0000"],["UWqz7Xwzqm7hSCA","Z","0000"],["V5KTFqy3QjqVeGD","Z","0000"],["VRj28PfE8bA7z9w","Z","0000"],["WcjrafLQA4ise3w","Z","0000"],["Wuhp9b9JK86mHbY","Z","0000"],["Xhqy7KyXmb2AC3r","Z","0000"],["YbRrCZauFDT7ekr","Z","0000"],["YdqvxxUuzkXgxPC","Z","0000"],["Yp6AvqHEEe4ihM5","Z","0000"],["ZQmAoLfDREctjR8","Z","0000"],["ZUG3xiwyXuG9EX6","Z","0000"],["ZjZWpcAuMqBu7sA","Z","0000"],["a63wdGbNERHMpa5","Z","0000"],["aCrEahwmLWnrEYk","Z","0000"],["b5RLrSWpuUA2xDJ","Z","0000"],["bbTqjAtUhBixvsA","Z","0000"],["bza5NNzwUcDGxjZ","Z","0000"],["cSuNdR3gM2yuhno","Z","0000"],["dvqrTPaYCbu9T83","Z","0000"],["eXpL2bTtqrJonfb","Z","0000"],["foYN97mrvgzxzfw","Z","0000"],["gW7ga3dwaYk4hfx","Z","0000"],["gqAaugd5Qxp49Qj","Z","0000"],["gtaNzg4gpSmknmC","Z","0000"],["hJBPtEuC5h7RUFp","Z","0000"],["hgxq4KDDQnLfDdt","Z","0000"],["hqfxkrJQWUySWrF","Z","0000"],["jjUX2TMExwDtacb","Z","0000"],["jvrcE3pVMgTWvsv","Z","0000"],["kGvs3kKPBRiy5gh","Z","0000"],["kJtmEhtJw2ejJEV","Z","0000"],["kmvqfevENfsFPAP","Z","0000"],["kqdqnxMFFJkyniW","Z","0000"],["kvz8FYgH7k4cKA3","Z","0000"],["mAMxZWF3MpVmGVW","Z","0000"],["mgnZKBCHCRr6J3U","Z","0000"],["mq8E4JwZjsC3EgA","Z","0000"],["muyQwyGhLXBcygT","Z","0000"],["nBUHKgNiTxgKfQT","Z","0000"],["nUKGRNBDCgZKjsc","Z","0000"],["nyQrM9tnSnKQnJR","Z","0000"],["ohhExfYetv3eYBU","Z","0000"],["ootDX8x8SGJxMUR","Z","0000"],["pRdJeoNkkQe543y","Z","0000"],["pRrZmbZjLbVZVWV","Z","0000"],["pbqjhNuNtAT77xF","Z","0000"],["pzrUd7ThTqF5rKD","Z","0000"],["q82SRp3qXgffQtG","Z","0000"],["r99FJzPh8u9bUy8","Z","0000"],["riwVLxaVz77qQTZ","Z","0000"],["ruHR4xBaQbnmchD","Z","0000"],["sXi35xooa3ZiT4A","Z","0000"],["sdawYAQWMEfjgJs","Z","0000"],["swjPPH8TzLQEaZd","Z","0000"],["tgziBNhoy6w5vHK","Z","0000"],["uVoyYaqET9ao8Zt","Z","0000"],["uokJh8abQzADFmR","Z","0000"],["v2YB7uY3bwvonCS","Z","0000"],["ww3JhcTYGatBoxb","Z","0000"],["x5mtu2ABVjfkjXn","Z","0000"],["x9CLJZ7HBDucjyS","Z","0000"],["xSWQPuWRYdon4w8","Z","0000"],["xXuTdzPfU8ksiy3","Z","0000"],["xqFuHJkzMDUQxMm","Z","0000"],["xtMkWjtq8RksQnS","Z","0000"],["y96xnv9gwjGbMqS","Z","0000"],["yBhdDyzyXYuyRty","Z","0000"],["yEqkFByQAFoSczB","Z","0000"],["ynXouk6pswt77fL","Z","0000"],["z3qdkJUoFEFaRqH","Z","0000"],["znTx6Mrwshfm5mp","Z","0000"],["zrTH9MYN5YgmPDL","Z","0000"]]}
     }
 
     componentDidMount(){
@@ -27,19 +27,19 @@ class CodeNull extends Component{
                      })
 
                 //Initializing Artifacs Codes to Blank
-                let artifacts = {
-                    boats: [["Blank","Z"]],   //boats: [["Blank","Z"],['code','Z','0000']]
-                    planes: [["Blank","Z"]],
-                }
-                this.state.artifactsCode.map((ele,ind)=>{
-                    if(ind<80){
-                        artifacts.boats = [...artifacts.boats,[ele[0],'Z','0000']];
-                    }
-                    else if(ind>79){
-                        artifacts.planes = [...artifacts.planes,[ele[0],'Z','0000']];
-                    }
-                })
-                axios.put(this.props.baseUrl + 'artifacts.json',artifacts)
+                // let artifacts = {
+                //     boats: [["Blank","Z"]],   //boats: [["Blank","Z"],['code','Z','0000']]
+                //     planes: [["Blank","Z"]],
+                // }
+                // this.state.artifactsCode.map((ele,ind)=>{
+                //     if(ind<80){
+                //         artifacts.boats = [...artifacts.boats,[ele[0],'Z','0000']];
+                //     }
+                //     else if(ind>79){
+                //         artifacts.planes = [...artifacts.planes,[ele[0],'Z','0000']];
+                //     }
+                // })
+                axios.put(this.props.baseUrl + 'artifacts.json',this.state.artifactsCode)
                      .catch(err=>{
                         alert('Network Error');
                         console.log(err);

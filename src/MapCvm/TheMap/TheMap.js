@@ -11,7 +11,6 @@ class TheMap extends Component{
 
     state = {
         coords: null,
-        activeTeamCoords: ['',''],
         baseUrlPublicCoords: this.props.baseUrl + '/coords/publicCoords'
     }
 
@@ -27,57 +26,7 @@ class TheMap extends Component{
                 console.log(err);
                 alert('Network issue has been observed')
              })
-        const options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0
-        }
-        if (navigator.geolocation) {
-            if(typeof navigator.geolocation.watchPosition !== 'function'){
-                navigator.geolocation.getCurrentPosition(position=>{
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    this.setState({
-                        activeTeamCoords:[latitude,longitude]
-                    })
-                },err=>{
-                    
-                    if(err.code===2)
-                        console.log("Unable to retrieve your location");
-                    else if(err.code===3)
-                        console.log('Shits happening');
-                },options)
-            }
-            else{
-                navigator.geolocation.watchPosition(position=>{
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-                    
-                    // let zonePolyCoords = [[23.31704,72.16704] , [22.73661,72.47311] , [22.62099,73.10878] , [22.99475,74.32242]];
-                    // zonePolyCoords.map((ele,ind)=>{
-                    //     updateSpecialZones("specialZone1",ele,ind);
-                    // })
-                    // updateSpecialZones(['sada','asdasd'],0);
-
-                    updateActiveTeamCoords(this.props.activeTeam,[latitude,longitude],this.props.charCodesArr);
-                    this.setState({
-                        activeTeamCoords: [latitude,longitude]
-                    })
-    
-                },err=>{
-                    
-                    if(err.code===2)
-                        console.log("Unable to retrieve your location");
-                    else if(err.code===3)
-                        console.log('Shits happening');
-                },options);   
-            }
-        }
-
-        else {
-            alert('Not supported in your goddamn browser')
-        }
+        
     }
 
     render(){
@@ -94,7 +43,7 @@ class TheMap extends Component{
                     url='https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' 
                     />
 
-                    <PublicDynamic baseUrlPublicCoords = {this.state.baseUrlPublicCoords} activeTeamCoords = {this.state.activeTeamCoords} activeTeam = {this.props.activeTeam}/>
+                    <PublicDynamic baseUrlPublicCoords = {this.state.baseUrlPublicCoords} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam}/>
                     
                     <ImageOverlay url = 'https://i.ibb.co/XjXxGkR/sector-16.png' bounds={[[23.232012525273973,72.64771431684495],[23.230016085247495,72.64565974473955]]}></ImageOverlay>
                 </LeafletMap>

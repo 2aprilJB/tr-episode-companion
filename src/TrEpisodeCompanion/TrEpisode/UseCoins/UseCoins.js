@@ -42,11 +42,11 @@ const UseCoins = (props)=>{
                     <div className="RiddleCatalogue">
                         <div className="BuyRiddle">
                             <h3 className="ButChitTypeHead">Type-I</h3>
-                            <button onClick={()=>onBuy(10,'i')} className="BuyButt"><div className="BoldParaCenter">BUY</div><p className="LightParaCenter">for 10 Coins</p></button>
+                            <button onClick={()=>onBuy(props.buyOpts.i,'i')} className="BuyButt"><div className="BoldParaCenter">BUY</div><p className="LightParaCenter">for {props.buyOpts.i} Coins</p></button>
                         </div>
                         <div className="BuyRiddle">
                             <h3 className="ButChitTypeHead">Type-II</h3>
-                            <button onClick={()=>onBuy(20,'ii')} className="BuyButt"><div className="BoldParaCenter">BUY</div><p className="LightParaCenter">for 20 Coins</p></button>
+                            <button onClick={()=>onBuy(props.buyOpts.ii,'ii')} className="BuyButt"><div className="BoldParaCenter">BUY</div><p className="LightParaCenter">for {props.buyOpts.ii} Coins</p></button>
                         </div>
                     </div>
                 </div>

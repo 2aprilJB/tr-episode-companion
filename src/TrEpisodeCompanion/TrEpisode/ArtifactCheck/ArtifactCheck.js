@@ -12,7 +12,7 @@ class ArtifactCheck extends Component{
     render(){
         return(
             <div className="ArtifactModuleWrapper">
-                <CodeValidation coinCount = {this.props.coinCount} refresh = {this.props.refresh} refreshed = {this.props.refreshed} baseUrl = {this.props.codeValidBaseUrl}  
+                <CodeValidation storeOptions = {this.props.storeOptions} coinCount = {this.props.coinCount} refresh = {this.props.refresh} refreshed = {this.props.refreshed} baseUrl = {this.props.codeValidBaseUrl}  
                     toValidateImgUrl = {this.props.toValidateImgUrl} activeTeam = {this.props.activeTeam}
                     bought = {this.props.bought} buyHandler = {this.props.buyHandler} validationLimit = {this.props.validationLimit}/>   {/* Controlling Factor */}
                     

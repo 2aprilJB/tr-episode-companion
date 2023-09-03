@@ -12,7 +12,6 @@ import { getCoins } from "../../FireStoreUtils/FireStoreUtils";
 import CoinsCollected from "./CoinsCollected/CoinsCollected";
 import UseCoins from "./UseCoins/UseCoins";
 import axios from "axios";
-import AlertModule from "../AlertModule/AlertModule";
 
 class TrEpisode extends Component{
     state = {
@@ -26,6 +25,7 @@ class TrEpisode extends Component{
         refreshPlane: false,
         loading: true,
         coinCount: 0,
+        riddleBuyOptions: {},
         toValidateImgUrl: 
         [
             'https://img.freepik.com/premium-vector/paper-airplane-icon-comic-style-plane-vector-cartoon-illustration-white-isolated-background-air-flight-business-concept-splash-effect_157943-6349.jpg?w=2000',
@@ -36,6 +36,18 @@ class TrEpisode extends Component{
         this.setState({
             loading: false
         })
+
+        axios.get(this.props.baseUrl + '/storeOptions.json')
+             .then(resp=>{
+                this.setState({
+                    riddleBuyOptions: resp.data.buyRiddlesOptions
+                })
+             })
+             .catch(err=>{
+                console.log(err);
+                alert('A network isuue contact the desk');
+             })
+        
     }
     render(){
         let buyHandler =(typeOfChit)=>{
@@ -99,7 +111,7 @@ class TrEpisode extends Component{
         <div className="UserMode">
             {/*Artifact - I : Five Check*/}
             <div className="BoatSection">
-                <ArtifactCheck coinCount = {this.state.coinCount} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl}   
+                <ArtifactCheck storeOptions = {this.props.storeOptions} coinCount = {this.state.coinCount} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl}   
                 codeValidBaseUrl = {this.state.artifactsCodesUrl} toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
                 buyHandler = {buyHandler} validationLimit = {2} bought = {this.state.bought}
                 onRefreshClick = {onBoatRefresh} chitType = {this.state.chitType}/>
@@ -134,7 +146,6 @@ class TrEpisode extends Component{
                     <h5>TEAM</h5>
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
-                <AlertModule/>
                 <div className="ShowMapContainer">
                     <div className="ShowMap">
                         <a href='/mapCVM'><ion-icon name="map-outline"></ion-icon></a>
@@ -157,10 +168,11 @@ class TrEpisode extends Component{
                 {/*Alert Module, works currently on refresh click*/}
 
                 {/* Lets buy some Riddles */}
-                <UseCoins buyHandler = {buyHandler} 
+                {this.state.riddleBuyOptions?<UseCoins buyHandler = {buyHandler} 
                 activeTeam = {this.props.activeTeam} 
                 coinCount = {this.state.coinCount}
-                bought = {this.state.bought} />
+                bought = {this.state.bought}
+                buyOpts = {this.state.riddleBuyOptions} />:null}
 
 
                 

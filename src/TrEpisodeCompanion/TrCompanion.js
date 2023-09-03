@@ -26,7 +26,7 @@ class TrCompanion extends Component{
         return(
             <div className="MainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true} />}
-                {this.props.loggedIn[0]?<TrEpisode baseUrl = {this.props.baseUrl} loggedIn = {this.props.loggedIn} logoutHandler = {this.props.logoutHandler} activeTeam = {this.props.loggedIn[1]}/>:
+                {this.props.loggedIn[0]?<TrEpisode storeOptions = {this.props.storeOptions} charCodesArr = {this.props.charCodesArr} setActiveCoords = {this.props.setActiveCoords} baseUrl = {this.props.baseUrl} loggedIn = {this.props.loggedIn} logoutHandler = {this.props.logoutHandler} activeTeam = {this.props.loggedIn[1]}/>:
                     <div className="LoginPage">
                         <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/loginPage'} />
                         <LoginPopup credentialsUrl = {this.props.credentialsUrl} loggedInHandler={this.props.loggedInHandler} loggedIn = {this.props.loggedIn} />

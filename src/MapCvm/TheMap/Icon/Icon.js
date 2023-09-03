@@ -96,6 +96,30 @@ const iconChar5 = new L.Icon({
     iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
+const iconKiller1 = new L.Icon({
+    iconUrl: require('../../../Assets/Images/killer1.png'),
+    iconRetinaUrl: require('../../../Assets/Images/killer1.png'),
+    iconAnchor: null,
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    border: 0,
+    iconSize: new L.Point(30, 30),
+    className: 'leaflet-div-icon'
+});
+const iconKiller2 = new L.Icon({
+    iconUrl: require('../../../Assets/Images/killer2.png'),
+    iconRetinaUrl: require('../../../Assets/Images/killer2.png'),
+    iconAnchor: null,
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    border: 0,
+    iconSize: new L.Point(30, 30),
+    className: 'leaflet-div-icon'
+});
 const iconManager = new L.Icon({
     iconUrl: require('../../../Assets/Images/manager.png'),
     iconRetinaUrl: require('../../../Assets/Images/manager.png'),
@@ -109,4 +133,4 @@ const iconManager = new L.Icon({
     className: 'leaflet-div-icon'
 });
 
-export { iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconManager, iconSpecial };
+export { iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial };
