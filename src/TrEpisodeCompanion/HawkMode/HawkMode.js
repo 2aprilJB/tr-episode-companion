@@ -14,7 +14,7 @@ class HawkMode extends Component{
     }
 
     onChitValidation(currentTeam,chitType,correctCode){
-        axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/points.json')
+        axios.get(this.props.baseUrl.dynamicBase3 + 'points.json')
              .then(resp=>{
                 let tempPts = resp.data;
                 if(correctCode&&chitType==='i'){
@@ -28,7 +28,7 @@ class HawkMode extends Component{
                     alert('Team ' + currentTeam + ' has wrong Guess, - 5pts');
                     tempPts[currentTeam] = tempPts[currentTeam] -5;
                 }
-                axios.put('https://tr-episode-companion-default-rtdb.firebaseio.com/points.json',tempPts)
+                axios.put(this.props.baseUrl.dynamicBase3 + 'points.json',tempPts)
                      .catch(err=>{
                         console.log(err);
                         alert("Network Error");
@@ -39,7 +39,7 @@ class HawkMode extends Component{
     onSubmitHandler(currentCode,currentSelect,currentChar){
         let codeCorrect = false;
         //We wil fetch latest data from server
-        axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/.json')
+        axios.get(this.props.baseUrl.dynamicBase2 + '.json')
              .then(resp=>{
                 let charArray = resp.data.characters;
                 charArray.map((elem,indA)=>{
@@ -50,7 +50,7 @@ class HawkMode extends Component{
                                 codeCorrect = true;
                                 tempCharArr[indA][indB][2] = codeCorrect; //Updating state that characters's chitCode is Validated 
                                 
-                                axios.put('https://tr-episode-companion-default-rtdb.firebaseio.com/characters.json',tempCharArr)
+                                axios.put(this.props.baseUrl.dynamicBase2 + 'characters.json',tempCharArr)
                                      .then(resp=>{
                                         this.onChitValidation(currentSelect,ele[1],codeCorrect);
                                      })
@@ -83,26 +83,37 @@ class HawkMode extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/.json')
+        axios.get(this.props.baseUrl.dynamicBase3 + '.json')
              .then(response=>{
                 let credentials = {};
                 credentials = response.data.points;
-                let characters = [];
-                characters = response.data.characters;
-                characters[0].map(ele=>{
-                    if(this.props.activeChar===ele[0]){
-                        this.setState({
-                            currChar: ele[1]
+                axios.get(this.props.baseUrl.dynamicBase2 + '.json')  
+                     .then(resp=>{
+                        let characters = [];
+                        characters = resp.data.characters;
+                        characters[0].map(ele=>{
+                            if(this.props.activeChar===ele[0]){
+                                this.setState({
+                                    currChar: ele[1]
+                                })
+                            }
+                            else{}
                         })
-                    }
-                    else{}
-                })
 
-                this.setState({
-                    credArr: credentials,
-                    charArr: characters
-                });
+                        this.setState({
+                            credArr: credentials,
+                            charArr: characters
+                        });
+                     })
+                     .catch(err=>{
+                        console.log(err);
+                        alert("There's Network Error");
+                     })
              }) //Storing Credentials
+             .catch(err=>{
+                console.log(err);
+                alert("There's Network Error");
+             })
     }
 
 
@@ -120,12 +131,12 @@ class HawkMode extends Component{
             })
         }
         let currentChar = this.state.currChar;
-        let onCharSelectHandler = (e)=>{
-            currentChar = e.target.value;
-            this.setState({
-                currChar: currentChar
-            })
-        }
+        // let onCharSelectHandler = (e)=>{
+        //     currentChar = e.target.value;
+        //     this.setState({
+        //         currChar: currentChar
+        //     })
+        // }
 
         let teamOptions = Object.keys(this.state.credArr).map((ele,ind)=>{
             return(
@@ -158,7 +169,7 @@ class HawkMode extends Component{
                     {showButton}
                 </div>
 
-                <PointTable/>
+                <PointTable baseUrl = {this.props.baseUrl} />
             </div>
         )
     }

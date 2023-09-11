@@ -5,6 +5,7 @@ import AlertUpdate from "./AlertUpdate/AlertUpdate";
 import CodeNull from "./CodeNull/CodeNull";
 import AddUser from "./AddUser/AddUser";
 import AddChit from "./AddChit/AddChit";
+import AddArtifact from "./AddArtifact/AddArtifact";
 
 class ManagerMode extends Component{
     state = {
@@ -26,10 +27,10 @@ class ManagerMode extends Component{
         return(
             <div className="ManagerContainer">
                 <h2 className="ManagerTitle">MR. Manager</h2>
-                <AlertUpdate baseUrl = {this.props.baseUrl}/>
-                <AddUser baseUrl = {this.props.baseUrl}/>
-                <AddChit baseUrl = {this.props.baseUrl}/>
-
+                <AlertUpdate/>
+                <AddUser baseUrl = {this.props.baseUrl.dynamicBase3}/>
+                <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
+                <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
                 <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>
                 {this.state.updateArtifactsCode?<CodeNull baseUrl = {this.props.baseUrl} />:null}
             </div>

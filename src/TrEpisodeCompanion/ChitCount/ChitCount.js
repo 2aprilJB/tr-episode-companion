@@ -8,7 +8,7 @@ class ChitCount extends Component{
         chitCount: [] 
     } 
     componentDidMount(){
-        axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/chits.json')
+        axios.get(this.props.baseUrl + 'chits.json')
              .then(res=>{
                 let tempCount = [0,0];
                 res.data['i'].map(ele=>{
@@ -35,7 +35,7 @@ class ChitCount extends Component{
     
     render(){
         let onRefresh = ()=>{
-            axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/chits.json')
+            axios.get(this.props.baseUrl + 'chits.json')
              .then(res=>{
                 let tempCount = [0,0];
                 res.data['i'].map(ele=>{

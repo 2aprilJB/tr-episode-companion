@@ -15,7 +15,7 @@ import axios from "axios";
 
 class TrEpisode extends Component{
     state = {
-        artifactsCodesUrl: this.props.baseUrl + 'artifacts/boats',
+        artifactsCodesUrl: this.props.baseUrl.dynamicBase1 + 'artifacts/',
         chitType: '-',
         showChit: false,
         bought: false,
@@ -37,7 +37,7 @@ class TrEpisode extends Component{
             loading: false
         })
 
-        axios.get(this.props.baseUrl + '/storeOptions.json')
+        axios.get(this.props.baseUrl.staticBase + '/storeOptions.json')
              .then(resp=>{
                 this.setState({
                     riddleBuyOptions: resp.data.buyRiddlesOptions
@@ -97,7 +97,7 @@ class TrEpisode extends Component{
             })
         }
         let showPoints = (activeTeam)=>{
-            axios.get(this.props.baseUrl + '/points.json')
+            axios.get(this.props.baseUrl.dynamicBase3 + '/points.json')
                  .then(resp=>{
                     alert("Your team's points : " + resp.data[activeTeam]);
                  })
@@ -139,7 +139,7 @@ class TrEpisode extends Component{
                 </div>
                 <Modal show = {this.state.showChit} onBackDrop = {()=>showChitCount(false)}>
                     {/*ChitCount Module*/}
-                    <ChitCount/>
+                    <ChitCount baseUrl = {this.props.baseUrl.dynamicBase2}/>
                 </Modal>
                 
                 <div className="TeamDetails">
@@ -179,11 +179,11 @@ class TrEpisode extends Component{
                     {this.props.activeTeam.split("").length===1?
                         UserMode:
                      this.props.activeTeam==="Z0"?
-                        <ManagerMode baseUrl = {this.props.baseUrl}/>:
-                        <HawkMode activeChar = {this.props.activeTeam}/>
+                        <ManagerMode activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
+                        <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam}/>
                     }
                 
-                <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/gamePage'}/>
+                <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>
 
             </div>
         );

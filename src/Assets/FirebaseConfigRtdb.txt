@@ -1,0 +1,89 @@
+01. TR-StaticBase
+    const firebaseConfig = {
+        apiKey: "AIzaSyD79UnWbSycIniFrRAObez_s-wBJBx27rk",
+        authDomain: "tr-staticbase.firebaseapp.com",
+        databaseURL: "https://tr-staticbase-default-rtdb.firebaseio.com",
+        projectId: "tr-staticbase",
+        storageBucket: "tr-staticbase.appspot.com",
+        messagingSenderId: "556116569330",
+        appId: "1:556116569330:web:61b0cdea2eaaa4e933b46b",
+        measurementId: "G-H3M04W1TZ8"
+    };
+
+    url: https://tr-staticbase-default-rtdb.firebaseio.com/
+
+
+
+1. TR-Team-A
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB-SOdcLeCq9PJWO5yiBVnKfhhrpT1qavo",
+        authDomain: "tr-team-a.firebaseapp.com",
+        projectId: "tr-team-a",
+        storageBucket: "tr-team-a.appspot.com",
+        messagingSenderId: "713495846254",
+        appId: "1:713495846254:web:0c46a5d8ce71aee55cb57f",
+        measurementId: "G-Q43Z6ESJ7W"
+    };
+
+    url: https://tr-team-a-default-rtdb.firebaseio.com/
+
+
+2. TR-Team-B
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBKQB1r4ZvB1Mm-K_xQcM6XtaDP98E0CgQ",
+        authDomain: "tr-team-b.firebaseapp.com",
+        databaseURL: "https://tr-team-b-default-rtdb.firebaseio.com",
+        projectId: "tr-team-b",
+        storageBucket: "tr-team-b.appspot.com",
+        messagingSenderId: "951334541844",
+        appId: "1:951334541844:web:299da669085b274a302501",
+        measurementId: "G-TXEX4R8E92"
+    };
+    url: https://tr-team-b-default-rtdb.firebaseio.com/
+
+
+3. TR-Team-C 
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCgVchW0ShcCJynpszLIQToc-1ygKatHQA",
+        authDomain: "tr-team-c.firebaseapp.com",
+        databaseURL: "https://tr-team-c-default-rtdb.firebaseio.com",
+        projectId: "tr-team-c",
+        storageBucket: "tr-team-c.appspot.com",
+        messagingSenderId: "755157202433",
+        appId: "1:755157202433:web:400f26068534cc9c267200",
+        measurementId: "G-3D0HCGCF0M"
+    };
+    url: https://tr-team-c-default-rtdb.firebaseio.com/
+
+
+4. TR-Team-D 
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCn2nX9lS1cMrZkrquLjK3SFHSvt41Ik7o",
+        authDomain: "tr-team-d.firebaseapp.com",
+        databaseURL: "https://tr-team-d-default-rtdb.firebaseio.com",
+        projectId: "tr-team-d",
+        storageBucket: "tr-team-d.appspot.com",
+        messagingSenderId: "467677051754",
+        appId: "1:467677051754:web:f57f4c570069aeaa4d8313",
+        measurementId: "G-YT4E3CN9GP"
+    };
+    url: https://tr-team-d-default-rtdb.firebaseio.com/
+
+
+5. TR-Team-E
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAS2aIDwLIwvw42IOCFj0kNX9k2rVCDDXM",
+        authDomain: "tr-team-e.firebaseapp.com",
+        databaseURL: "https://tr-team-e-default-rtdb.firebaseio.com",
+        projectId: "tr-team-e",
+        storageBucket: "tr-team-e.appspot.com",
+        messagingSenderId: "965418008485",
+        appId: "1:965418008485:web:0d158803e8bfa24aaf324c",
+        measurementId: "G-DQNPRLV6J6"
+    };
+    url: https://tr-team-e-default-rtdb.firebaseio.com/

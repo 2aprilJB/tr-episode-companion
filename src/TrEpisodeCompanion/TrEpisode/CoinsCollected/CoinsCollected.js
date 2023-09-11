@@ -1,4 +1,4 @@
-import db from '../../../firebase';
+import {dbTeams} from '../../../firebase';
 import { collection, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
 import React, { Component, useEffect, useState } from "react";
 import "./CoinsCollected.css";
@@ -19,22 +19,24 @@ const CoinsCollected = (props)=>{
     // }
 
     useEffect(()=>{
-        onSnapshot(collection(db,"participantsCoords"), (snapshot)=>{
-            let allCoins = snapshot.docs.map(doc=>({...doc.data(), id:doc.id}));
-            allCoins.map(ele=>{
-                if(ele.id===props.activeTeam){
-                    if(ele.trCoins){
-                        props.updateCoinState(ele.trCoins)
-                        setCoins(ele.trCoins);
+        if(dbTeams[props.activeTeam]){
+            onSnapshot(collection(dbTeams[props.activeTeam],"TrCoins"), (snapshot)=>{
+                let allCoins = snapshot.docs.map(doc=>({...doc.data(), id:doc.id}));
+                allCoins.map(ele=>{
+                    if(ele.id===props.activeTeam){
+                        if(ele.trCoins){
+                            props.updateCoinState(ele.trCoins)
+                            setCoins(ele.trCoins);
+                        }
+                        else{
+                            props.updateCoinState(0)
+                            setCoins(0);
+                        }
                     }
-                    else{
-                        props.updateCoinState(0)
-                        setCoins(0);
-                    }
-                }
-                else{}
+                    else{}
+                })
             })
-        })
+        }
     },[])
 
     return(

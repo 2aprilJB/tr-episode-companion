@@ -26,7 +26,7 @@ class NewMay extends Component{
     
 
     componentDidMount(){
-        axios.get(this.props.baseUrl + '/billBoards.json')
+        axios.get(this.props.baseUrl.staticBase + '/billBoards.json')
              .then(resp=>{
                 this.setState({
                     videoIds: [resp.data.youtube1,resp.data.youtube2]
@@ -69,7 +69,7 @@ class NewMay extends Component{
                         <br/>Battle Royale
                     </p>
                 </Showcase> */}
-                <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/homePage'} />
+                <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/homePage'} />
                 
                 <ArTech videoIds = {this.state.videoIds} />
 

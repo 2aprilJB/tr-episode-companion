@@ -13,13 +13,14 @@ class MapCvm extends Component{
         
     }
     render(){
+        let loggedIn = document.cookie.split(",");
         return(
             <div className="MapCvmWrapper">
                 
                 <div className="MapInfoContainer">
                     <div className="MapOverlayFeatures">
                         <div className="LogoutButtContainer">
-                            {this.props.loggedIn[0]?<div><div onClick={()=>this.props.logoutHandler(this.props.loggedIn)} className="LogoutButt">
+                            {loggedIn[0]?<div><div onClick={()=>this.props.logoutHandler(loggedIn)} className="LogoutButt">
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </div><h3 className="ButtText2">LOGOUT</h3></div>:null}
                         </div>
@@ -31,7 +32,7 @@ class MapCvm extends Component{
                         </div>
                     </div>
                     <div className="MapContainer">
-                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} charCodesArr = {this.props.charCodesArr} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl} />
+                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl} />
                     </div>
                     
                     <div className="MapInfo">

@@ -1,10 +1,11 @@
 import { collection, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
-import db from '../../../firebase';
+import {db,dbDynamic1, dbDynamic4, dbTeams} from '../../../firebase';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { Circle, Marker, Polygon, Polyline } from 'react-leaflet';
-import {  iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial  } from '../Icon/Icon';
+import {  iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial ,iconVartifacts } from '../Icon/Icon';
 import axios from 'axios';
+import CharCoords from './CharCoords/CharCoords';
 
 const PublicMarkers = (props)=>{
 
@@ -13,8 +14,8 @@ const PublicMarkers = (props)=>{
         weight: 1
     }
     
+    const [vArtifacts,setVartifacts] = useState();
     const [polyCoords,setPolyCoords] = useState();         //Storing static Polygon Coordinates  
-    const [charCoords,setCharCoords] = useState();         //Storing Character Coordinates
     const [usersCoords,setUsersCoords] = useState();         //Storing users Coordinates
     const [specialCoords,setSpecialCoords] = useState();   //Storing Special Coordinates
     let activeCoords = props.activeTeamCoords;
@@ -34,16 +35,19 @@ const PublicMarkers = (props)=>{
                 alert('Another Network error is on the verge to kill this app');
             })
         
-            
-        onSnapshot(collection(db,"characterCoords"), (snapshot)=>{
-            setCharCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
-        })
+        onSnapshot(collection(dbDynamic4,"vArtifacts"), (snapshot)=>{
+            setVartifacts(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})))
+        })    
+        // onSnapshot(collection(db,"characterCoords"), (snapshot)=>{
+        //     setCharCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
+        // })
         onSnapshot(collection(db,"participantsCoords"), (snapshot)=>{
             setUsersCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
         })
-        onSnapshot(collection(db,"specialCoords"), (snapshot)=>{
+        onSnapshot(collection(dbDynamic1,"specialCoords"), (snapshot)=>{
             setSpecialCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
         })
+
     },[])
     let showUsers = false;
     if(props.activeTeam==="Z0")
@@ -52,42 +56,8 @@ const PublicMarkers = (props)=>{
 
     return(
         <div className="PublicMarkersContainer">
-            {/* All Characters Markers that are public and dynamic in nature, including Manager */}
-            {charCoords?charCoords.map(ele=>{
-                let problemIcon = null;
-                if(ele.id===props.activeTeam){
-                    problemIcon = iconPerson;
-                }
-                else if(ele.id==="Z0"){
-                    problemIcon = iconManager;             //Till this part we have solved problem
-                }
-                else if(ele.id==="Z1"){
-                    problemIcon = iconChar1;             //Till this part we have solved problem
-                }
-                else if(ele.id==="Z2"){
-                    problemIcon = iconChar2;             //Till this part we have solved problem
-                }
-                else if(ele.id==="Z3"){
-                    problemIcon = iconChar3;             //Till this part we have solved problem
-                }
-                else if(ele.id==="Z4"){
-                    problemIcon = iconChar4;             //Till this part we have solved problem
-                }
-                else if(ele.id==="Z5"){
-                    problemIcon = iconChar5;             //Till this part we have solved problem
-                }  
-                else if(ele.id==="Z6"){
-                    problemIcon = iconKiller1;             //Till this part we have solved problem
-                } 
-                else if(ele.id==="Z7"){
-                    problemIcon = iconKiller2;             //Till this part we have solved problem
-                }                                      //Where when character becomes active icon should be of activePerson 
-                return(
-                    <Marker key={ele.id} eventHandlers={{
-                        click: (e)=>{alert(ele.characterName)}
-                    }} position = {ele.coords} icon={problemIcon}></Marker>
-                )
-            }):null}
+            <CharCoords activeTeam = {props.activeTeam}/>
+
             {/* Special Markers going to popup and dynamic in nature*/}
             {specialCoords?specialCoords.map(ele=>{
                 return(
@@ -103,12 +73,20 @@ const PublicMarkers = (props)=>{
 
             {/* All polygons that are public and Static in nature */}
             {polyCoords?<Polygon positions={polyCoords.outlineBoundary.polyCoords} pathOptions={polyCoords.outlineBoundary.polyOptions}></Polygon>:null}
-            {polyCoords?polyCoords.charZones.map(ele=>{
+            {polyCoords?polyCoords.charZones.map((ele,ind)=>{
                 return(
-                    <Polygon positions={ele[2]} pathOptions={ele[1]}/>
+                    <Polygon key={ind} positions={ele[2]} pathOptions={ele[1]}/>
                 )
             }):null}
-            <Marker position={activeCoords} icon={iconPerson}></Marker>
+
+            {vArtifacts?vArtifacts.map((ele,ind)=>{
+                if(!ele.validated){
+                    return <Marker key={ind} eventHandlers={{click: (e)=>{alert(ele.idArtifact)}}} position={ele.coords} icon={iconVartifacts}/>;
+                }
+                else{}
+            }):null}
+
+            {props.activeTeam.length<2?<Marker position={activeCoords} icon={iconPerson}></Marker>:null}
         </div>
     );
 }

@@ -14,8 +14,6 @@ import HeroDisplay from './TrEpisodeCompanion/HeroDisplay/HeroDisplay';
 import MapCvm from './MapCvm/MapCvm';
 import Landing from './Landing/Landing';
 import { updateActiveTeamCoords } from './FireStoreUtils/FireStoreUtils';
-import { popUpAlertMsg } from './FireStoreUtils/FireStoreUtils';
-import AlertMsgPopUp from './Assets/ALertMsgPopUp/AlertMsgPopUp';
 import AlertModule from './TrEpisodeCompanion/AlertModule/AlertModule';
 class App extends Component {
 
@@ -28,13 +26,19 @@ class App extends Component {
     showMenu:false,
     showNews:false,
     backImgs: '',
-    baseUrl: 'https://tr-episode-companion-default-rtdb.firebaseio.com/',
+    refBaseUrl: 'https://tr-episode-companion-default-rtdb.firebaseio.com/',
+    baseUrls:{
+      dynamicBase1: "https://tr-dynamicbase-1-default-rtdb.firebaseio.com/",
+      dynamicBase2: "https://tr-dynamicbase-2-default-rtdb.firebaseio.com/",
+      dynamicBase3: "https://tr-dynamicbase-3-default-rtdb.firebaseio.com/",
+      dynamicBase4: "https://tr-dynamicbase-4-default-rtdb.firebaseio.com/",
+      staticBase:"https://tr-staticbase-default-rtdb.firebaseio.com/"
+    },
     activeTeamCoords:['',''],
     activeTeam: '?',
     charCodesArr: [],
     alertMsg:"",
     loggedIn: [false,'Z'],
-    credentialsUrl: 'https://tr-episode-companion-default-rtdb.firebaseio.com/credentials',
     loading: true,
     storeOptions: {}
   }
@@ -49,13 +53,13 @@ logoutHandler=(loggedIn)=>{
     this.setState({
         loading: true
     })
-    axios.get(this.state.credentialsUrl + '.json')
+    axios.get(this.state.baseUrls.dynamicBase3 + '.json')
          .then(resp=>{
-            let creds = resp.data;          //Retrieving credentials array from server
+            let creds = resp.data.credentials;          //Retrieving credentials array from server
             creds.map((ele,ind)=>{
                 if(ele[3]===loggedIn[1]){ //Finding credential using TeamCode
                     creds[ind][2] = false;
-                    axios.put(this.state.credentialsUrl + '/' + ind + '.json',creds[ind]) //Updating credentials that user has logged out
+                    axios.put(this.state.baseUrls.dynamicBase3 + 'credentials/' + ind + '.json',creds[ind]) //Updating credentials that user has logged out
                          .then(resp=>{
                             this.setState({
                                 loading: false
@@ -85,45 +89,46 @@ logoutHandler=(loggedIn)=>{
   }
 
   componentDidMount(){
-    // if(this.state.alertMsg!==popUpAlertMsg()){
-    //   this.setState({
-    //     alertMsg:popUpAlertMsg()
-    //   })
-    //   alert(popUpAlertMsg());
-    // }
-    // else{}
-    // console.log(popUpAlertMsg());
-    // if(popUpAlertMsg().data){
-    // }
-    // else{console.log('glith')}
-
     let cookArr = document.cookie;
-        if(cookArr != '0'){
+        if(cookArr !== '0'){
             this.setState({
                 loggedIn: cookArr.split(",")
             })
         }
-        else{}
+        else{
+          document.cookie = '0';
+        }
     let tempTeam = document.cookie.split(',')[1]?document.cookie.split(',')[1]:'?';
-    axios.get(this.state.baseUrl + '.json')
-         .then(resp=>{
-            let tempCharCodes = resp.data.characters[0];
-            let tempHawkPass = resp.data.hawkPassCode;
-            let tempManagerPass = resp.data.managerPassCode;
-            this.setState({
-              charCodesArr: tempCharCodes,
-              activeTeam: tempTeam,
-              hawkPassCode: tempHawkPass,
-              managerPassCode: tempManagerPass,
-              backImgs: resp.data.backImgs,
-              newsUpdates:resp.data.newsUpdates,
-              storeOptions: resp.data.storeOptions
-            })
-         })
-         .catch(err=>{
-            alert("Network Error");
-            console.log(err);
-         })
+            axios.get(this.state.baseUrls.staticBase + '.json')
+                 .then(response=>{
+                    // 
+                    let tempHawkPass = response.data.hawkPassCode;
+                    let tempManagerPass = response.data.managerPassCode;
+                    this.setState({
+                      // charCodesArr: tempCharCodes,
+                      activeTeam: tempTeam,
+                      hawkPassCode: tempHawkPass,
+                      managerPassCode: tempManagerPass,
+                      backImgs: response.data.backImgs,
+                      newsUpdates:response.data.newsUpdates,
+                      storeOptions: response.data.storeOptions
+                    })
+                 })
+                 .catch(err=>{
+                  alert("Network Error");
+                  console.log(err);
+                 })
+            axios.get(this.state.baseUrls.dynamicBase2 + '.json')
+                 .then(response=>{
+                    let tempCharCodes = response.data.characters[0]; 
+                    this.setState({
+                      charCodesArr: tempCharCodes
+                    })
+                 })
+                 .catch(err=>{
+                  alert("Network Error");
+                  console.log(err);
+                 })
 
          const options = {
           enableHighAccuracy: true,
@@ -217,20 +222,20 @@ logoutHandler=(loggedIn)=>{
     }
     let back = 'url("' + this.state.backImgs + '")'; 
 
-    let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing baseUrl = {this.state.baseUrl} /><Footer /></div>
+    let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing baseUrl = {this.state.baseUrls} /><Footer /></div>
     let mainApp = <div style={{backgroundImage:back}} className="App">
                     
-                    {this.state.hawkMode?<HawkMode/>:this.state.managerMode?<ManagerMode baseUrl = {this.state.baseUrl} />:<TrCompanion storeOptions = {this.state.storeOptions} charCodesArr = {this.state.charCodesArr} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.credentialsUrl} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrl}  />}
+                    {this.state.hawkMode?<HawkMode/>:this.state.managerMode?<ManagerMode activeTeamCoords = {this.state.activeTeamCoords} baseUrl = {this.state.baseUrls} />:<TrCompanion activeTeamCoords = {this.state.activeTeamCoords} trueCreds = {this.state.trueCreds} storeOptions = {this.state.storeOptions} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.baseUrls.dynamicBase3 + 'credentials'} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls}  />}
                     <Footer />
                   </div>
-    let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrl + 'billBoards/managerMode'}/></div>
-    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm activeTeam = {this.state.activeTeam} charCodesArr = {this.state.charCodesArr} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrl} /></div>
+    let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/managerMode'}/></div>
+    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls.staticBase} /></div>
     // let polygonGen = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><PolygonGen /></div>
-    let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrl + 'billBoards/contactUs'}/></div>
+    let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/contactUs'}/></div>
       return (
-        <BrowserRouter>
+        this.state.refBaseUrl?<BrowserRouter>
             {/* If Menu or News icons are clicked they are handled here.... */}
-            {this.state.showMenu?<Menu baseUrl = {this.state.baseUrl} backDrop = {this.onMenuBackDrop}/>:null}
+            {this.state.showMenu?<Menu baseUrl = {this.state.baseUrls.staticBase} backDrop = {this.onMenuBackDrop}/>:null}
                     {this.state.showNews?<Modal show = {this.state.showNews} onBackDrop = {this.onNewsBackDrop}>
                       <h2 className='NewsHead'>Latest Updates</h2>
                       {this.state.newsUpdates.map((ele,ind)=>{
@@ -251,7 +256,7 @@ logoutHandler=(loggedIn)=>{
               <Route path='/mapCVM' exact element = {mapCVM}/>
               {/* <Route path='/polygonGen' exact element = {polygonGen}/> */}
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter>:null
       );
   }
 }

@@ -8,7 +8,7 @@ class PointTable extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/points.json')
+        axios.get(this.props.baseUrl.dynamicBase3 + 'points.json')
                  .then(resp=>{
                     this.setState({
                         points: resp.data
@@ -21,7 +21,7 @@ class PointTable extends Component{
     }
     render(){
         let onRefresh = ()=>{
-            axios.get('https://tr-episode-companion-default-rtdb.firebaseio.com/points.json')
+            axios.get(this.props.baseUrl.dynamicBase3 + 'points.json')
                  .then(resp=>{
                     this.setState({
                         points: resp.data

@@ -14,21 +14,22 @@ Each Array contains, [username, passcode] */
 /* if loggedIn === true, The main Module to display can be replaced with null */
 class TrCompanion extends Component{
     state = {
-        loading: true,
+        loading: true
     }
 
     componentDidMount(){
         this.setState({
             loading: false
         })
+        
     }
     render(){
         return(
             <div className="MainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true} />}
-                {this.props.loggedIn[0]?<TrEpisode storeOptions = {this.props.storeOptions} charCodesArr = {this.props.charCodesArr} setActiveCoords = {this.props.setActiveCoords} baseUrl = {this.props.baseUrl} loggedIn = {this.props.loggedIn} logoutHandler = {this.props.logoutHandler} activeTeam = {this.props.loggedIn[1]}/>:
+                {this.props.loggedIn[0]?<TrEpisode activeTeamCoords = {this.props.activeTeamCoords} storeOptions = {this.props.storeOptions} setActiveCoords = {this.props.setActiveCoords} baseUrl = {this.props.baseUrl} loggedIn = {this.props.loggedIn} logoutHandler = {this.props.logoutHandler} activeTeam = {this.props.loggedIn[1]}/>:
                     <div className="LoginPage">
-                        <HeroDisplay baseUrl = {this.props.baseUrl + 'billBoards/loginPage'} />
+                        <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/loginPage'} />
                         <LoginPopup credentialsUrl = {this.props.credentialsUrl} loggedInHandler={this.props.loggedInHandler} loggedIn = {this.props.loggedIn} />
                     </div>
                 }

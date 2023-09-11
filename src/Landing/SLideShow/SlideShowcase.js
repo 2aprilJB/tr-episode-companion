@@ -15,10 +15,10 @@ const slideShowcase = (props)=>{
             </div>
             <Showcase2 colors = {['#c70039','#1eb2a6']} activeSub = {0} modules = {['Events','The App']}>
                 <div className="Events">
-                    <HeroDisplay baseUrl = {props.baseUrl + 'billBoards/homeEvents'} />
+                    <HeroDisplay baseUrl = {props.baseUrl.staticBase + 'billBoards/homeEvents'} />
                 </div>
                 <div className="TheApp">
-                    <HeroDisplay baseUrl = {props.baseUrl + 'billBoards/homeApp'} />
+                    <HeroDisplay baseUrl = {props.baseUrl.staticBase + 'billBoards/homeApp'} />
                 </div>
             </Showcase2>
         </div>

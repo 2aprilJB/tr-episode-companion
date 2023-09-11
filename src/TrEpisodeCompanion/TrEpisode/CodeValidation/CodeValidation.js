@@ -2,16 +2,29 @@ import React from "react";
 import "./CodeValidation.css"
 import axios from 'axios';
 import { Component } from "react";
-import { updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
+import { updateArtifactToFs, updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
 
 class CodeValidation extends Component{
 
     state = {
         baseUrl: null,
         isThereError: false,
-        disableSubmit: false
+        disableSubmit: false,
+        currCode: ''
     }
-    
+    updateTrCoinsBackup(teamCode,coinCount){
+        axios.put(this.props.trCoinsBackUpUrl + 'backUpTrCoins/' + teamCode + '.json',coinCount)
+             .catch(err=>{
+                console.log(err);
+                alert("There's some serious Network Error");
+             })
+    }
+    onChangeHandler = (e)=>{
+        let temp = e.target.value;
+        this.setState({
+            currCode: temp
+        })
+    }
     onSubmitHandler(currentCode){
         this.setState({
             disableSubmit: true //Disabling Submit button till the response from request arrives
@@ -24,15 +37,36 @@ class CodeValidation extends Component{
                 });
                 
                 let artifacts = response.data;
+                let boats = artifacts.boats;
+                let planes = artifacts.planes;
+                artifacts = boats.concat(planes);
+                let artifactType = 'boats';
+
+                // let specialArtifacts = response.data.planes;
                 let foundArtifactAt = 0;
                 let foundAlready = false;
                 artifacts.map((ele,index)=>{
                     if(currentCode===ele[0]&&ele[1]==='Z'){
                         alert('Code Found')     // Here we'll do Firestore Coin Collection
-                        let updatedCoins = this.props.coinCount + this.props.storeOptions.awardCoins; //Adding the More coins as per DB to the current coins
-                        updateCoins(this.props.activeTeam,updatedCoins);
+                        let updatedCoins = 0
+                        if(index<boats.length){ // When the artifact found belongs to BoatsArray
 
-                        foundArtifactAt = index;
+                            updatedCoins = this.props.coinCount + this.props.storeOptions.awardCoins[0]; //Adding the More coins as per DB to the current coins
+                            foundArtifactAt = index;
+
+                        }
+                        else{                   // When the artifact found belongs to PlanesArray
+
+                            updatedCoins = this.props.coinCount + this.props.storeOptions.awardCoins[1]; //Adding the More coins as per DB to the current coins
+                            foundArtifactAt = index-boats.length;
+                            artifactType = 'planes'
+
+                            updateArtifactToFs(currentCode);
+
+                        }
+                        updateCoins(this.props.activeTeam,updatedCoins);
+                        this.updateTrCoinsBackup(this.props.activeTeam,updatedCoins);
+
                     }
                     else if(currentCode===ele[0]&&ele[1]!='Z'){
                         alert('Code Already Found');
@@ -44,15 +78,17 @@ class CodeValidation extends Component{
                 if(foundAlready){
                     console.log('Item Already Found')
                 }    
-                else if(artifacts[foundArtifactAt][0] === "Blank")
+                else if(artifacts[foundArtifactAt][0] === "Blank"){
                     alert('Wrong Code');
-                let newArtifact = artifacts[foundArtifactAt]; //newArtifact, Copy of Found Artifact
+                }
+
+                let newArtifact = response.data[artifactType][foundArtifactAt]; //newArtifact, Copy of Found Artifact
                 newArtifact[1] = this.props.activeTeam;       //Storing Team Code with Artifact's Code
 
                 if(foundArtifactAt===0)                       //newArtifact will now be updated to the server
                     {}                                        
                 else{
-                    axios.put(this.props.baseUrl + '/' + foundArtifactAt + '.json',newArtifact)
+                    axios.put(this.props.baseUrl + artifactType + '/' + foundArtifactAt + '.json',newArtifact)
                     .catch(err=>{
                         console.log(err);
                         this.setState({
@@ -72,6 +108,8 @@ class CodeValidation extends Component{
             
     }
 
+    
+
     componentDidUpdate(){
         if(this.props.refresh){
             console.log('Here for refresh  ' + this.state.validated);
@@ -86,12 +124,7 @@ class CodeValidation extends Component{
     }
     render(){
         
-        let currentCode = null;
-        let onChangeHandler = (e)=>{
-            currentCode = e.target.value;
-        }
-        let validated = this.state.validated;
-        let submitButton = <button onClick={()=>this.onSubmitHandler(currentCode)} className="codeSubmit"><ion-icon name="arrow-forward-outline"></ion-icon></button>
+        let submitButton = <button onClick={()=>this.onSubmitHandler(this.state.currCode)} className="codeSubmit"><ion-icon name="arrow-forward-outline"></ion-icon></button>
         if(this.state.disableSubmit)
             submitButton = null;
         else{}
@@ -105,7 +138,7 @@ class CodeValidation extends Component{
                     </div>
                     <div className="EnterCode">
                         <h6 className="Enter">Enter CODE :</h6>
-                        <input onChange={onChangeHandler} type = "text" className="CodeInput"></input>
+                        <input onChange={this.onChangeHandler} type = "text" className="CodeInput"></input>
                         {submitButton}
                     </div>
                 </div>

@@ -4,30 +4,44 @@ import axios from "axios";
 
 class LoginPopup extends Component{    
     state = {
-        credentials: [],
+        currUser:'',
+        currPass:''
     }
 
     componentDidMount(){
-        axios.get(this.props.credentialsUrl + '.json')
-             .then(resp=>{
-                this.setState({
-                    credentials: resp.data
-                })
-             })
-             .catch(err=>{
-                alert('Some Network Issue');
-                console.log(err);
-             })
+        // axios.get(this.props.credentialsUrl + '.json')
+        //      .then(resp=>{
+        //         this.setState({
+        //             credentials: resp.data
+        //         })
+        //         alert(this.state.credentials);
+        //      })
+        //      .catch(err=>{
+        //         alert('Some Network Issue');
+        //         console.log(err);
+        //      })
     }
-    onSubmitHandler = (userName,passCode)=>{
+
+    onUserChangeHandler = (e)=>{
+        this.setState({
+            currUser: e.target.value
+        })
+    }
+    onPassChangeHandler = (e)=>{
+        this.setState({
+            currPass: e.target.value
+        })
+    }
+    onSubmitHandler = ()=>{
         axios.get(this.props.credentialsUrl + '.json')
              .then(resp=>{
                 let latestCred = resp.data;
-                let tempLog = this.props.loggedIn;
+                let tempLog = document.cookie.split(",");
                 let foundIndex = null;
+                console.log(this.state.currUser)
                 latestCred.map((cred,credInd)=>{
-                    if(cred[0] === userName)
-                        if(cred[1] === passCode){
+                    if(cred[0] === this.state.currUser)
+                        if(cred[1] === this.state.currPass){
                             tempLog = [!cred[2],cred[3]];
                             foundIndex = credInd;
                         }
@@ -48,7 +62,7 @@ class LoginPopup extends Component{
                 }
                 else{}
                 
-                if(tempLog[0]) //If user entered correct credentials and has Logged in setting active team
+                if(tempLog[0]===true) //If user entered correct credentials and has Logged in setting active team
                     {
                         this.props.loggedInHandler(tempLog);
                         document.cookie = tempLog;
@@ -68,28 +82,30 @@ class LoginPopup extends Component{
         
     }
     
+    
     render(){
 
-        let username = null;
-        let passcode = null;
-        let inputHandler = (e)=>{
-            username = e.target.value;
-        };
-        let passHandler = (e)=>{
-            passcode = e.target.value;
-        };
+        
+        // let username = null;
+        // let passcode = null;
+        // let inputHandler = (e)=>{
+        //     username = e.target.value;
+        // };
+        // let passHandler = (e)=>{
+        //     passcode = e.target.value;
+        // };
         return(
             <div className="LoginContainer">
                 <h2 className="LoginHeading">Login</h2>
                 <div className="Credential">
                     <h3 className="Username">UserName :</h3>
-                    <input className="UserNameInp" type="text" onChange={inputHandler}></input>
+                    <input className="UserNameInp" type="text" onChange={this.onUserChangeHandler}></input>
                 </div>
                 <div className="Credential">
                     <h3 className="Passcode">Passcode :</h3>
-                    <input className="PassCodeInp" type="text" onChange={passHandler}></input>
+                    <input className="PassCodeInp" type="text" onChange={this.onPassChangeHandler}></input>
                 </div>
-                <button className="LoginSubmit" onClick={()=>this.onSubmitHandler(username,passcode)}>Login</button>
+                <button className="LoginSubmit" onClick={this.onSubmitHandler}>Login</button>
             </div>
         );  
     }

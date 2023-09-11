@@ -11,7 +11,7 @@ class TheMap extends Component{
 
     state = {
         coords: null,
-        baseUrlPublicCoords: this.props.baseUrl + '/coords/publicCoords'
+        baseUrlPublicCoords: this.props.baseUrl + 'publicCoords'
     }
 
     componentDidMount(){

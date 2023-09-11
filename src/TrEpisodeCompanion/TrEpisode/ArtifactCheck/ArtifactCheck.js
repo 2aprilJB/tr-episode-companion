@@ -14,11 +14,12 @@ class ArtifactCheck extends Component{
             <div className="ArtifactModuleWrapper">
                 <CodeValidation storeOptions = {this.props.storeOptions} coinCount = {this.props.coinCount} refresh = {this.props.refresh} refreshed = {this.props.refreshed} baseUrl = {this.props.codeValidBaseUrl}  
                     toValidateImgUrl = {this.props.toValidateImgUrl} activeTeam = {this.props.activeTeam}
+                    trCoinsBackUpUrl = {this.props.baseUrl.dynamicBase4}
                     bought = {this.props.bought} buyHandler = {this.props.buyHandler} validationLimit = {this.props.validationLimit}/>   {/* Controlling Factor */}
                     
                     <h4 className="ChitTypeHeading">Type - {this.props.chitType.toUpperCase()}</h4>
                     <div className="ChitContainer">
-                        {this.props.bought?<ActualChit chitType = {this.props.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>:<DummyChit/>}
+                        {this.props.bought?<ActualChit chitType = {this.props.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
                     </div>
                     <div className="RefreshDiv">
                         Press This

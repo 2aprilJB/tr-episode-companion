@@ -132,5 +132,17 @@ const iconManager = new L.Icon({
     iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
+const iconVartifacts = new L.Icon({
+    iconUrl: require('../../../Assets/Images/vArtifact.png'),
+    iconRetinaUrl: require('../../../Assets/Images/vArtifact.png'),
+    iconAnchor: null,
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    border: 0,
+    iconSize: new L.Point(15, 15),
+    className: 'leaflet-div-icon'
+});
 
-export { iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial };
+export { iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial, iconVartifacts };
