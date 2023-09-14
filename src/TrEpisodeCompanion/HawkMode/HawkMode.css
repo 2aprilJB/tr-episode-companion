@@ -1,5 +1,5 @@
     .HawkModeContainer{
-        min-height: 100vh;
+        height: max-content;
         height: 100%;
         width: 90%;
         max-width: 25rem;

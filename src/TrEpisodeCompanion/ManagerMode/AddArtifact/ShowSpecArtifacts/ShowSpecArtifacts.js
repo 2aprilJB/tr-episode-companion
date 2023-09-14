@@ -7,7 +7,7 @@ import { deleteArtifactFromFs } from "../../../../FireStoreUtils/FireStoreUtils"
 
 class ShowSpecArtifacts extends Component{
     state = {
-        planeBase: this.props.baseUrl + 'artifacts/planes.json',
+        planeBase: this.props.baseUrl,
         showArtifacts: false,
         specArtifacts: []
     }

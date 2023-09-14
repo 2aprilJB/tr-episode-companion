@@ -15,6 +15,9 @@ import MapCvm from './MapCvm/MapCvm';
 import Landing from './Landing/Landing';
 import { updateActiveTeamCoords } from './FireStoreUtils/FireStoreUtils';
 import AlertModule from './TrEpisodeCompanion/AlertModule/AlertModule';
+import ProxyZonePopUp from './Assets/ProxyZonePopUp/ProxyZonePopUp';
+import { isMarkerInsidePolygon } from './MapCvm/TheMap/DynamicMarker/DynamicMarker';
+import { proxyZoneDetector } from './MapCvm/ProximityDetectors/ProximityDetectors';
 class App extends Component {
 
   state = {
@@ -40,10 +43,126 @@ class App extends Component {
     alertMsg:"",
     loggedIn: [false,'Z'],
     loading: true,
-    storeOptions: {}
+    storeOptions: {},
+
+    publicCoords:{},
+    activeProxyZone:'',
+    popUpValidator: false
   }
 
-  //For Log in And Log out handling
+  componentDidMount(){
+    let cookArr = document.cookie;
+        if(cookArr !== '0'){
+            this.setState({
+                loggedIn: cookArr.split(",")
+            })
+        }
+        else{
+          document.cookie = '0';
+        }
+    let tempTeam = document.cookie.split(',')[1]?document.cookie.split(',')[1]:'?';
+            axios.get(this.state.baseUrls.staticBase + '.json')
+                 .then(response=>{
+                    // 
+                    let tempHawkPass = response.data.hawkPassCode;
+                    let tempManagerPass = response.data.managerPassCode;
+                    this.setState({
+                      activeTeam: tempTeam,
+                      hawkPassCode: tempHawkPass,
+                      managerPassCode: tempManagerPass,
+                      backImgs: response.data.backImgs,
+                      newsUpdates:response.data.newsUpdates,
+                      storeOptions: response.data.storeOptions,
+                      publicCoords:response.data.publicCoords
+                    })
+                 })
+                 .catch(err=>{
+                  alert("Network Error");
+                  console.log(err);
+                 })
+            axios.get(this.state.baseUrls.dynamicBase2 + '.json')
+                 .then(response=>{
+                    let tempCharCodes = response.data.characters[0]; 
+                    this.setState({
+                      charCodesArr: tempCharCodes
+                    })
+                 })
+                 .catch(err=>{
+                  alert("Network Error");
+                  console.log(err);
+                 })
+
+         const options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+      }
+      if (navigator.geolocation) {
+          if(typeof navigator.geolocation.watchPosition !== 'function'){          //This Extra part is to fix that bug that sometimes led to no Location
+              navigator.geolocation.getCurrentPosition(position=>{
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
+                  this.setState({activeTeamCoords:[latitude,longitude]});
+
+                  //Making listeners for ActiveCoords currentActiveCoords
+                  let ts = this.state;
+                  if(ts.publicCoords.polygons){
+                    proxyZoneDetector(ts.activeTeamCoords,ts.publicCoords.polygons.charProxies,ts.activeProxyZone,this.activeProxyZoneHandler);
+                    console.log(this.state.activeProxyZone)}
+                  else{}
+              },err=>{
+                  
+                  if(err.code===2)
+                      console.log("Unable to retrieve your location");
+                  else if(err.code===3)
+                      console.log('Shits happening');
+              },options)
+          }
+          else{
+              navigator.geolocation.watchPosition(position=>{
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
+                  this.setState({activeTeamCoords:[latitude,longitude]});
+
+                  //Making listeners for ActiveCoords currentActiveCoords
+                  let ts = this.state;
+                  if(ts.publicCoords.polygons){
+                    proxyZoneDetector(ts.activeTeamCoords,ts.publicCoords.polygons.charProxies,ts.activeProxyZone,this.activeProxyZoneHandler);
+                  }
+                  else{}
+              },err=>{
+                  if(err.code===2)
+                      console.log("Unable to retrieve your location");
+                  else if(err.code===3)
+                      console.log('Shits happening');
+              },options);   
+          }
+      }
+
+      else {
+          alert('Not supported in your goddamn browser')
+      }
+
+  }
+activeProxyZoneHandler = (zoneCode)=>{
+  let showValidator = false;
+  if(zoneCode!==''){
+      showValidator = true
+  }
+  else{}
+  this.setState({
+    activeProxyZone: zoneCode,
+    popUpValidator: showValidator
+  })
+}
+onValidatorBackDrop = ()=>{
+  this.setState({
+    popUpValidator: false
+  })
+}
+    //For Log in And Log out handling
 loggedInHandler = (tempLog)=>{
   this.setState({
      loggedIn: tempLog
@@ -88,97 +207,6 @@ logoutHandler=(loggedIn)=>{
     })
   }
 
-  componentDidMount(){
-    let cookArr = document.cookie;
-        if(cookArr !== '0'){
-            this.setState({
-                loggedIn: cookArr.split(",")
-            })
-        }
-        else{
-          document.cookie = '0';
-        }
-    let tempTeam = document.cookie.split(',')[1]?document.cookie.split(',')[1]:'?';
-            axios.get(this.state.baseUrls.staticBase + '.json')
-                 .then(response=>{
-                    // 
-                    let tempHawkPass = response.data.hawkPassCode;
-                    let tempManagerPass = response.data.managerPassCode;
-                    this.setState({
-                      // charCodesArr: tempCharCodes,
-                      activeTeam: tempTeam,
-                      hawkPassCode: tempHawkPass,
-                      managerPassCode: tempManagerPass,
-                      backImgs: response.data.backImgs,
-                      newsUpdates:response.data.newsUpdates,
-                      storeOptions: response.data.storeOptions
-                    })
-                 })
-                 .catch(err=>{
-                  alert("Network Error");
-                  console.log(err);
-                 })
-            axios.get(this.state.baseUrls.dynamicBase2 + '.json')
-                 .then(response=>{
-                    let tempCharCodes = response.data.characters[0]; 
-                    this.setState({
-                      charCodesArr: tempCharCodes
-                    })
-                 })
-                 .catch(err=>{
-                  alert("Network Error");
-                  console.log(err);
-                 })
-
-         const options = {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
-      }
-      if (navigator.geolocation) {
-          if(typeof navigator.geolocation.watchPosition !== 'function'){
-              navigator.geolocation.getCurrentPosition(position=>{
-                  const latitude = position.coords.latitude;
-                  const longitude = position.coords.longitude;
-                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
-                  this.setState({activeTeamCoords:[latitude,longitude]});
-              },err=>{
-                  
-                  if(err.code===2)
-                      console.log("Unable to retrieve your location");
-                  else if(err.code===3)
-                      console.log('Shits happening');
-              },options)
-          }
-          else{
-              navigator.geolocation.watchPosition(position=>{
-                  const latitude = position.coords.latitude;
-                  const longitude = position.coords.longitude;
-                  console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-                  
-
-                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
-                  this.setState({activeTeamCoords:[latitude,longitude]});
-  
-              },err=>{
-                  
-                  if(err.code===2)
-                      console.log("Unable to retrieve your location");
-                  else if(err.code===3)
-                      console.log('Shits happening');
-              },options);   
-          }
-      }
-
-      else {
-          alert('Not supported in your goddamn browser')
-      }
-
-
-
-
-
-  }
   setActiveCoords = (coords)=>{
     this.setState({
       activeTeamCoords: coords
@@ -206,7 +234,6 @@ logoutHandler=(loggedIn)=>{
   }
   
   render(){
-    
     let onHawkClick=()=>{
       let secretCode = prompt('Enter The Secret Code,If You are a Hawk:');
       if(secretCode === this.state.hawkPassCode)
@@ -229,7 +256,7 @@ logoutHandler=(loggedIn)=>{
                     <Footer />
                   </div>
     let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/managerMode'}/></div>
-    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls.staticBase} /></div>
+    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrls = {this.state.baseUrls} /></div>
     // let polygonGen = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><PolygonGen /></div>
     let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/contactUs'}/></div>
       return (
@@ -246,6 +273,8 @@ logoutHandler=(loggedIn)=>{
             
             <div className='AppBarContainer'>
               {/* <AlertMsgPopUp/> */}
+              {this.state.activeTeam!=='?'?<ProxyZonePopUp activeTeam = {this.state.activeTeam} baseUrl = {this.state.baseUrls} zoneCode = {this.state.activeProxyZone} show = {this.state.popUpValidator} onBackDrop = {this.onValidatorBackDrop} />:null}
+              
               <AlertModule/>
               <AppBar hawkClick = {onHawkClick} menuClick = {this.showMenuHandler} newsClick = {this.showNewsHandler} />
             </div>

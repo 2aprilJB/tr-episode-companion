@@ -200,6 +200,15 @@ const teamCoordsConfig = {
         messagingSenderId: "563454355808",
         appId: "1:563454355808:web:1b733a97e6b88f158a5605",
         measurementId: "G-1JF1J9DBVF"
+    },
+    H:{
+        apiKey: "AIzaSyAJ2tUroiRCkHVuqm5qj6wkSj6wm1Lcu6k",
+        authDomain: "tr-team-h.firebaseapp.com",
+        projectId: "tr-team-h",
+        storageBucket: "tr-team-h.appspot.com",
+        messagingSenderId: "789935638585",
+        appId: "1:789935638585:web:de93e9306e6fdebb3b25e8",
+        measurementId: "G-93571RRJST"
     }
 }
 
@@ -222,6 +231,9 @@ const appTeamB = initializeApp(teamCoordsConfig.B,'TeamB');
 const appTeamC = initializeApp(teamCoordsConfig.C,'TeamC');
 const appTeamD = initializeApp(teamCoordsConfig.D,'TeamD');
 const appTeamE = initializeApp(teamCoordsConfig.E,'TeamE');
+const appTeamF = initializeApp(teamCoordsConfig.F,'TeamF');
+const appTeamG = initializeApp(teamCoordsConfig.E,'TeamG');
+const appTeamH = initializeApp(teamCoordsConfig.H,'TeamH');
 
 export const db = getFirestore(app);
 // export const dbMain = getFirestore(appMain);
@@ -241,5 +253,8 @@ export const dbTeams = {
     B: getFirestore(appTeamB),
     C: getFirestore(appTeamC),
     D: getFirestore(appTeamD),
-    E: getFirestore(appTeamE)
+    E: getFirestore(appTeamE),
+    F: getFirestore(appTeamF),
+    G: getFirestore(appTeamG),
+    H: getFirestore(appTeamH)
 }

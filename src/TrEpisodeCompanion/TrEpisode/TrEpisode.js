@@ -176,11 +176,11 @@ class TrEpisode extends Component{
 
 
                 
-                    {this.props.activeTeam.split("").length===1?
+                    {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
                         UserMode:
                      this.props.activeTeam==="Z0"?
                         <ManagerMode activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
-                        <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam}/>
+                        <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
                     }
                 
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>

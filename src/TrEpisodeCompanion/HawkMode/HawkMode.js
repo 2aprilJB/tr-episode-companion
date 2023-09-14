@@ -4,13 +4,19 @@ import "./HawkMode.css";
 import AlertModule from "../AlertModule/AlertModule";
 import PointTable from "./PointTable/PointTable";
 
+//Takes following props:-
+//---activeChar , if you pass null will let you select characters
+//---activeTeam , if you pass null will let you select teams
+//---baseUrl , with dynamicBase3 , a Must without this props, this whole component won't work
+
 class HawkMode extends Component{
     state = {
         credArr:[],
         charArr:[],
         submittedCode: '',
         currTeam: '',
-        currChar: ''
+        currChar: '',
+        showButton: true
     }
 
     onChitValidation(currentTeam,chitType,correctCode){
@@ -29,6 +35,11 @@ class HawkMode extends Component{
                     tempPts[currentTeam] = tempPts[currentTeam] -5;
                 }
                 axios.put(this.props.baseUrl.dynamicBase3 + 'points.json',tempPts)
+                     .then(resp=>{
+                        this.setState({
+                            showButton: true
+                        })
+                     })
                      .catch(err=>{
                         console.log(err);
                         alert("Network Error");
@@ -38,6 +49,9 @@ class HawkMode extends Component{
 
     onSubmitHandler(currentCode,currentSelect,currentChar){
         let codeCorrect = false;
+        this.setState({
+            showButton:false
+        })
         //We wil fetch latest data from server
         axios.get(this.props.baseUrl.dynamicBase2 + '.json')
              .then(resp=>{
@@ -65,7 +79,10 @@ class HawkMode extends Component{
                             }
                             else if(ele[0]===currentCode&&ele[2]===true){
                                 codeCorrect = true;
-                                alert('ChitCode already Validated')
+                                alert('ChitCode already Validated');
+                                this.setState({
+                                    showButton:true
+                                })
                             }
                         })
                     }
@@ -83,6 +100,17 @@ class HawkMode extends Component{
     }
 
     componentDidMount(){
+
+        if(this.props.activeTeam){
+            this.setState({
+                currTeam: this.props.activeTeam
+            })
+        }
+        else{}
+
+        let trueActiveChar = '';
+        let onlyCode = this.props.activeChar?this.props.activeChar.split('')[1]:null;
+
         axios.get(this.props.baseUrl.dynamicBase3 + '.json')
              .then(response=>{
                 let credentials = {};
@@ -91,6 +119,9 @@ class HawkMode extends Component{
                      .then(resp=>{
                         let characters = [];
                         characters = resp.data.characters;
+                        if(this.props.activeChar.length===2){
+                            trueActiveChar = characters[0][onlyCode];
+                        }
                         characters[0].map(ele=>{
                             if(this.props.activeChar===ele[0]){
                                 this.setState({
@@ -131,45 +162,47 @@ class HawkMode extends Component{
             })
         }
         let currentChar = this.state.currChar;
-        // let onCharSelectHandler = (e)=>{
-        //     currentChar = e.target.value;
-        //     this.setState({
-        //         currChar: currentChar
-        //     })
-        // }
+        let onCharSelectHandler = (e)=>{
+            currentChar = e.target.value;
+            this.setState({
+                currChar: currentChar
+            })
+        }
 
         let teamOptions = Object.keys(this.state.credArr).map((ele,ind)=>{
             return(
                 <option key = {ind + 65}>{ele}</option>
             )
         })
-        // let charOptions = this.state.charArr.map(ele=>{
-        //     return(
-        //         <option key = {ele + '22'}>{ele[0]}</option>
-        //     )
-        // })
-        let showButton = <button className="VerifyButt" onClick={()=>this.onSubmitHandler(currentCode,currentSelect,currentChar)}><ion-icon name="checkmark-done-outline" /></button>
+        let charOptions = this.state.charArr.map(ele=>{
+            return(
+                <option key = {ele + '22'}>{ele[0]}</option>
+            )
+        })
+        let showButton = this.state.showButton?<button className="VerifyButt" onClick={()=>this.onSubmitHandler(currentCode,currentSelect,currentChar)}><ion-icon name="checkmark-done-outline" /></button>:null;
 
         return(
             <div className="HawkModeContainer">
                 <div className="CodeVerification">
                     <h2 className="CurrCharName">{this.state.currChar}</h2>
-                    {/* Select Your Character
+                    {!this.props.activeChar?<div>
+                    Select Your Character
                     <select onChange={onCharSelectHandler} className="CharSelector">
                         {charOptions}
-                    </select> */}
+                    </select></div>:null}
                     
                     <h3>Chit Code Verification</h3>
-                    <select onChange={onSelectHandler} className="TeamSelector">
+                    <h2 className="CurrCharName">{this.state.currTeam}</h2>
+                    {!this.props.activeTeam?<select onChange={onSelectHandler} className="TeamSelector">
                         {teamOptions}
-                    </select>
+                    </select>:null}
                     Enter Chit Code To verify
                     <input className="ChitCodeInp" type="text" onChange={onChangeHandler}></input>
                     
                     {showButton}
                 </div>
 
-                <PointTable baseUrl = {this.props.baseUrl} />
+                {this.props.onProximity?<PointTable baseUrl = {this.props.baseUrl} />:null}
             </div>
         )
     }

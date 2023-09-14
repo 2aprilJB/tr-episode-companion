@@ -2,10 +2,17 @@ import { collection, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore'
 import {db,dbDynamic1, dbDynamic4, dbTeams} from '../../../firebase';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import SpecialCoords from './SpecialCoords/SpecialCoords';
+import CharZones from './CharZones/CharZones';
+import ShowUserCoords from './ShowUserCoords/ShowUserCoords';
+import SpecialArtifacts from './SpecialArtifacts/SpecialArtifacts';
 import { Circle, Marker, Polygon, Polyline } from 'react-leaflet';
 import {  iconPerson, iconChar,iconChar1,iconChar2,iconChar3,iconChar4,iconChar5,iconKiller1,iconKiller2,iconManager, iconSpecial ,iconVartifacts } from '../Icon/Icon';
 import axios from 'axios';
 import CharCoords from './CharCoords/CharCoords';
+import CharProxies from './CharProximity/CharProxies';
+import Modal from '../../../Containers/Modal/Modal';
+// import { proxyCircleDetector } from '../../ProximityDetectors/ProximityDetectors';
 
 const PublicMarkers = (props)=>{
 
@@ -17,14 +24,15 @@ const PublicMarkers = (props)=>{
     const [vArtifacts,setVartifacts] = useState();
     const [polyCoords,setPolyCoords] = useState();         //Storing static Polygon Coordinates  
     const [usersCoords,setUsersCoords] = useState();         //Storing users Coordinates
-    const [specialCoords,setSpecialCoords] = useState();   //Storing Special Coordinates
+    const [specCoords,setSpecCoords] = useState();   //Storing Special Coordinates
+    const [showModal,setShowModal] = useState();
     let activeCoords = props.activeTeamCoords;
     
     
     
 
     useEffect(()=>{
-
+        setShowModal(false);
         axios.get(props.baseUrlPublicCoords + '.json')
             .then(resp=>{
                 setPolyCoords(resp.data.polygons);
@@ -38,14 +46,11 @@ const PublicMarkers = (props)=>{
         onSnapshot(collection(dbDynamic4,"vArtifacts"), (snapshot)=>{
             setVartifacts(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})))
         })    
-        // onSnapshot(collection(db,"characterCoords"), (snapshot)=>{
-        //     setCharCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
-        // })
         onSnapshot(collection(db,"participantsCoords"), (snapshot)=>{
             setUsersCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
         })
         onSnapshot(collection(dbDynamic1,"specialCoords"), (snapshot)=>{
-            setSpecialCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
+            setSpecCoords(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
         })
 
     },[])
@@ -54,39 +59,33 @@ const PublicMarkers = (props)=>{
         showUsers = true;
     else{}
 
+
+    // if(specCoords){
+    //     specCoords.map(ele=>{
+    //         if(proxyCircleDetector(activeCoords,ele.coords,7,showModal)){
+    //             setShowModal(true);
+    //         }
+    //     })
+    // }
+    // else{}
+
+
     return(
         <div className="PublicMarkersContainer">
-            <CharCoords activeTeam = {props.activeTeam}/>
+            <CharCoords activeCoords = {activeCoords} activeTeam = {props.activeTeam}/>
 
             {/* Special Markers going to popup and dynamic in nature*/}
-            {specialCoords?specialCoords.map(ele=>{
-                return(
-                    <Circle key={ele.id} center = {ele.coords} fillColor='Yellow' color='red' weight={1} opacity={10} radius={7}></Circle>
-                )
-            }):null}
-
-            {showUsers?usersCoords?usersCoords.map(ele=>{
-                return(
-                    <Marker key={ele.id} position = {ele.coords} icon={iconChar}></Marker>
-                )
-            }):null:null}
+            <SpecialCoords baseUrl = {props.baseUrls.dynamicBase3} activeCoords={activeCoords} specCoords = {specCoords} />
+            {vArtifacts?<SpecialArtifacts vArtifacts = {vArtifacts} />:null}
+            <ShowUserCoords showUsers = {showUsers} usersCoords = {usersCoords} />
 
             {/* All polygons that are public and Static in nature */}
             {polyCoords?<Polygon positions={polyCoords.outlineBoundary.polyCoords} pathOptions={polyCoords.outlineBoundary.polyOptions}></Polygon>:null}
-            {polyCoords?polyCoords.charZones.map((ele,ind)=>{
-                return(
-                    <Polygon key={ind} positions={ele[2]} pathOptions={ele[1]}/>
-                )
-            }):null}
+            <CharZones activeCoords = {activeCoords} polyCoords = {polyCoords} />
+            <CharProxies activeProxy = {props.activeProxy} modalBackDrop = {props.modalBackDrop} charProximityHandler = {props.charProximityHandler} setModal = {setShowModal} activeCoords = {activeCoords} baseUrl = {props.baseUrlPublicCoords} />
+            
 
-            {vArtifacts?vArtifacts.map((ele,ind)=>{
-                if(!ele.validated){
-                    return <Marker key={ind} eventHandlers={{click: (e)=>{alert(ele.idArtifact)}}} position={ele.coords} icon={iconVartifacts}/>;
-                }
-                else{}
-            }):null}
-
-            {props.activeTeam.length<2?<Marker position={activeCoords} icon={iconPerson}></Marker>:null}
+            {props.activeTeam.length===1||props.activeTeam.length===3?<Marker position={activeCoords} icon={iconPerson}></Marker>:null}
         </div>
     );
 }

@@ -14,7 +14,7 @@ class CodeNull extends Component{
                 let creds = resp.data;
                 let pointTableObj = {};
                 creds.map(ele=>{
-                    if(ele[3].split("").length===1){
+                    if(ele[3].split("").length===1||ele[3].split("").length===3){
                         pointTableObj[ele[3]] = 0;
                     }
                     else{}

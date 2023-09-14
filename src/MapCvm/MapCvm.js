@@ -10,7 +10,6 @@ class MapCvm extends Component{
     }
     componentDidMount(){
         
-        
     }
     render(){
         let loggedIn = document.cookie.split(",");
@@ -32,16 +31,18 @@ class MapCvm extends Component{
                         </div>
                     </div>
                     <div className="MapContainer">
-                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl} />
+                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrls} />
                     </div>
-                    
+                    {/* See the button below we'll be prepareing it to take snapshit of all PArticipants------------------------ */}
                     <div className="MapInfo">
+                        {this.props.activeTeam==='Z0'?<button style={{position:"absolute",top:"3%",left:"44.5%"}} className="ShowButt"><ion-icon name="bonfire-outline"></ion-icon></button>:null}
                         <div className="TeamDetailsMap">
                             <h5>TEAM</h5>
                             <h3 className="TeamCodeMap">{this.props.activeTeam}
                             </h3>
                         </div>
-                        <HeroDisplay addSpace baseUrl = {this.props.baseUrl + 'billBoards/mapCVM'}/>
+                        <div className="AddSpaceToMapCvm" style={{height:"3rem"}}></div>
+                        <HeroDisplay addSpace baseUrl = {this.props.baseUrls.staticBase + 'billBoards/mapCVM'}/>
                     </div>
                 </div>
                 <Footer/>
