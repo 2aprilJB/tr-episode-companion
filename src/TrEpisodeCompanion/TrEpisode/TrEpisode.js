@@ -8,10 +8,16 @@ import Modal from "../../Containers/Modal/Modal";
 import HeroDisplay from "../HeroDisplay/HeroDisplay";
 import HawkMode from "../HawkMode/HawkMode";
 import ManagerMode from "../ManagerMode/ManagerMode";
+import ShowPointsButt from "./UtilButtons/ShowPointsButt/ShowPointsButt";
+import LogoutButt from "./UtilButtons/LogoutButt/LogoutButt";
+import ShowChitsButt from "./UtilButtons/ShowChitsButt/ShowChitsButt";
 import { getCoins } from "../../FireStoreUtils/FireStoreUtils";
 import CoinsCollected from "./CoinsCollected/CoinsCollected";
-import UseCoins from "./UseCoins/UseCoins";
+import UseCoins from "./RiddleShop/RiddleShop";
 import axios from "axios";
+
+import treasureMapWallpaper from '../../Assets/Images/treasureMap.png';
+import TheMap from "../../MapCvm/TheMap/TheMap";
 
 class TrEpisode extends Component{
     state = {
@@ -24,7 +30,7 @@ class TrEpisode extends Component{
         planeValidation: false,
         refreshPlane: false,
         loading: true,
-        coinCount: 0,
+        coinCount: [0,0], //this array implies: [indexOfCoinCountOfTeam, coinCountOfTeam]
         riddleBuyOptions: {},
         toValidateImgUrl: 
         [
@@ -51,7 +57,6 @@ class TrEpisode extends Component{
     }
     render(){
         let buyHandler =(typeOfChit)=>{
-            let tempUrl = this.state.artifactsCodesUrl;
             if(typeOfChit==='i'){
                 this.setState({
                     bought: true,
@@ -99,7 +104,13 @@ class TrEpisode extends Component{
         let showPoints = (activeTeam)=>{
             axios.get(this.props.baseUrl.dynamicBase3 + '/points.json')
                  .then(resp=>{
-                    alert("Your team's points : " + resp.data[activeTeam]);
+                    resp.data.map(ele=>{
+                        if(ele[0]===activeTeam){
+                            alert("Your team's points : " + ele[1]);
+                        }
+                        else{}
+                    })
+                    
                  })
                  .catch(err=>{
                     console.log(err);
@@ -111,7 +122,7 @@ class TrEpisode extends Component{
         <div className="UserMode">
             {/*Artifact - I : Five Check*/}
             <div className="BoatSection">
-                <ArtifactCheck storeOptions = {this.props.storeOptions} coinCount = {this.state.coinCount} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl}   
+                <ArtifactCheck storeOptions = {this.props.storeOptions} coinCount = {this.state.coinCount[1]} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl}   
                 codeValidBaseUrl = {this.state.artifactsCodesUrl} toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
                 buyHandler = {buyHandler} validationLimit = {2} bought = {this.state.bought}
                 onRefreshClick = {onBoatRefresh} chitType = {this.state.chitType}/>
@@ -123,46 +134,28 @@ class TrEpisode extends Component{
         return(
             <div className="TrEpisodeMainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true}/>}
-                {/*Logout button that resets Credentail's loggedIn Status*/}
-                <div className="LogoutButtContainer">
-                    <div onClick={()=>this.props.logoutHandler(this.props.loggedIn)} className="LogoutButt">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </div>
-                    <h3 className="ButtText">LOGOUT</h3>
-                </div>
                 
-                <div className="ShowChitContainer">
-                    <div onClick={()=>showChitCount(true)} className="ShowChit">
-                        <ion-icon name="checkbox-outline"></ion-icon>
-                    </div>
-                    <h3 className="ButtText">Show<br/>Chits</h3>
-                </div>
-                <Modal show = {this.state.showChit} onBackDrop = {()=>showChitCount(false)}>
-                    {/*ChitCount Module*/}
-                    <ChitCount baseUrl = {this.props.baseUrl.dynamicBase2}/>
-                </Modal>
+                <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
+                <ShowChitsButt showChit = {this.state.showChit} showChitCount = {showChitCount} baseUrl = {this.props.baseUrl} />
                 
                 <div className="TeamDetails">
                     <h5>TEAM</h5>
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
-                <div className="ShowMapContainer">
-                    <div className="ShowMap">
-                        <a href='/mapCVM'><ion-icon name="map-outline"></ion-icon></a>
+                
+                <ShowPointsButt showPoints = {()=>showPoints(this.props.activeTeam)}/>
+                
+                <div className="TreasureMapContainer">
+                    <img className="MapWallPaper" src={treasureMapWallpaper}></img>
+                    <div className="TMapContainer">
+                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
                     </div>
-                    <h3 className="ButtText">Show<br/>Map</h3>
-                </div>
-                <div className="ShowPointsContainer">
-                    <div onClick={()=>showPoints(this.props.activeTeam)} className="ShowPoints">
-                        <ion-icon name="checkmark-done-circle-outline"></ion-icon>
-                    </div>
-                    <h3 className="ButtText">Show<br/>Points</h3>
                 </div>
 
                 <h3 className="CoinsHead">TR COINS</h3>
                 <div className="CoinsCollectedWrapper">
                     <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
-                    <CoinsCollected updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
+                    <CoinsCollected baseUrl = {this.props.baseUrl} stateCoins = {this.state.coinCount} updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
                     <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
                 </div>
                 {/*Alert Module, works currently on refresh click*/}
@@ -172,16 +165,17 @@ class TrEpisode extends Component{
                 activeTeam = {this.props.activeTeam} 
                 coinCount = {this.state.coinCount}
                 bought = {this.state.bought}
+                baseUrl = {this.props.baseUrl} updateCoinState = {updateCoinState}
                 buyOpts = {this.state.riddleBuyOptions} />:null}
 
-
+                {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
+                    UserMode:
+                    this.props.activeTeam==="Z0"?
+                    <ManagerMode activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
+                    <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
+                }
                 
-                    {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
-                        UserMode:
-                     this.props.activeTeam==="Z0"?
-                        <ManagerMode activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
-                        <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
-                    }
+                    
                 
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>
 

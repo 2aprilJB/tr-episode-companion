@@ -2,7 +2,7 @@ import React from "react";
 import "./CodeValidation.css"
 import axios from 'axios';
 import { Component } from "react";
-import { updateArtifactToFs, updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
+import { updateArtifactToFs, updateCoins } from "../../../../FireStoreUtils/FireStoreUtils";
 
 class CodeValidation extends Component{
 

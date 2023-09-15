@@ -62,55 +62,7 @@
     color: #000000;
     font-size: 0.6rem;
 }
-.ShowMapContainer{
-    position: absolute;
-    top: 13.2rem;
-    left: 0rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.ShowMap{
-    padding-top: 0.6rem;
-    border: 2px solid rgb(255,230,0);
-    width: 5.5rem;
-    height: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 0 20px 20px 0;
-    align-items: center;
-    color: rgb(255, 255, 255);
-    background-color: #fff;
-    transition: all 0.4s;
-    font-size: 3rem;
-    animation: keepFloat 5s infinite;
-    background-image: linear-gradient(90deg,#50ff9f,rgb(109, 184, 255));
-}
-.ShowPointsContainer{
-    position: absolute;
-    top: 13.2rem;
-    right: 0rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.ShowPoints{
-    border: 2px solid rgb(255,230,0);
-    width: 5.5rem;
-    height: 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 20px 0 0 20px;
-    align-items: center;
-    color: rgb(255, 255, 255);
-    background-color: #fff;
-    transition: all 0.4s;
-    font-size: 3rem;
-    animation: keepFloat 5s infinite;
-    background-image: linear-gradient(90deg,#50ff9f,rgb(109, 184, 255));
-}
+
 
 .Timer{
     font-size: 2rem;
@@ -134,7 +86,7 @@
     font-size: 1.2rem;
     font-family: 'Lato';
     font-weight: 800;
-    margin-bottom: 2rem;
+    margin-bottom: 0.3rem;
     background-image: linear-gradient(110deg,#025dc4,#c7004c);
     box-shadow: 0 4px 10px #ffffff4d;
     animation: float 3s infinite;
@@ -236,6 +188,34 @@
     animation: turn 1.4s infinite;
 }
 
+
+.TreasureMapContainer{
+    position: relative;
+    height: max-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -3rem;
+    margin-bottom: 2rem;
+}
+.TMapContainer{
+    z-index: 2;
+    width: 19rem;
+    height: 18.5rem;
+    margin-top: 2.5rem;
+    border: 5px solid  #914900;
+    border-radius: 20px;
+}
+.MapWallPaper{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: -0.3rem;
+    width: 25rem;
+    height: 24rem;
+}
 
 
 @keyframes keepFloat{

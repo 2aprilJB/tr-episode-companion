@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import CodeValidation from "../CodeValidation/CodeValidation";
-import ActualChit from "../ActualChit/ActualChit";
-import DummyChit from "../DummyChit/DummyChit";
+import CodeValidation from "./CodeValidation/CodeValidation";
+import ActualChit from "./ActualChit/ActualChit";
+import DummyChit from "./DummyChit/DummyChit";
 import "./ArtifactCheck.css";
 
 class ArtifactCheck extends Component{

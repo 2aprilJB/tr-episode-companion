@@ -1,15 +1,22 @@
 import React from "react";
-import "./UseCoins.css";
-import { updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
+import "./RiddleShop.css";
+// import { updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
 import billImg from '../../../Assets/Images/board.png';
+import axios from "axios";
 
 
 const UseCoins = (props)=>{
     const onBuy = (price,type)=>{
-        let remainder = props.coinCount-price;
+        let remainder = props.coinCount[1]-price;
         if(remainder>=0){
             if(window.confirm("Are You sure to buy Type -" + type + " ?")){
-                updateCoins(props.activeTeam,remainder);
+                // updateCoins(props.activeTeam,remainder);   //This will be used when we are storing TrCoins in Our FireStore
+                axios.put(props.baseUrl.dynamicBase4 + 'backUpTrCoins/' + props.coinCount[0] + '/1.json',remainder)
+                     .catch(err=>{
+                        console.log(err);
+                        alert('Network Error')
+                     })
+                props.updateCoinState([props.coinCount[0],remainder]);
                 props.buyHandler(type);
             }
             else{}

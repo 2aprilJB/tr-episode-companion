@@ -12,15 +12,15 @@ class CodeNull extends Component{
         axios.get(this.props.baseUrl.dynamicBase3 + 'credentials.json')
              .then(resp=>{
                 let creds = resp.data;
-                let pointTableObj = {};
+                let pointTableArr = [];
                 creds.map(ele=>{
                     if(ele[3].split("").length===1||ele[3].split("").length===3){
-                        pointTableObj[ele[3]] = 0;
+                        pointTableArr = [...pointTableArr,[ele[3],0]];
                     }
                     else{}
                 });
                 //Now Time to update the pointTable
-                axios.put(this.props.baseUrl.dynamicBase3 + 'points.json',pointTableObj)
+                axios.put(this.props.baseUrl.dynamicBase3 + 'points.json',pointTableArr)
                      .catch(err=>{
                         console.log(err);
                         alert('There is another Network Error you Moronic Developer')
@@ -32,7 +32,7 @@ class CodeNull extends Component{
                         console.log(err);
                      })
                 
-                axios.put(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json',pointTableObj)
+                axios.put(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json',pointTableArr)
                      .catch(err=>{
                         console.log(err);
                         alert('There is another Network Error you Moronic Developer')

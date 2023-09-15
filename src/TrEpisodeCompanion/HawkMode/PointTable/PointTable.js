@@ -32,11 +32,11 @@ class PointTable extends Component{
                     console.log(err);
                  })
         }
-        let Tpts = Object.keys(this.state.points).map(ele=>{
+        let Tpts = this.state.points.map(ele=>{
             return(
                 <div key={ele + "mad"} className="TeamPoints">
-                        <h4 className="TeamCode">{ele}</h4>
-                        <h4 className="TeamPts">{this.state.points[ele]}</h4>
+                        <h4 className="TeamCode">{ele[0]}</h4>
+                        <h4 className="TeamPts">{ele[1]}</h4>
                 </div>
             )
         })
