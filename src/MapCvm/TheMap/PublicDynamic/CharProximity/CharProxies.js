@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import "./CharProxies.css";
 import Modal from "../../../../Containers/Modal/Modal";
 import axios from "axios";
-import { Polygon } from "react-leaflet";
+import { Circle} from "react-leaflet";
 import { isMarkerInsidePolygon } from "../../DynamicMarker/DynamicMarker";
 
 class CharProxies extends Component{
@@ -33,7 +33,7 @@ class CharProxies extends Component{
         return(
             <div>
                 {this.state.charArr?this.state.charArr.map((ele,ind)=>{
-                    return <Polygon key={ind} positions={ele[2]} pathOptions={ele[1]} />
+                    return <Circle key={ind} weight={ele[1].weight} radius={ele[1].radius} fillColor={ele[1].color} color="blue" center={ele[2]} />
                 }):null}
             </div>
         );

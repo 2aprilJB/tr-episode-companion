@@ -7,7 +7,7 @@ const logoutButt = (props)=>{
             <div onClick={props.logoutHandler} className="LogoutButt">
                 <ion-icon name="log-out-outline"></ion-icon>
             </div>
-            <h3 className="ButtText">LOGOUT</h3>
+            <h3 style={{fontWeight: 'bold'}} className="ButtText">LOGOUT</h3>
         </div>
     );
 }

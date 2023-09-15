@@ -3,6 +3,7 @@ import "./TrEpisode.css"
 import { Component } from "react";
 import Loader from "../../Assets/Loader/Loader";
 import ChitCount from "../ChitCount/ChitCount";
+import TeamBanner from "../../Assets/Images/teamBanner.png"
 import ArtifactCheck from "./ArtifactCheck/ArtifactCheck";
 import Modal from "../../Containers/Modal/Modal";
 import HeroDisplay from "../HeroDisplay/HeroDisplay";
@@ -18,6 +19,7 @@ import axios from "axios";
 
 import treasureMapWallpaper from '../../Assets/Images/treasureMap.png';
 import TheMap from "../../MapCvm/TheMap/TheMap";
+import ArtifactCheckBanner from "../../Assets/Images/artifactCheckBanner.png"
 
 class TrEpisode extends Component{
     state = {
@@ -125,6 +127,7 @@ class TrEpisode extends Component{
                 <ArtifactCheck storeOptions = {this.props.storeOptions} coinCount = {this.state.coinCount[1]} refresh = {this.state.refreshBoat} refreshed = {boatRefreshed} baseUrl = {this.props.baseUrl}   
                 codeValidBaseUrl = {this.state.artifactsCodesUrl} toValidateImgUrl = {this.state.toValidateImgUrl[0]} activeTeam = {this.props.activeTeam}
                 buyHandler = {buyHandler} validationLimit = {2} bought = {this.state.bought}
+                stateCoins = {this.state.coinCount} updateCoinState = {updateCoinState}
                 onRefreshClick = {onBoatRefresh} chitType = {this.state.chitType}/>
             </div>
             
@@ -135,10 +138,10 @@ class TrEpisode extends Component{
             <div className="TrEpisodeMainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true}/>}
                 
-                <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
                 <ShowChitsButt showChit = {this.state.showChit} showChitCount = {showChitCount} baseUrl = {this.props.baseUrl} />
                 
                 <div className="TeamDetails">
+                    <img className="TeamBanner" src={TeamBanner}></img>
                     <h5>TEAM</h5>
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
@@ -168,6 +171,8 @@ class TrEpisode extends Component{
                 baseUrl = {this.props.baseUrl} updateCoinState = {updateCoinState}
                 buyOpts = {this.state.riddleBuyOptions} />:null}
 
+                <div style={{position: "relative",width: "100%"}}>as<img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div>
+                
                 {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
                     UserMode:
                     this.props.activeTeam==="Z0"?
@@ -175,10 +180,12 @@ class TrEpisode extends Component{
                     <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
                 }
                 
-                    
-                
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>
-
+                
+                <div style={{position:'relative'}}>
+                    <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
+                </div>
+                
             </div>
         );
     }

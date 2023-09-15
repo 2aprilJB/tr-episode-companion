@@ -13,7 +13,12 @@ class CodeValidation extends Component{
         currCode: ''
     }
     updateTrCoinsBackup(teamCode,coinCount){
-        axios.put(this.props.trCoinsBackUpUrl + 'backUpTrCoins/' + teamCode + '.json',coinCount)
+        axios.put(this.props.trCoinsBackUpUrl + 'backUpTrCoins/' + this.props.stateCoins[0] + '/1.json',coinCount)
+             .then(resp=>{
+                let tempCoins = this.props.stateCoins;
+                tempCoins[1] = coinCount;
+                this.props.updateCoinState(tempCoins)
+             })
              .catch(err=>{
                 console.log(err);
                 alert("There's some serious Network Error");
@@ -64,8 +69,8 @@ class CodeValidation extends Component{
                             updateArtifactToFs(currentCode);
 
                         }
-                        updateCoins(this.props.activeTeam,updatedCoins);
-                        this.updateTrCoinsBackup(this.props.activeTeam,updatedCoins);
+                        // updateCoins(this.props.activeTeam,updatedCoins); //This function was to update Firestore
+                        this.updateTrCoinsBackup(this.props.activeTeam,updatedCoins);  //This function is updating State as well as our rtdb, in dynamicBase-4
 
                     }
                     else if(currentCode===ele[0]&&ele[1]!='Z'){

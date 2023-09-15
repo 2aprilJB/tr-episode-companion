@@ -14,7 +14,7 @@ class ArtifactCheck extends Component{
             <div className="ArtifactModuleWrapper">
                 <CodeValidation storeOptions = {this.props.storeOptions} coinCount = {this.props.coinCount} refresh = {this.props.refresh} refreshed = {this.props.refreshed} baseUrl = {this.props.codeValidBaseUrl}  
                     toValidateImgUrl = {this.props.toValidateImgUrl} activeTeam = {this.props.activeTeam}
-                    trCoinsBackUpUrl = {this.props.baseUrl.dynamicBase4}
+                    trCoinsBackUpUrl = {this.props.baseUrl.dynamicBase4}  stateCoins = {this.props.stateCoins} updateCoinState = {this.props.updateCoinState}
                     bought = {this.props.bought} buyHandler = {this.props.buyHandler} validationLimit = {this.props.validationLimit}/>   {/* Controlling Factor */}
                     
                     <h4 className="ChitTypeHeading">Type - {this.props.chitType.toUpperCase()}</h4>

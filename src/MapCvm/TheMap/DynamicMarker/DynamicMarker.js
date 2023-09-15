@@ -17,13 +17,13 @@ export const isMarkerInsidePolygon=(marker,poly)=>{
     return inside;
 }
 
-// export const isMarkerInsideCircle = (marker,center,radius)=>{
-//     let dist = getDistance(
-//         { latitude: marker[0], longitude: marker[1] },
-//         { latitude: center[0], longitude: center[1] }
-//     );
-//     if(dist<radius){
-//         return true
-//     }
-//     else{}
-// }
+export const isMarkerInsideCircle = (marker,center,radius)=>{
+    let dist = getDistance(
+        { latitude: marker[0], longitude: marker[1] },
+        { latitude: center[0], longitude: center[1] }
+    );
+    if(dist<radius){
+        return true
+    }
+    else{}
+}
