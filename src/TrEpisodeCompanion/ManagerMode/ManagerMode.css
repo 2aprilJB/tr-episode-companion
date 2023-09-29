@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 5rem;
+    z-index: 3;
 }
 .ManagerTitle{
     border-bottom: 1px solid red;
@@ -34,4 +35,14 @@
     border-radius: 100%;
     border: 3px solid crimson;
     font-size: 2rem;
+}
+.AddWrapper{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.247);
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
 }

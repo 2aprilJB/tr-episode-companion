@@ -59,7 +59,7 @@ class AddUser extends Component{
             })
         }
         return(
-            <div className="AddUser">
+            <div className="AddWrapper">
                 {this.state.showUsers?<Modal show = {this.state.showUsers} onBackDrop = {()=>showUsers(false)}>
                     <ShowUsers fetchUrl = {this.props.baseUrl + 'credentials.json'} />
                 </Modal>:null}

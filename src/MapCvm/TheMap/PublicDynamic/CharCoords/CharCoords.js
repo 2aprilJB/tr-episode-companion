@@ -25,7 +25,6 @@ const CharCoords = (props)=>{
                     ele[1](snapshot.docs.map(doc=>({...doc.data(),id:doc.id})))
                 })
             else{
-                console.log('Its A me Mario')
             }
         })
 

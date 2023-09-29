@@ -6,6 +6,7 @@ import CodeNull from "./CodeNull/CodeNull";
 import AddUser from "./AddUser/AddUser";
 import AddChit from "./AddChit/AddChit";
 import AddArtifact from "./AddArtifact/AddArtifact";
+import AddProxyZone from "./AddProxyZone/AddProxyZone";
 
 class ManagerMode extends Component{
     state = {
@@ -31,6 +32,7 @@ class ManagerMode extends Component{
                 <AddUser baseUrl = {this.props.baseUrl.dynamicBase3}/>
                 <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
                 <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
+                <AddProxyZone baseUrl = {this.props.baseUrl.staticBase} />
                 <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>
                 {this.state.updateArtifactsCode?<CodeNull baseUrl = {this.props.baseUrl} />:null}
             </div>

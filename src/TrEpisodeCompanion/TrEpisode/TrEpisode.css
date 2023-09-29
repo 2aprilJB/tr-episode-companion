@@ -82,7 +82,7 @@
 /* BOAT Collection and type - I */
 .BoatSection, .PlaneSection{
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 .ChitTypeHeading{
     display: flex;

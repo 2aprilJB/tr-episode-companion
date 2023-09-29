@@ -1,21 +1,19 @@
 import React, { Component } from "react";
-import './ShowSpecArtifacts.css';
+import './ShowProxyZones.css';
 import Modal from "../../../../Containers/Modal/Modal";
+import ProxyZone from "./ProxyZone/ProxyZone";
 import axios from "axios";
-import SpecArtifact from "./SpecArtifact/SpecArtifact";
-import { deleteArtifactFromFs } from "../../../../FireStoreUtils/FireStoreUtils";
 
-class ShowSpecArtifacts extends Component{
+class ShowProxyZones extends Component{
     state = {
-        planeBase: this.props.baseUrl,
-        showArtifacts: false,
-        specArtifacts: []
+        showZones: false,
+        proxyZones: []
     }
     componentDidMount(){
-        axios.get(this.state.planeBase)
+        axios.get(this.props.baseUrl)
              .then(resp=>{
                 this.setState({
-                    specArtifacts: resp.data
+                    proxyZones: resp.data
                 })
              })
              .catch(err=>{
@@ -29,16 +27,15 @@ class ShowSpecArtifacts extends Component{
         if(indexOfArtifact!==0){
             let latestArtifacts = []
             if(window.confirm('Are You sure to Delete this Artifact??')){
-                axios.get(this.state.planeBase)
+                axios.get(this.props.baseUrl)
                 .then(resp=>{
-                    deleteArtifactFromFs(resp.data[indexOfArtifact][0]); //Deleting Artifcat from Firestore Server
                     latestArtifacts = resp.data;
                     latestArtifacts.splice(indexOfArtifact,1) //Removing artifact 
                     this.setState({
-                        specArtifacts:latestArtifacts,
-                        showArtifacts:false //Closing ShowArtifacts to let the user refresh by opening it again
+                        proxyZones:latestArtifacts,
+                        showZones:false //Closing ShowArtifacts to let the user refresh by opening it again
                     })
-                    axios.put(this.state.planeBase,latestArtifacts)
+                    axios.put(this.props.baseUrl,latestArtifacts)
                         .catch(err=>{
                             console.log(err);
                             alert('There is just another Network ERror')
@@ -56,12 +53,12 @@ class ShowSpecArtifacts extends Component{
         }
     }
     render(){
-        let showArtifacts = (showOrNot)=>{
-            axios.get(this.state.planeBase)
+        let showZones = (showOrNot)=>{
+            axios.get(this.props.baseUrl)
              .then(resp=>{
                 this.setState({
-                    specArtifacts: resp.data,
-                    showArtifacts:showOrNot
+                    proxyZones: resp.data,
+                    showZones:showOrNot
                 })
              })
              .catch(err=>{
@@ -69,19 +66,19 @@ class ShowSpecArtifacts extends Component{
                 alert('Network Error has done things terrible for our CEO');
              })
         }
-        let specArt = this.state.specArtifacts;
+        let proxyZones = this.state.proxyZones;
         return(
-            <div className="ShowSpecArtifactsWrapper">
-                {this.state.showArtifacts?<Modal show = {this.state.showArtifacts} onBackDrop = {()=>showArtifacts(false)}>
-                    <div style={{width:"100%",height: "30rem"}}>{specArt?specArt.map((ele,ind)=>{
-                        return <SpecArtifact key={ind} onDeleteHandler = {()=>this.onDeleteHandler(ind)} artifactCode = {ele[0]} foundBy = {ele[1]} />
+            <div className="ShowProxyZoneWrapper">
+                {this.state.showZones?<Modal show = {this.state.showZones} onBackDrop = {()=>showZones(false)}>
+                    <div style={{width:"100%",height: "30rem"}}>{proxyZones?proxyZones.map((ele,ind)=>{
+                        return <ProxyZone key = {'ProxyZone' + ind} onDeleteHandler = {()=>this.onDeleteHandler(ind)} proxyZoneDet = {ele} />
                     }):null}
                     </div></Modal>:null}
-                <button onClick={()=>showArtifacts(true)} className="ShowButt"><ion-icon name="bonfire-outline"></ion-icon></button>
+                <button onClick={()=>showZones(true)} className="ShowButt"><ion-icon name="bonfire-outline"></ion-icon></button>
             </div>
         );
     }
 }
 
 
-export default ShowSpecArtifacts;
+export default ShowProxyZones;

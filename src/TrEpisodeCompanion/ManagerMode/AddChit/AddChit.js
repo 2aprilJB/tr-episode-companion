@@ -79,7 +79,7 @@ class AddChit extends Component{
             })
         }
         return(
-            <div className="AddChitWrapper">
+            <div className="AddWrapper">
                 {this.state.showChits?<Modal show = {this.state.showChits} onBackDrop = {()=>showChits(false)}>
                     <Showcase2 colors = {['#c70039','#1eb2a6']} activeSub = {2} modules = {["Riddles", "Characters"]}>
                         <ShowChits fetchUrl = {this.props.baseUrl + 'chits'} fetchCharUrl = {this.props.baseUrl + 'characters'} />

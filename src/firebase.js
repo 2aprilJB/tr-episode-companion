@@ -56,6 +56,16 @@ const mainBaseConfig = {
         messagingSenderId: "294575645216",
         appId: "1:294575645216:web:1dd298793de2f09ff85245",
         measurementId: "G-ZFR1MNHHEJ"
+    },
+    dynamicBase5:{
+        apiKey: "AIzaSyAJd3v07BKrwdpU5EwYaED3UxziKARBncA",
+        authDomain: "tr-dynamicbase-5.firebaseapp.com",
+        databaseURL: "https://tr-dynamicbase-5-default-rtdb.firebaseio.com",
+        projectId: "tr-dynamicbase-5",
+        storageBucket: "tr-dynamicbase-5.appspot.com",
+        messagingSenderId: "897860212460",
+        appId: "1:897860212460:web:8af0fd05571aba3aa837c9",
+        measurementId: "G-JT3MGQQRNG"
     }
 }
 
@@ -217,6 +227,7 @@ const app = initializeApp(firebaseConfig);
 const appStaticBase = initializeApp(staticBaseConfig,'dbStatic');
 const appDynamicBase1 = initializeApp(mainBaseConfig.dynamicBase1,'dbDynamic1');
 const appDynamicBase4 = initializeApp(mainBaseConfig.dynamicBase4,'dbDynamic4');
+const appDynamicBase5 = initializeApp(mainBaseConfig.dynamicBase5,'dbDynamic5');
 
 const appCharZ0 = initializeApp(teamCoordsConfig.Z0,'CharZ0');
 const appCharZ1 = initializeApp(teamCoordsConfig.Z1,'CharZ1');
@@ -240,6 +251,7 @@ export const db = getFirestore(app);
 export const dbStatic = getFirestore(appStaticBase);
 export const dbDynamic1 = getFirestore(appDynamicBase1);
 export const dbDynamic4 = getFirestore(appDynamicBase4);    
+export const dbDynamic5 = getFirestore(appDynamicBase5);    
 export const dbTeams = {
     Z0: getFirestore(appCharZ0),
     Z1: getFirestore(appCharZ1),

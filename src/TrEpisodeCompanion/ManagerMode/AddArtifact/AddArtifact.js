@@ -55,7 +55,7 @@ class AddArtifact extends Component{
             })
         }
         return(
-            <div className="AddArtifact">
+            <div className="AddWrapper">
                 <ShowSpecArtifacts baseUrl = {this.props.baseUrl + 'artifacts/planes.json'}/>
                 <h4 className="AddUsersHead">Add Artifact</h4>
                 {/* <EnterData onChangeHandler = {onArtifactChangeHandler} currValIn = {'currArtifact'} currValue = {this.state.currValue.currArtifact} enterWhat = "Coords"/> */}

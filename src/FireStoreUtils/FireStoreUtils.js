@@ -1,5 +1,5 @@
 import { collection, doc, onSnapshot, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
-import {db,dbDynamic4,dbStatic,dbTeams} from '../firebase';   
+import {db,dbDynamic4,dbStatic,dbTeams,dbDynamic5} from '../firebase';   
 import axios from 'axios';
 //activeTeam: 'string'
 //coordsArr: [lat,lng]
@@ -71,5 +71,19 @@ export const deleteArtifactFromFs = async(artifactCode)=>{
 export const updateAlertMsg = async(msg)=>{
     const docRef = doc(dbStatic,"TRalerts","mainMsg");
     const payload = {message: msg};
+    await setDoc(docRef,payload);
+}
+
+//************************************************************************************ */
+
+//------TR-DynamicBase-5
+
+//Signal for Send Coords from Participants Devices
+
+export const sendCoordsSignal = async()=>{
+    let randomNum = Math.floor(Math.random()*1000); //Snapshot signal on every participant Device so it can react by sendimg its live location
+    const docRef = doc(dbDynamic5,"sendCoords","fromParticipants");
+    const docSnap = await getDoc(docRef);
+    const payload  = {...docSnap.data(),sendOrNot: randomNum};    //Here we want any random number to be updated so we can get 
     await setDoc(docRef,payload);
 }

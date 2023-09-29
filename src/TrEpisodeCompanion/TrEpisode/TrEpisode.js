@@ -14,7 +14,7 @@ import LogoutButt from "./UtilButtons/LogoutButt/LogoutButt";
 import ShowChitsButt from "./UtilButtons/ShowChitsButt/ShowChitsButt";
 import { getCoins } from "../../FireStoreUtils/FireStoreUtils";
 import CoinsCollected from "./CoinsCollected/CoinsCollected";
-import UseCoins from "./RiddleShop/RiddleShop";
+import RiddleShop from "./RiddleShop/RiddleShop";
 import axios from "axios";
 
 import treasureMapWallpaper from '../../Assets/Images/treasureMap.png';
@@ -151,7 +151,7 @@ class TrEpisode extends Component{
                 <div className="TreasureMapContainer">
                     <img className="MapWallPaper" src={treasureMapWallpaper}></img>
                     <div className="TMapContainer">
-                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
+                        <TheMap setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
                     </div>
                 </div>
 
@@ -164,14 +164,16 @@ class TrEpisode extends Component{
                 {/*Alert Module, works currently on refresh click*/}
 
                 {/* Lets buy some Riddles */}
-                {this.state.riddleBuyOptions?<UseCoins buyHandler = {buyHandler} 
+                {this.state.riddleBuyOptions?<RiddleShop 
+                activeProxyZone = {this.props.activeProxyZone}
+                buyHandler = {buyHandler} 
                 activeTeam = {this.props.activeTeam} 
                 coinCount = {this.state.coinCount}
                 bought = {this.state.bought}
                 baseUrl = {this.props.baseUrl} updateCoinState = {updateCoinState}
                 buyOpts = {this.state.riddleBuyOptions} />:null}
 
-                <div style={{position: "relative",width: "100%"}}>as<img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div>
+                <div style={{position: "relative",width: "100%"}}><img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div>
                 
                 {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
                     UserMode:
@@ -182,7 +184,7 @@ class TrEpisode extends Component{
                 
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>
                 
-                <div style={{position:'relative'}}>
+                <div style={{position:'relative',marginTop: '4rem'}}>
                     <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
                 </div>
                 

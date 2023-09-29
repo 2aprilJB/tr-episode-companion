@@ -5,7 +5,7 @@ import billImg from '../../../Assets/Images/board.png';
 import axios from "axios";
 
 
-const UseCoins = (props)=>{
+const RiddleShop = (props)=>{
     const onBuy = (price,type)=>{
         let remainder = props.coinCount[1]-price;
         if(remainder>=0){
@@ -34,8 +34,18 @@ const UseCoins = (props)=>{
                 Riddle Shop
             </div>
             {/* PASTE HERE WHEN **TR COIN HUNT** IS Going On */}
-            
-            {props.bought?
+            {
+                props.activeProxyZone!=='ZRS'?
+                <div className="RiddleShop">
+                    <img className="ShopBackBoard" src="https://images.vexels.com/media/users/3/164273/isolated/lists/a64481d86e7873605b7430b3a407a152-hanging-wooden-sign-board.png"></img>
+                    <div className="RiddleCatalogue">
+                        <div className="NoRiddle">
+                            <h3 className="ButChitTypeHead">REACH TOWARDS RIDDLE SHOP</h3>
+                        </div>
+                    </div>
+                </div>
+
+                :props.bought?
                 <div className="RiddleShop">
                     <img className="ShopBackBoard" src="https://images.vexels.com/media/users/3/164273/isolated/lists/a64481d86e7873605b7430b3a407a152-hanging-wooden-sign-board.png"></img>
                     <div className="RiddleCatalogue">
@@ -64,17 +74,10 @@ const UseCoins = (props)=>{
     );
 }
 
-export default UseCoins;
+export default RiddleShop;
 
 
 /* When TR Episode is under Maintainance paste below code above at pointed location */
 
 
-            // <div className="RiddleShop">
-            //     <img className="ShopBackBoard" src="https://images.vexels.com/media/users/3/164273/isolated/lists/a64481d86e7873605b7430b3a407a152-hanging-wooden-sign-board.png"></img>
-            //     <div className="RiddleCatalogue">
-            //         <div className="NoRiddle">
-            //             <h3 className="ButChitTypeHead">TR COIN MINING IS GOING ON</h3>
-            //         </div>
-            //     </div>
-            // </div>
+            

@@ -35,9 +35,10 @@ class App extends Component {
       dynamicBase2: "https://tr-dynamicbase-2-default-rtdb.firebaseio.com/",
       dynamicBase3: "https://tr-dynamicbase-3-default-rtdb.firebaseio.com/",
       dynamicBase4: "https://tr-dynamicbase-4-default-rtdb.firebaseio.com/",
+      dynamicBase5: "https://tr-dynamicbase-5-default-rtdb.firebaseio.com/",
       staticBase:"https://tr-staticbase-default-rtdb.firebaseio.com/"
     },
-    activeTeamCoords:['',''],
+    activeTeamCoords:['23.841592','72.659534'],
     activeTeam: '?',
     charCodesArr: [],
     alertMsg:"",
@@ -102,7 +103,6 @@ class App extends Component {
               navigator.geolocation.getCurrentPosition(position=>{
                   const latitude = position.coords.latitude;
                   const longitude = position.coords.longitude;
-                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
                   this.setState({activeTeamCoords:[latitude,longitude]});
 
                   //Making listeners for ActiveCoords currentActiveCoords
@@ -123,7 +123,6 @@ class App extends Component {
               navigator.geolocation.watchPosition(position=>{
                   const latitude = position.coords.latitude;
                   const longitude = position.coords.longitude;
-                  updateActiveTeamCoords(this.state.activeTeam,[latitude,longitude],this.state.charCodesArr);
                   this.setState({activeTeamCoords:[latitude,longitude]});
 
                   //Making listeners for ActiveCoords currentActiveCoords
@@ -148,7 +147,7 @@ class App extends Component {
   }
 activeProxyZoneHandler = (zoneCode)=>{
   let showValidator = false;
-  if(zoneCode!==''){
+  if(zoneCode!=='' && zoneCode.length===2){
       showValidator = true
   }
   else{}
@@ -165,7 +164,8 @@ onValidatorBackDrop = ()=>{
     //For Log in And Log out handling
 loggedInHandler = (tempLog)=>{
   this.setState({
-     loggedIn: tempLog
+     loggedIn: tempLog,
+     activeTeam: tempLog[1]
   })
 }
 logoutHandler=(loggedIn)=>{
@@ -233,7 +233,16 @@ logoutHandler=(loggedIn)=>{
     })
   }
   
+  setPublicCoordsForProxies = (publicCoordsArr)=>{
+    this.setState({
+      publicCoords: publicCoordsArr
+    })
+  }
+
   render(){
+
+    updateActiveTeamCoords(this.state.activeTeam,this.state.activeTeamCoords,this.state.charCodesArr);
+
     let onHawkClick=()=>{
       let secretCode = prompt('Enter The Secret Code,If You are a Hawk:');
       if(secretCode === this.state.hawkPassCode)
@@ -252,11 +261,11 @@ logoutHandler=(loggedIn)=>{
     let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing baseUrl = {this.state.baseUrls} /><Footer /></div>
     let mainApp = <div style={{backgroundImage:back}} className="App">
                     
-                    {this.state.hawkMode?<HawkMode/>:this.state.managerMode?<ManagerMode activeTeamCoords = {this.state.activeTeamCoords} baseUrl = {this.state.baseUrls} />:<TrCompanion activeTeamCoords = {this.state.activeTeamCoords} trueCreds = {this.state.trueCreds} storeOptions = {this.state.storeOptions} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.baseUrls.dynamicBase3 + 'credentials'} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls}  />}
+                    {this.state.hawkMode?<HawkMode baseUrl = {this.state.baseUrls} />:this.state.managerMode?<ManagerMode activeTeamCoords = {this.state.activeTeamCoords} baseUrl = {this.state.baseUrls} />:<TrCompanion setPublicCoordsForProxies ={this.setPublicCoordsForProxies} activeProxyZone = {this.state.activeProxyZone} activeTeamCoords = {this.state.activeTeamCoords} trueCreds = {this.state.trueCreds} storeOptions = {this.state.storeOptions} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.baseUrls.dynamicBase3 + 'credentials'} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls}  />}
                     <Footer />
                   </div>
     let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/managerMode'}/></div>
-    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrls = {this.state.baseUrls} /></div>
+    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm setPublicCoordsForProxies ={this.setPublicCoordsForProxies} activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrls = {this.state.baseUrls} /></div>
     // let polygonGen = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><PolygonGen /></div>
     let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/contactUs'}/></div>
       return (
@@ -274,8 +283,8 @@ logoutHandler=(loggedIn)=>{
             <div className='AppBarContainer'>
               {/* <AlertMsgPopUp/> */}
               {this.state.activeTeam!=='?'?<ProxyZonePopUp activeTeam = {this.state.activeTeam} baseUrl = {this.state.baseUrls} zoneCode = {this.state.activeProxyZone} show = {this.state.popUpValidator} onBackDrop = {this.onValidatorBackDrop} />:null}
-              
-              <AlertModule/>
+              {/* <AlertModule/> */}
+
               <AppBar hawkClick = {onHawkClick} menuClick = {this.showMenuHandler} newsClick = {this.showNewsHandler} />
             </div>
             <Routes>

@@ -13,6 +13,7 @@
     border: 0 ;
     transition: all 0.8s;
     text-shadow: 0 0 10px #000;
+    filter: drop-shadow(0 3px 3px #0000009c)
 }
 .RefreshCoords{
     position: absolute;

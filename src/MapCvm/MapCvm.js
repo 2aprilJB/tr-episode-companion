@@ -31,7 +31,7 @@ class MapCvm extends Component{
                         </div>
                     </div>
                     <div className="MapContainer">
-                        <TheMap activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrls} />
+                        <TheMap setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrls} />
                     </div>
                     {/* See the button below we'll be prepareing it to take snapshit of all PArticipants------------------------ */}
                     <div className="MapInfo">

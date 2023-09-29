@@ -16,26 +16,36 @@ class HawkMode extends Component{
         submittedCode: '',
         currTeam: '',
         currChar: '',
-        showButton: true
+        showButton: true,
+        currCode: ''
     }
 
     onChitValidation(currentTeam,chitType,correctCode){
         axios.get(this.props.baseUrl.dynamicBase3 + 'points.json')
              .then(resp=>{
                 let tempPts = resp.data;
+                let indOTeam = 0;
+                tempPts.map((ele,ind)=>{
+                    if(ele[0]===currentTeam){
+                        indOTeam = ind;
+                    }
+                    else{}
+                })
+                // let currTeamIndex = currTeamPtsIndex();
                 if(correctCode&&chitType==='i'){
                     alert('Team ' + currentTeam + ' has validated Type - I, + 20pts');
-                    tempPts[currentTeam] = tempPts[currentTeam] + 20;
+                    tempPts[indOTeam][1] = tempPts[indOTeam][1] + 20;
                 }
                 else if(correctCode&&chitType==='ii'){
                     alert('Team ' + currentTeam + ' has validated Type - II, !!GIVE TASK!!');
                 }
                 else{
                     alert('Team ' + currentTeam + ' has wrong Guess, - 5pts');
-                    tempPts[currentTeam] = tempPts[currentTeam] -5;
+                    tempPts[indOTeam][1] = tempPts[indOTeam][1] -5;
                 }
                 axios.put(this.props.baseUrl.dynamicBase3 + 'points.json',tempPts)
                      .then(resp=>{
+                        // console.log(tempPts)
                         this.setState({
                             showButton: true
                         })
@@ -149,9 +159,10 @@ class HawkMode extends Component{
 
 
     render(){
-        let currentCode = null;
         let onChangeHandler = (e)=>{
-            currentCode = e.target.value
+            this.setState({
+                currCode: e.target.value
+            })
         }
 
         let currentSelect = this.state.currTeam;
@@ -179,7 +190,7 @@ class HawkMode extends Component{
                 <option key = {ele + '22'}>{ele[0]}</option>
             )
         })
-        let showButton = this.state.showButton?<button className="VerifyButt" onClick={()=>this.onSubmitHandler(currentCode,currentSelect,currentChar)}><ion-icon name="checkmark-done-outline" /></button>:null;
+        let showButton = this.state.showButton?<button className="VerifyButt" onClick={()=>this.onSubmitHandler(this.state.currCode,currentSelect,currentChar)}><ion-icon name="checkmark-done-outline" /></button>:null;
 
         return(
             <div className="HawkModeContainer">

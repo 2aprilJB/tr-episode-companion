@@ -27,7 +27,7 @@ class ShowChars extends Component{
                 {this.state.chars.map((elem,index)=>{
                     if(index>0){
                         return(
-                            <div className="CharContainer">
+                            <div key={index + ' Container'} className="CharContainer">
                                 <h4 className="CharName">{elem[0]}</h4>
                                 {elem.map((ele,ind)=>{
                                     if(ind>0)

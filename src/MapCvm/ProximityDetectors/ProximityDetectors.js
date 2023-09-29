@@ -6,14 +6,16 @@ import getDistance from "geolib/es/getPreciseDistance";
 
 export const proxyZoneDetector = (activeCoords,proxyZonesCoords,currProxyZone,setProxyZoneCode)=>{
     proxyZonesCoords.map((ele,ind)=>{
-        if(isMarkerInsideCircle(activeCoords,ele[2],ele[1].radius)){
-            setProxyZoneCode(ele[0]);
-        }
-        else{
-            if(currProxyZone===ele[0]){
-                setProxyZoneCode('')
+        if(ele[0]!=='Z0'){
+            if(isMarkerInsideCircle(activeCoords,ele[2],ele[1].radius)){
+                setProxyZoneCode(ele[0]);
             }
-            else{}
+            else{
+                if(currProxyZone===ele[0]){
+                    setProxyZoneCode('')
+                }
+                else{}
+            }
         }
     })
 }

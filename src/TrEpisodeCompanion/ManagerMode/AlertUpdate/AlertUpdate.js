@@ -1,29 +1,36 @@
 import {updateAlertMsg} from "../../../FireStoreUtils/FireStoreUtils"
-import React from "react";
+import React, { Component } from "react";
 import "./AlertUpdate.css";
 
-const alertUpdate = ()=>{
-    let currentAlertInp = null;
-    let onChangeHandler = (e)=>{
-        currentAlertInp = e.target.value;
+class AlertUpdate extends Component{
+    state={
+        currValue: ''
+    }
+    onChangeHandler = (e)=>{
+        this.setState({
+            currValue: e.target.value
+        })
     }
 
-    let onClickHandler = ()=>{
+    onClickHandler = ()=>{
         if(window.confirm("Are you sure to send?"))
-            updateAlertMsg(currentAlertInp);
+            updateAlertMsg(this.state.currValue);
         else{
             console.log('Well Its your call')
         }
     }
-    return(
-        <div className="IssueAlert">
-                    Enter Alert:-
-                    <div className="AddAlertWrapper">
-                        <input onChange = {(e)=>onChangeHandler(e)} type="text" className="AlertText"></input>
-                        <button onClick={onClickHandler} className="SubmitAlert"><ion-icon name="caret-forward-outline"></ion-icon></button>
-                    </div>
-        </div>
-    );
+    render(){
+        return(
+            <div className="IssueAlert">
+                        Enter Alert:-
+                        <div className="AddAlertWrapper">
+                            <input onChange = {(e)=>this.onChangeHandler(e)} type="text" className="AlertText"></input>
+                            <button onClick={this.onClickHandler} className="SubmitAlert"><ion-icon name="caret-forward-outline"></ion-icon></button>
+                        </div>
+            </div>
+        );
+    };
+    
 }
 
-export default alertUpdate;
+export default AlertUpdate;

@@ -6,7 +6,8 @@ import {  iconPerson, iconChar  } from './Icon/Icon';
 import Lintt from "../../Assets/Lintt/Lintt";
 import axios from "axios";
 import PublicDynamic from "./PublicDynamic/PublicDynamic";
-import { updateActiveTeamCoords, updateSpecialZones } from "../../FireStoreUtils/FireStoreUtils";
+import PrivateDynamic from "./PrivateDynamic/PrivateDynamic";
+import { sendCoordsSignal, updateActiveTeamCoords, updateSpecialZones } from "../../FireStoreUtils/FireStoreUtils";
 import { isMarkerInsidePolygon } from "./DynamicMarker/DynamicMarker";
 import Modal from "../../Containers/Modal/Modal";
 class TheMap extends Component{
@@ -15,7 +16,9 @@ class TheMap extends Component{
         coords: null,
         baseUrlPublicCoords: this.props.baseUrls.staticBase + 'publicCoords',
         activeProxy:'',
-        showModal: false
+        showModal: false,
+        gettingCoords: false,
+        allCoords: {}
     }
 
     componentDidMount(){
@@ -32,51 +35,48 @@ class TheMap extends Component{
              })
         
     }
-    isMarkerInsideProximmity = (charProxyPoly,charCode)=>{
-        if(isMarkerInsidePolygon(this.props.activeTeamCoords, charProxyPoly)){
-            
-            if(!this.state.showModal){
-                this.setState({
-                    showModal:true,
-                    activeProxy: charCode
-                })
-            }
-            else{}
-        }
-        else{
-            // if(this.state.showModal){{
-            // }}
-            // else{}
-            this.onBackDrop();
-        }
-    }
     onBackDrop = ()=>{
         this.setState({
             showModal: false,
             activeProxy: ''
         })
-        console.log(this.state)
     }
+
+    getCoords = ()=>{
+        sendCoordsSignal();
+        this.setState({
+            gettingCoords: false
+        })
+        setTimeout(()=>{
+            axios.get(this.props.baseUrls.dynamicBase5 + '.json')
+                 .then(resp=>{
+                    this.setState({
+                        allCoords : resp.data.participantsCoords
+                    })
+                 })
+                 .catch(err=>{
+                    console.log(err)
+                    alert("There's a Network Error");
+                 })
+        },5000) //Assuming By 5 seconds All Participant's devices would've sent their location.
+    }
+
     render(){
         
-        // setTimeout(()=>axios.put(this.props.baseUrl + '/coords.json',this.state.coords)
-        // .catch(err=>{
-        //    console.log(err);
-        //    alert('Error has occcurred that too in connection with MAp')
-        // }),3000)
         return(
             this.state.coords?<div className="TheMapContainer">
                 <Modal show = {this.state.showModal} onBackDrop = {this.onBackDrop}>{this.state.activeProxy==='Z3'?<div>Brij</div>:this.state.activeProxy==='Z2'?<div>siba</div>:null}</Modal>
-                <LeafletMap center={this.state.coords.mapCenter} zoom={15}>
+                <LeafletMap center={this.props.activeTeamCoords} zoom={15}>
                     <TileLayer
                     maxZoom={21}
                     url='https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' 
                     />
 
-                    <PublicDynamic baseUrls = {this.props.baseUrls} activeProxy = {this.state.activeProxy} modalBackDrop = {this.onBackDrop} charProximityHandler = {this.isMarkerInsideProximmity} baseUrlPublicCoords = {this.state.baseUrlPublicCoords} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam}/>
-                    
+                    <PublicDynamic setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} baseUrls = {this.props.baseUrls} activeProxy = {this.state.activeProxy} modalBackDrop = {this.onBackDrop} charProximityHandler = {this.isMarkerInsideProximmity} baseUrlPublicCoords = {this.state.baseUrlPublicCoords} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam}/>
+                    {this.state.allCoords?<PrivateDynamic allCoords = {this.state.allCoords} />:null}
                     <ImageOverlay url = 'https://i.ibb.co/XjXxGkR/sector-16.png' bounds={[[23.232012525273973,72.64771431684495],[23.230016085247495,72.64565974473955]]}></ImageOverlay>
                 </LeafletMap>
+                {this.props.activeTeam.length===2?this.state.gettingCoords===false?<button onClick={this.getCoords} className="GetCoords">GetCoords</button>:null:null}
             </div>:<h2>LOADING...</h2>
         );
     }
