@@ -33,8 +33,7 @@ const iconChar = new L.Icon({
     shadowSize: null,
     shadowAnchor: null,
     border: 0,
-    iconSize: new L.Point(20,20),
-    className: 'leaflet-div-icon'
+    iconSize: new L.Point(20,20)
 });
 const iconChar1 = new L.Icon({
     iconUrl: require('../../../Assets/Images/char1.png'),

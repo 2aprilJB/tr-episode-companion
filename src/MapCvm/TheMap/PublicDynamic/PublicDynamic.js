@@ -1,6 +1,6 @@
 import { collection, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
 import {db,dbDynamic1, dbDynamic4, dbTeams, dbDynamic5} from '../../../firebase';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import React from 'react';
 import SpecialCoords from './SpecialCoords/SpecialCoords';
 import CharZones from './CharZones/CharZones';
@@ -26,7 +26,7 @@ const PublicMarkers = (props)=>{
     const [usersCoords,setUsersCoords] = useState();         //Storing users Coordinates
     const [specCoords,setSpecCoords] = useState();   //Storing Special Coordinates
     const [showModal,setShowModal] = useState();
-    const [sendCoords,setSendCoords] = useState();
+    const [sendCoords,setSendCoords] = useState();   //To get Snapshot and make changes accordingly
     let activeCoords = props.activeTeamCoords;
     
     
@@ -84,6 +84,14 @@ const PublicMarkers = (props)=>{
                     alert("There's some serious Network error going on that even the developer can't deal with so bear with us cause he is onto some another toll!!")
                 })
     else{}
+
+    const eventHandlers = useMemo(() => ({
+        dragend(e) {
+          let draggedCoords = e.target.getLatLng();
+          
+          props.setDraggedCoords([draggedCoords.lat,draggedCoords.lng])
+        },
+      }),[])
     return(
         <div className="PublicMarkersContainer">
             <CharCoords activeCoords = {activeCoords} activeTeam = {props.activeTeam}/>
@@ -100,6 +108,9 @@ const PublicMarkers = (props)=>{
             
             <Marker position={activeCoords} icon={iconPerson}></Marker>
             {/* {props.activeTeam.length===1||props.activeTeam.length===3?<Marker position={activeCoords} icon={iconPerson}></Marker>:null} */}
+
+
+            {props.activeTeam.length===2?<Marker position={props.draggedCoords} icon={iconChar} eventHandlers={eventHandlers} draggable={true} />:null}
         </div>
     );
 }

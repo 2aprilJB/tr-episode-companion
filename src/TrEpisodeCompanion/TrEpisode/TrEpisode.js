@@ -151,10 +151,16 @@ class TrEpisode extends Component{
                 <div className="TreasureMapContainer">
                     <img className="MapWallPaper" src={treasureMapWallpaper}></img>
                     <div className="TMapContainer">
-                        <TheMap setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
+                        <TheMap draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords} setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
                     </div>
+                    
                 </div>
-
+                <div className="BackToMapContainer">
+                        <div className="BackToHome">
+                        <a style={{marginTop:"0.4rem"}} href="/mapCVM"><ion-icon name="expand-outline"></ion-icon></a>
+                        </div>
+                        <h3 className="ButtText2">Back</h3>
+                </div>
                 <h3 className="CoinsHead">TR COINS</h3>
                 <div className="CoinsCollectedWrapper">
                     <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
@@ -178,7 +184,7 @@ class TrEpisode extends Component{
                 {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
                     UserMode:
                     this.props.activeTeam==="Z0"?
-                    <ManagerMode activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
+                    <ManagerMode draggedCoords = {this.props.draggedCoords} activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
                     <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
                 }
                 

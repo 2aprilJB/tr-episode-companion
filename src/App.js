@@ -18,6 +18,7 @@ import AlertModule from './TrEpisodeCompanion/AlertModule/AlertModule';
 import ProxyZonePopUp from './Assets/ProxyZonePopUp/ProxyZonePopUp';
 import { isMarkerInsidePolygon } from './MapCvm/TheMap/DynamicMarker/DynamicMarker';
 import { proxyZoneDetector } from './MapCvm/ProximityDetectors/ProximityDetectors';
+import Loader from './Assets/Loader/Loader';
 class App extends Component {
 
   state = {
@@ -38,7 +39,7 @@ class App extends Component {
       dynamicBase5: "https://tr-dynamicbase-5-default-rtdb.firebaseio.com/",
       staticBase:"https://tr-staticbase-default-rtdb.firebaseio.com/"
     },
-    activeTeamCoords:['23.841592','72.659534'],
+    activeTeamCoords:null,
     activeTeam: '?',
     charCodesArr: [],
     alertMsg:"",
@@ -46,6 +47,7 @@ class App extends Component {
     loading: true,
     storeOptions: {},
 
+    draggedCoords: [23.218907353996382, 72.64213129878046],
     publicCoords:{},
     activeProxyZone:'',
     popUpValidator: false
@@ -55,11 +57,42 @@ class App extends Component {
     let cookArr = document.cookie;
         if(cookArr !== '0'){
             this.setState({
-                loggedIn: cookArr.split(",")
+              loading: true
             })
+            axios.get(this.state.baseUrls.dynamicBase3 + 'credentials.json')
+                 .then(resp=>{
+                    this.setState({
+                      loading: false
+                    })
+                    let creds = resp.data;
+                    let tempLoggedIn = cookArr.split(",");
+
+                    creds.map(ele=>{
+                      let temp = [ele[2].toString(),ele[3]];
+                      if(temp[0]===tempLoggedIn[0]){
+                        if(temp[1]===tempLoggedIn[1]){
+                            this.setState({
+                              loggedIn: tempLoggedIn
+                            })
+                        }
+                        else{}
+                      }
+                      else{}
+                    })
+                 })
+                 .catch(err=>{
+                  console.log(err);
+                  alert("There's a network Error")
+                 })
+            // this.setState({
+            //     loggedIn: cookArr.split(",")
+            // })
         }
         else{
           document.cookie = '0';
+          this.setState({
+            loading: false
+          })
         }
     let tempTeam = document.cookie.split(',')[1]?document.cookie.split(',')[1]:'?';
             axios.get(this.state.baseUrls.staticBase + '.json')
@@ -127,7 +160,7 @@ class App extends Component {
 
                   //Making listeners for ActiveCoords currentActiveCoords
                   let ts = this.state;
-                  if(ts.publicCoords.polygons){
+                  if(ts.publicCoords.polygons&&ts.activeTeamCoords){
                     proxyZoneDetector(ts.activeTeamCoords,ts.publicCoords.polygons.charProxies,ts.activeProxyZone,this.activeProxyZoneHandler);
                   }
                   else{}
@@ -238,10 +271,15 @@ logoutHandler=(loggedIn)=>{
       publicCoords: publicCoordsArr
     })
   }
+  setDraggedCoords = (coordsArr)=>{
+    this.setState({
+      draggedCoords: coordsArr
+    })
+  }
 
   render(){
 
-    updateActiveTeamCoords(this.state.activeTeam,this.state.activeTeamCoords,this.state.charCodesArr);
+    updateActiveTeamCoords(this.state.activeTeam,this.state.activeTeamCoords,this.state.charCodesArr); //This is for live Location updation for Characters i.e Z0-Z7
 
     let onHawkClick=()=>{
       let secretCode = prompt('Enter The Secret Code,If You are a Hawk:');
@@ -261,15 +299,16 @@ logoutHandler=(loggedIn)=>{
     let landing = <div style={{backgroundColor: "#fff", paddingTop: "3rem"}} className="App"><Landing baseUrl = {this.state.baseUrls} /><Footer /></div>
     let mainApp = <div style={{backgroundImage:back}} className="App">
                     
-                    {this.state.hawkMode?<HawkMode baseUrl = {this.state.baseUrls} />:this.state.managerMode?<ManagerMode activeTeamCoords = {this.state.activeTeamCoords} baseUrl = {this.state.baseUrls} />:<TrCompanion setPublicCoordsForProxies ={this.setPublicCoordsForProxies} activeProxyZone = {this.state.activeProxyZone} activeTeamCoords = {this.state.activeTeamCoords} trueCreds = {this.state.trueCreds} storeOptions = {this.state.storeOptions} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.baseUrls.dynamicBase3 + 'credentials'} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls}  />}
+                    {this.state.hawkMode?<HawkMode baseUrl = {this.state.baseUrls} />:this.state.managerMode?<ManagerMode draggedCoords = {this.state.draggedCoords} activeTeamCoords = {this.state.activeTeamCoords} baseUrl = {this.state.baseUrls} />:<TrCompanion draggedCoords = {this.state.draggedCoords} setDraggedCoords = {this.setDraggedCoords} setPublicCoordsForProxies ={this.setPublicCoordsForProxies} activeProxyZone = {this.state.activeProxyZone} activeTeamCoords = {this.state.activeTeamCoords} trueCreds = {this.state.trueCreds} storeOptions = {this.state.storeOptions} setActiveCoords = {this.setActiveCoords} credentialsUrl= {this.state.baseUrls.dynamicBase3 + 'credentials'} loggedIn = {this.state.loggedIn} loggedInHandler = {this.loggedInHandler} logoutHandler = {this.logoutHandler} baseUrl = {this.state.baseUrls}  />}
                     <Footer />
                   </div>
     let managerMode = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/managerMode'}/></div>
-    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm setPublicCoordsForProxies ={this.setPublicCoordsForProxies} activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrls = {this.state.baseUrls} /></div>
+    let mapCVM = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><MapCvm draggedCoords = {this.state.draggedCoords} setDraggedCoords = {this.setDraggedCoords} setPublicCoordsForProxies ={this.setPublicCoordsForProxies} activeTeam = {this.state.activeTeam} activeTeamCoords = {this.state.activeTeamCoords} loggedIn = {this.state.loggedIn} logoutHandler = {this.logoutHandler} baseUrls = {this.state.baseUrls} /></div>
     // let polygonGen = <div style={{backgroundImage:back, paddingTop: "3rem"}} className="App"><PolygonGen /></div>
     let contactUs = <div style={{backgroundImage:back, paddingTop: "8rem"}} className="App"><HeroDisplay addSpace baseUrl = {this.state.baseUrls.staticBase + 'billBoards/contactUs'}/></div>
       return (
         this.state.refBaseUrl?<BrowserRouter>
+            {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true} />}
             {/* If Menu or News icons are clicked they are handled here.... */}
             {this.state.showMenu?<Menu baseUrl = {this.state.baseUrls.staticBase} backDrop = {this.onMenuBackDrop}/>:null}
                     {this.state.showNews?<Modal show = {this.state.showNews} onBackDrop = {this.onNewsBackDrop}>
@@ -301,6 +340,3 @@ logoutHandler=(loggedIn)=>{
 
 
 export default App;
-
-
-

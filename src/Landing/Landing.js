@@ -7,6 +7,7 @@ import ArTech from "./ArTech/ArTech";
 import './Landing.css';
 import { Component } from "react";
 import Showcase from "../Containers/Showcase/Showcase";
+import LeaderBoard from "./LeaderBoard/LeaderBoard";
 import HeroDisplay from "../TrEpisodeCompanion/HeroDisplay/HeroDisplay";
 import TheQuote from "./TheQuote/TheQuote";
 import axios from "axios";
@@ -71,6 +72,8 @@ class NewMay extends Component{
                 </Showcase> */}
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/homePage'} />
                 
+                <LeaderBoard/>
+
                 <ArTech videoIds = {this.state.videoIds} />
 
                 <SlideShowcase baseUrl = {this.props.baseUrl}/>

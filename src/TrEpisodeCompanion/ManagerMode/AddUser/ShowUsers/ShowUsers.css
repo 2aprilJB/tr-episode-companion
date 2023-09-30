@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    max-height: 25rem;
+
 }
 .UserCredentials{
     display: flex;

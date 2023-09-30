@@ -4,7 +4,7 @@
     margin-top: -1rem;
 }
 .MapOverlayFeatures{
-    bottom: 26.5rem;
+    bottom: 250%;
     width: 100%;
     position: absolute;
     z-index: 10;
@@ -28,7 +28,8 @@
     border-radius: 20px;
     width: 100%;
     margin: 1rem auto;
-    min-height: 35rem;
+    height: max-content;
+    height: max-content;
     background-image: linear-gradient(45deg,rgb(0, 0, 63),red);
     display: flex;
     flex-direction: column;
@@ -36,7 +37,7 @@
 }
 .MapContainer{
     z-index: 9;
-    height: 37rem;
+    height: 90vh;
     width: 100%;
     border-radius: 10px;
     background-color: rgba(255, 228, 196, 0.418);
@@ -49,7 +50,7 @@
 }
 
 .TeamDetailsMap{
-    top: -15%;
+    top: -24%;
     left: 40%;
     position: absolute;
     display: flex;
@@ -57,8 +58,8 @@
     align-content: center;
     justify-content: center;
     border-radius: 20px;
-    width: 5rem;
-    height: 5rem;
+    min-width: 5rem;
+    min-height: 5rem;
     background-color:antiquewhite;
     font-size: 1.2rem;
     font-family: 'Lato';
@@ -69,6 +70,8 @@
     border: 3px solid #fff;
     animation: keepFloat 5s infinite;
     z-index: 999;
+    width: 20%;
+    height: 20%;
 }
 .TeamDetailsMap h5{
     border-bottom: 3px solid rgb(183, 231, 10);
@@ -86,9 +89,36 @@
 
 .ButtText2{
     font-family: 'Lato';
-    font-weight: lighter;
+    font-weight: bold;
     letter-spacing: 0.2rem;
     margin-top: 0.5rem;
-    font-size: 0.6rem;
-    color: aliceblue;
+    font-size: 0.8rem;
+    color: rgb(222, 251, 0);
+    text-shadow: 0 2px 3px #000;
+}
+.BackToHomeContainer{
+    position: absolute;
+    top: 610%;
+    right: 5%;
+}
+.BackToMapContainer{
+    position: absolute;
+    top: 23%;
+    z-index: 100;
+    margin-right: 0.7rem;
+}
+
+.BackToHome{
+    position: absolute;
+    border: 3px solid #025dc4;
+    font-size: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.4rem;
 }

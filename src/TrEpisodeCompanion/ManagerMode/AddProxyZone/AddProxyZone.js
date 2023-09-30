@@ -42,7 +42,7 @@ class AddProxyZone extends Component{
                     weight: parseFloat(values.weight), //Converting String to Number
                     radius: parseFloat(values.radius)  //Converting String to Number             
                 },
-                [parseFloat(values.centerCoordsX),parseFloat(values.centerCoordsY)]
+                this.props.draggedCoords
             ]
 
             axios.get(this.state.baseUrl)
@@ -68,8 +68,6 @@ class AddProxyZone extends Component{
                 <ShowProxyZones baseUrl = {this.state.baseUrl} />
 
                 <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'zoneCode'} currValue = {this.state.currValue.zoneCode} enterWhat = "Zone-Code" />
-                <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'centerCoordsX'} currValue = {this.state.currValue.centerCoordsX} enterWhat = "Center-X" />
-                <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'centerCoordsY'} currValue = {this.state.currValue.centerCoordsY} enterWhat = "Center-Y" />
                 <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'radius'} currValue = {this.state.currValue.radius} enterWhat = "Radius" />
                 <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'weight'} currValue = {this.state.currValue.weight} enterWhat = "Weight" />
                 <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'color'} currValue = {this.state.currValue.color} enterWhat = "Fill-Color" />

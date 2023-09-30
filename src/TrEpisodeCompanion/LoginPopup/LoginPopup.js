@@ -38,7 +38,6 @@ class LoginPopup extends Component{
                 let latestCred = resp.data;
                 let tempLog = document.cookie.split(",");
                 let foundIndex = null;
-                console.log(this.state.currUser)
                 latestCred.map((cred,credInd)=>{
                     if(cred[0] === this.state.currUser)
                         if(cred[1] === this.state.currPass){

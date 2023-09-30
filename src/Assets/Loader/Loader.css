@@ -26,12 +26,12 @@
     justify-content: center;
     transition: all 2s;
     transform: translateX(-100%);
-    animation: fadeOut 3s;opacity: 0;
+    animation: fadeOut 7s;opacity: 0;
 }
 .LinttContainer{
     width: 40%;
     animation-name: breatheMboy;
-    animation-duration: 2s;
+    animation-duration: 1.4s;
     animation-iteration-count: infinite;
 }
 
