@@ -64,7 +64,7 @@ const CoinsCollected = (props)=>{
         
         <div className="CoinsContainer">
             <div className="CoinContainer"><ion-icon name="logo-bitcoin"></ion-icon></div>
-            <div className="CoinCount">{props.stateCoins[1]?props.stateCoins[1]:null}</div>
+            <div className="CoinCount">{props.stateCoins[1]}</div>
         </div>
     );
 }

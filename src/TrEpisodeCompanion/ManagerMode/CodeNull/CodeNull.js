@@ -32,11 +32,15 @@ class CodeNull extends Component{
                         console.log(err);
                      })
                 
-                axios.put(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json',pointTableArr)
-                     .catch(err=>{
-                        console.log(err);
-                        alert('There is another Network Error you Moronic Developer')
-                })
+                if(window.confirm("Do you want to initialize TrCoins to 0"))
+                    axios.put(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json',pointTableArr)
+                        .catch(err=>{
+                            console.log(err);
+                            alert('There is another Network Error you Moronic Developer')
+                    })
+                else{
+                    console.log('Wise choice!!')
+                }
              })
              .catch(err=>{
                 console.log(err);

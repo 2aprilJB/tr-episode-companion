@@ -32,14 +32,14 @@ const CharCoords = (props)=>{
 
     return(
         <div>
-            {charZ0?<Marker position={charZ0[0].coords} eventHandlers={{click: (e)=>{alert(charZ0[0].characterName)}}} icon={iconManager} />:null}
-            {charZ1?<Marker position={charZ1[0].coords} eventHandlers={{click: (e)=>{alert(charZ1[0].characterName)}}} icon={iconChar1} />:null}
-            {charZ2?<Marker position={charZ2[0].coords} eventHandlers={{click: (e)=>{alert(charZ2[0].characterName)}}} icon={iconChar2} />:null}
-            {charZ3?<Marker position={charZ3[0].coords} eventHandlers={{click: (e)=>{alert(charZ3[0].characterName)}}} icon={iconChar3} />:null}
-            {charZ4?<Marker position={charZ4[0].coords} eventHandlers={{click: (e)=>{alert(charZ4[0].characterName)}}} icon={iconChar4} />:null}
-            {charZ5?<Marker position={charZ5[0].coords} eventHandlers={{click: (e)=>{alert(charZ5[0].characterName)}}} icon={iconChar5} />:null}
-            {charZ6?<Marker position={charZ6[0].coords} eventHandlers={{click: (e)=>{alert(charZ6[0].characterName)}}} icon={iconKiller1} />:null}
-            {charZ7?<Marker position={charZ7[0].coords} eventHandlers={{click: (e)=>{alert(charZ7[0].characterName)}}} icon={iconKiller2} />:null}
+            {charZ0?charZ0[0].coords!==null?<Marker position={charZ0[0].coords} eventHandlers={{click: (e)=>{alert(charZ0[0].characterName)}}} icon={iconManager} />:null:null}
+            {charZ1?charZ1[0].coords!==null?<Marker position={charZ1[0].coords} eventHandlers={{click: (e)=>{alert(charZ1[0].characterName)}}} icon={iconChar1} />:null:null}
+            {charZ2?charZ2[0].coords!==null?<Marker position={charZ2[0].coords} eventHandlers={{click: (e)=>{alert(charZ2[0].characterName)}}} icon={iconChar2} />:null:null}
+            {charZ3?charZ3[0].coords!==null?<Marker position={charZ3[0].coords} eventHandlers={{click: (e)=>{alert(charZ3[0].characterName)}}} icon={iconChar3} />:null:null}
+            {charZ4?charZ4[0].coords!==null?<Marker position={charZ4[0].coords} eventHandlers={{click: (e)=>{alert(charZ4[0].characterName)}}} icon={iconChar4} />:null:null}
+            {charZ5?charZ5[0].coords!==null?<Marker position={charZ5[0].coords} eventHandlers={{click: (e)=>{alert(charZ5[0].characterName)}}} icon={iconChar5} />:null:null}
+            {charZ6?charZ6[0].coords!==null?<Marker position={charZ6[0].coords} eventHandlers={{click: (e)=>{alert(charZ6[0].characterName)}}} icon={iconKiller1} />:null:null}
+            {charZ7?charZ7[0].coords!==null?<Marker position={charZ7[0].coords} eventHandlers={{click: (e)=>{alert(charZ7[0].characterName)}}} icon={iconKiller2} />:null:null}
         </div>
     );
 }

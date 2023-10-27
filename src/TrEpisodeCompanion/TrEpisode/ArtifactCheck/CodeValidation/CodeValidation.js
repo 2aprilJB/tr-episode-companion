@@ -64,7 +64,7 @@ class CodeValidation extends Component{
 
                             updatedCoins = this.props.coinCount + this.props.storeOptions.awardCoins[1]; //Adding the More coins as per DB to the current coins
                             foundArtifactAt = index-boats.length;
-                            artifactType = 'planes'
+                            artifactType = 'planes';
 
                             updateArtifactToFs(currentCode);
 

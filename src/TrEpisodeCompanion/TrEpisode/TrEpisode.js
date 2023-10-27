@@ -16,8 +16,8 @@ import { getCoins } from "../../FireStoreUtils/FireStoreUtils";
 import CoinsCollected from "./CoinsCollected/CoinsCollected";
 import RiddleShop from "./RiddleShop/RiddleShop";
 import axios from "axios";
-
-import treasureMapWallpaper from '../../Assets/Images/treasureMap.png';
+import ActualChit from './ArtifactCheck/ActualChit/ActualChit';
+import DummyChit from './ArtifactCheck/DummyChit/DummyChit';
 import TheMap from "../../MapCvm/TheMap/TheMap";
 import ArtifactCheckBanner from "../../Assets/Images/artifactCheckBanner.png"
 
@@ -41,6 +41,7 @@ class TrEpisode extends Component{
         ],
     }
     componentDidMount(){
+    
         this.setState({
             loading: false
         })
@@ -103,22 +104,7 @@ class TrEpisode extends Component{
                 coinCount: updatedCoins
             })
         }
-        let showPoints = (activeTeam)=>{
-            axios.get(this.props.baseUrl.dynamicBase3 + '/points.json')
-                 .then(resp=>{
-                    resp.data.map(ele=>{
-                        if(ele[0]===activeTeam){
-                            alert("Your team's points : " + ele[1]);
-                        }
-                        else{}
-                    })
-                    
-                 })
-                 .catch(err=>{
-                    console.log(err);
-                    alert("Uff Ye Network errors");
-                 })
-        }
+        
 
         let UserMode =                     //Assigning UserMode Part to one variable
         <div className="UserMode">
@@ -146,12 +132,26 @@ class TrEpisode extends Component{
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
                 
-                <ShowPointsButt showPoints = {()=>showPoints(this.props.activeTeam)}/>
+                <ShowPointsButt activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
                 
+                <h3 className="CoinsHead">TR COINS</h3>
+                <div className="CoinsCollectedWrapper">
+                    <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
+                    <CoinsCollected baseUrl = {this.props.baseUrl} stateCoins = {this.state.coinCount} updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
+                    <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
+                </div>
+
+                {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
+                    UserMode:
+                    this.props.activeTeam==="Z0"?
+                    <ManagerMode forAll = {false} draggedCoords = {this.props.draggedCoords} activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
+                    <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
+                }
+
                 <div className="TreasureMapContainer">
-                    <img className="MapWallPaper" src={treasureMapWallpaper}></img>
+                    {/* <img className="MapWallPaper" src={treasureMapWallpaper}></img> */}
                     <div className="TMapContainer">
-                        <TheMap draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords} setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
+                        <TheMap secondaryProxy = {this.props.secondaryProxy} publicCoords = {this.props.publicCoords} draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords} setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeProxyZoneHandler = {this.props.activeProxyZoneHandler} activeProxyZone ={this.props.activeProxyZone} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
                     </div>
                     
                 </div>
@@ -161,12 +161,7 @@ class TrEpisode extends Component{
                         </div>
                         <h3 className="ButtText2">Back</h3>
                 </div>
-                <h3 className="CoinsHead">TR COINS</h3>
-                <div className="CoinsCollectedWrapper">
-                    <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
-                    <CoinsCollected baseUrl = {this.props.baseUrl} stateCoins = {this.state.coinCount} updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
-                    <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
-                </div>
+                
                 {/*Alert Module, works currently on refresh click*/}
 
                 {/* Lets buy some Riddles */}
@@ -179,14 +174,20 @@ class TrEpisode extends Component{
                 baseUrl = {this.props.baseUrl} updateCoinState = {updateCoinState}
                 buyOpts = {this.state.riddleBuyOptions} />:null}
 
-                <div style={{position: "relative",width: "100%"}}><img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div>
+                {/* <div style={{position: "relative",width: "100%"}}><img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div> */}
                 
-                {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
-                    UserMode:
-                    this.props.activeTeam==="Z0"?
-                    <ManagerMode draggedCoords = {this.props.draggedCoords} activeTeamCoords = {this.props.activeTeamCoords} baseUrl = {this.props.baseUrl}/>:
-                    <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
-                }
+                <h4 className="ChitTypeHeading">Type - {this.state.chitType.toUpperCase()}</h4>
+                <div className="ChitContainer">
+                    {this.state.bought?<ActualChit chitType = {this.state.chitType} activeTeam = {this.state.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
+                </div>
+                <div className="RefreshDiv">
+                    Press This
+                    <button onClick={onBoatRefresh} className="RefreshCollection">
+                        <ion-icon name="reload-circle-outline"></ion-icon>
+                    </button>
+                    To Refresh
+                </div>
+                
                 
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>
                 

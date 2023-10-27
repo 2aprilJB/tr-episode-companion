@@ -32,7 +32,7 @@ class TrCompanion extends Component{
         return(
             <div className="MainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true} />}
-                {this.props.loggedIn[0]?<TrEpisode draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords}  setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeProxyZone = {this.props.activeProxyZone} activeTeamCoords = {this.props.activeTeamCoords} storeOptions = {this.props.storeOptions} setActiveCoords = {this.props.setActiveCoords} baseUrl = {this.props.baseUrl} loggedIn = {this.props.loggedIn} logoutHandler = {this.props.logoutHandler} activeTeam = {this.props.loggedIn[1]}/>:
+                {this.props.loggedIn[0]?<TrEpisode secondaryProxy = {this.props.secondaryProxy} publicCoords = {this.props.publicCoords} draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords}  setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeProxyZoneHandler = {this.props.activeProxyZoneHandler} activeProxyZone = {this.props.activeProxyZone} activeTeamCoords = {this.props.activeTeamCoords} storeOptions = {this.props.storeOptions} setActiveCoords = {this.props.setActiveCoords} baseUrl = {this.props.baseUrl} loggedIn = {this.props.loggedIn} logoutHandler = {this.props.logoutHandler} activeTeam = {this.props.loggedIn[1]}/>:
                     <div className="LoginPage">
                         <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/loginPage'} />
                         <LoginPopup credentialsUrl = {this.props.credentialsUrl} loggedInHandler={this.props.loggedInHandler} loggedIn = {this.props.loggedIn} />

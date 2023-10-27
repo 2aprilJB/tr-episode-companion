@@ -37,7 +37,8 @@ class HawkMode extends Component{
                     tempPts[indOTeam][1] = tempPts[indOTeam][1] + 20;
                 }
                 else if(correctCode&&chitType==='ii'){
-                    alert('Team ' + currentTeam + ' has validated Type - II, !!GIVE TASK!!');
+                    alert('Team ' + currentTeam + ' has validated Type - II, + 50pts');
+                    tempPts[indOTeam][1] = tempPts[indOTeam][1] + 50;
                 }
                 else{
                     alert('Team ' + currentTeam + ' has wrong Guess, - 5pts');
@@ -125,6 +126,7 @@ class HawkMode extends Component{
              .then(response=>{
                 let credentials = {};
                 credentials = response.data.points;
+                
                 axios.get(this.props.baseUrl.dynamicBase2 + '.json')  
                      .then(resp=>{
                         let characters = [];
@@ -180,7 +182,7 @@ class HawkMode extends Component{
             })
         }
 
-        let teamOptions = Object.keys(this.state.credArr).map((ele,ind)=>{
+        let teamOptions = this.state.credArr.map((ele,ind)=>{
             return(
                 <option key = {ind + 65}>{ele}</option>
             )
@@ -202,12 +204,12 @@ class HawkMode extends Component{
                         {charOptions}
                     </select></div>:null}
                     
-                    <h3>Chit Code Verification</h3>
+                    <h3>Riddle Code Verification</h3>
                     <h2 className="CurrCharName">{this.state.currTeam}</h2>
                     {!this.props.activeTeam?<select onChange={onSelectHandler} className="TeamSelector">
                         {teamOptions}
                     </select>:null}
-                    Enter Chit Code To verify
+                    Enter Riddle Code To verify
                     <input className="ChitCodeInp" type="text" onChange={onChangeHandler}></input>
                     
                     {showButton}

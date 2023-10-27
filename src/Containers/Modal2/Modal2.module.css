@@ -53,8 +53,10 @@
 @keyframes appear{
     0%{
         opacity: 0;
+        transform: translateY(100%);
     }
     100%{
+        transform: translateY(0);
         opacity: 1;
     }
 }

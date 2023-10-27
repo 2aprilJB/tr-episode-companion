@@ -19,7 +19,13 @@ const AlertModule = ()=>{
         <div>
             {alertMsg?
             <Modal show={showModal} onBackDrop = {()=>setShowModal(false)}>
-                {alertMsg[0].message}
+                <div className="AlertModContainer">
+                    <div className="AlertSymb">
+                        <h3 className="DangerAlert"><ion-icon name="warning-outline"></ion-icon></h3> 
+                    </div>
+                    
+                    {alertMsg[0].message}
+                </div>
             </Modal>:null}
         </div>
     );

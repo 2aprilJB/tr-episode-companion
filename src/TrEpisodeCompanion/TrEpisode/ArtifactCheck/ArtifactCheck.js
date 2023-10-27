@@ -17,17 +17,7 @@ class ArtifactCheck extends Component{
                     trCoinsBackUpUrl = {this.props.baseUrl.dynamicBase4}  stateCoins = {this.props.stateCoins} updateCoinState = {this.props.updateCoinState}
                     bought = {this.props.bought} buyHandler = {this.props.buyHandler} validationLimit = {this.props.validationLimit}/>   {/* Controlling Factor */}
                     
-                    <h4 className="ChitTypeHeading">Type - {this.props.chitType.toUpperCase()}</h4>
-                    <div className="ChitContainer">
-                        {this.props.bought?<ActualChit chitType = {this.props.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
-                    </div>
-                    <div className="RefreshDiv">
-                        Press This
-                        <button onClick={this.props.onRefreshClick} className="RefreshCollection">
-                            <ion-icon name="reload-circle-outline"></ion-icon>
-                        </button>
-                        To Refresh
-                    </div>
+                    
             </div>
         )
     }

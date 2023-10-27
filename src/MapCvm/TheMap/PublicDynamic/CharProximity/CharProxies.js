@@ -56,6 +56,9 @@ class CharProxies extends Component{
                     else if(ele[0]==='ZRS'){
                         centreMarkerIcon = iconRShop;
                     }
+                    else if(ele[0].length>3){
+                        centreMarkerIcon = null;
+                    }
                     else{}
 
                     if(ele[1].boundColor){
@@ -64,7 +67,7 @@ class CharProxies extends Component{
                     else{}
                     return <div key={ind}>
                         <Circle weight={ele[1].weight} radius={ele[1].radius} fillColor={ele[1].color} color={colorDef} center={ele[2]} />
-                        <Marker key={ind + 'CenterMarker'} position={ele[2]} icon={centreMarkerIcon}/>
+                        {centreMarkerIcon?<Marker key={ind + 'CenterMarker'} position={ele[2]} icon={centreMarkerIcon}/>:null}
                     </div>
                 }):null}
             </div>

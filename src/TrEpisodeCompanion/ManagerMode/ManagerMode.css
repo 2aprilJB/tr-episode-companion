@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 5rem;
-    z-index: 3;
+    z-index: 1;
 }
 .ManagerTitle{
     border-bottom: 1px solid red;

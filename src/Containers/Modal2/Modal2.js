@@ -9,7 +9,7 @@ import classes from './Modal2.module.css';
 const modal = (props)=>{
     let mooodal = <div className = {classes.BackDrop}>
                     <div className = {classes.ModalWrapper}>
-                        <div onClick = {props.onBackDrop} className = {classes.Cross}><ion-icon name="close-outline"></ion-icon></div>
+                        {props.noCross?null:<div onClick = {props.onBackDrop} className = {classes.Cross}><ion-icon name="close-outline"></ion-icon></div>}
                         {props.children}
                     </div>
                   </div>

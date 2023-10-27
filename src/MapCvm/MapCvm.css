@@ -103,8 +103,8 @@
 }
 .BackToMapContainer{
     position: absolute;
-    top: 23%;
-    z-index: 100;
+    top: 32rem;
+    z-index: 1;
     margin-right: 0.7rem;
 }
 
@@ -114,7 +114,7 @@
     font-size: 2rem;
     background-color: #fff;
     border-radius: 10px;
-    height: 3rem;
+    height: 2.2rem;
     width: 3rem;
     display: flex;
     flex-direction: column;

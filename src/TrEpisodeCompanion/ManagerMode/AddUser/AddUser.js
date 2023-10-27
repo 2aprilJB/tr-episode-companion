@@ -12,7 +12,7 @@ class AddUser extends Component{
         currValue : {
             currUser:'',
             currPass:'',
-                currTeamCode:''
+            currTeamCode:''
         }
     }
 
@@ -25,13 +25,33 @@ class AddUser extends Component{
             let newUser = this.state.currValue;
             newUser = [newUser.currUser,newUser.currPass,false,newUser.currTeamCode];
             if(window.confirm("Are You Sure to Add this USER??"))
-                axios.get(this.props.baseUrl + 'credentials.json')
+                axios.get(this.props.baseUrl.dynamicBase3 + 'credentials.json')
                     .then(resp=>{
                         let creds = resp.data;
                         creds.push(newUser);
-                        axios.put(this.props.baseUrl + 'credentials.json',creds)
+                        axios.put(this.props.baseUrl.dynamicBase3 + 'credentials.json',creds)
                             .then(resp=>{
                                 alert('User Added');
+                                axios.get(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json')
+                                     .then(resp=>{
+                                        let tempTrC = resp.data;
+                                        tempTrC.push([this.state.currValue.currTeamCode,0]);
+                                        axios.put(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json',tempTrC)
+                                             .catch(err=>{
+                                                console.log(err);
+                                                alert('There is another network eror that can be only be solved by the might of INTERNET');
+                                             })
+                                        axios.put(this.props.baseUrl.dynamicBase3 + 'points.json',tempTrC)
+                                             .catch(err=>{
+                                               console.log(err);
+                                               alert('There is another Network Error you Moronic Developer')
+                                        })
+
+                                     })
+                                     .catch(err=>{
+                                        console.log(err);
+                                        alert('There is another network eror that can be only be solved by the might of INTERNET');
+                                     })
                             })
                             .catch(err=>{
                                 alert('Network Issue');
@@ -61,7 +81,7 @@ class AddUser extends Component{
         return(
             <div className="AddWrapper">
                 {this.state.showUsers?<Modal show = {this.state.showUsers} onBackDrop = {()=>showUsers(false)}>
-                    <ShowUsers fetchUrl = {this.props.baseUrl + 'credentials.json'} />
+                    <ShowUsers fetchUrl = {this.props.baseUrl.dynamicBase3 + 'credentials.json'} />
                 </Modal>:null}
                 <button onClick={onShowUsers} className="ShowButt"><ion-icon name="bonfire-outline"></ion-icon></button>
 

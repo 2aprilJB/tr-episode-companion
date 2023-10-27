@@ -1,5 +1,5 @@
 .ArtifactModuleWrapper{
-    z-index: 2;
+    z-index: 1;
     animation: fadeIn 1.8s;
     width: 100%;
     border-radius: 20px;

@@ -1,0 +1,78 @@
+.DangerModalDisplay{
+    width: 5rem;
+    max-width: 25ren;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 2rem;
+}
+.DangerModalDisplay img{
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    width: 5rem;
+    height: 5rem;
+}
+.DangerAlert{
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: crimson;
+    background-color: #fff;
+    border-radius: 100%;
+    border: 0px solid crimson;
+    font-size: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: -2.8rem;
+    left: 1.2rem;
+    animation: textGlow2 2s infinite;
+}
+.DangerAlertText{
+    color: #fff;
+    font-size: 1.2rem;
+    width: 16rem;
+    animation: textGlow3 2s infinite;
+}
+@keyframes textGlow3{
+    0%{
+        text-shadow: 0 0 1px #ff0044;
+        font-size: 1.2rem;
+    }
+    50%{
+        text-shadow: 0 0 1px #be0808;
+        font-size: 1.21rem;
+    }
+    100%{
+        text-shadow: 0 0 1px #ff0044;
+        font-size: 1.2rem;
+    }
+}
+
+@keyframes textGlow2{
+    0%{
+        color: #ff0044;
+        transform: scale(0.8);
+        font-size: 1.6rem;
+        box-shadow: 0 0 10px #ff0044;
+    }
+    50%{
+        color: #ff7e14;
+        transform: scale(1.1);
+        font-size: 2rem;
+        box-shadow: 0 0 10px #be0808;
+    }
+    100%{
+        color: #ff0044;
+        transform: scale(0.8);
+        font-size: 1.6rem;
+        box-shadow: 0 0 10px #ff0044;
+    }
+}
+

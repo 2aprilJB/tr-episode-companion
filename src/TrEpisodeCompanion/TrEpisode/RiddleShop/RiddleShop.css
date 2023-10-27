@@ -17,7 +17,7 @@
     font-family: 'Oswald';
     letter-spacing: 0.3rem;
     padding: 0.4rem;
-    z-index: 10;
+    z-index: 1;
     text-shadow: 0 0 3px #000;
 }
 .RiddleCatalogue{
@@ -89,12 +89,11 @@
 }
 
 .BillImg{
-    top: -6.5rem;
-    left: auto;
-    right: auto;
+    top: 2.5rem;
     position: absolute;
     width: 17rem;
-    z-index: 9;
+    height: 7rem;
+    z-index: 1;
 }
 
 .RiddleShop{

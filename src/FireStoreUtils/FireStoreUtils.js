@@ -1,5 +1,5 @@
 import { collection, doc, onSnapshot, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
-import {db,dbDynamic4,dbStatic,dbTeams,dbDynamic5} from '../firebase';   
+import {db,dbDynamic4,dbDynamic1,dbStatic,dbTeams,dbDynamic5} from '../firebase';   
 import axios from 'axios';
 //activeTeam: 'string'
 //coordsArr: [lat,lng]
@@ -40,6 +40,19 @@ export const updateCoins = async(activeTeam,updatedCoins)=>{
     }
 }
 //************************************************************************************ */
+//------TR-DynamicBase-1
+export const updateDangerZone = async(activeTeam,tOf)=>{
+    const docRef = doc(dbDynamic1,activeTeam,"dangerZoneActivation");
+    const docSnap = await getDoc(docRef);
+    const payload = {...docSnap.data(),activate:tOf};
+    await setDoc(docRef,payload);
+}
+export const isItDanger = async(activeTeam)=>{
+    const docRef = doc(dbDynamic1,activeTeam,"dangerZoneActivation");
+    const docSnap = await getDoc(docRef);
+    const payload = {...docSnap.data()};
+    return payload;
+}
 
 //------TR-DynamicBase-4
 
@@ -49,7 +62,7 @@ export const updateCoins = async(activeTeam,updatedCoins)=>{
 export const addArtifactToFs = async(coordsArr,artifactCode,idArtifact)=>{
     const docRef = doc(dbDynamic4,"vArtifacts",artifactCode);
     const docSnap = await getDoc(docRef);
-    const payload = {...docSnap.data(),coords:coordsArr[0],validated:coordsArr[1],idArtifact:idArtifact};
+    const payload = {...docSnap.data(),coords:coordsArr[0],validated:coordsArr[1],idArtifact:idArtifact,proxyZone:[docRef.id,{boundColor:'white',color:'white',radius:2,weight:2}]};
     await setDoc(docRef,payload);
 }
 //Updating validation to true
@@ -64,6 +77,18 @@ export const deleteArtifactFromFs = async(artifactCode)=>{
     const docRef = doc(dbDynamic4,'vArtifacts',artifactCode);
     await deleteDoc(docRef);
 }
+//------TR-DynamicBase-5
+
+//Signal for Send Coords from Participants Devices
+
+export const sendCoordsSignal = async(hideArtifacts)=>{
+    let randomNum = hideArtifacts?hideArtifacts:Math.floor(Math.random()*1000); //Snapshot signal on every participant Device so it can react by sendimg its live location
+    const docRef = doc(dbDynamic5,"sendCoords","fromParticipants");
+    const docSnap = await getDoc(docRef);
+    const payload  = {...docSnap.data(),sendOrNot: randomNum};    //Here we want any random number to be updated so we can get 
+    await setDoc(docRef,payload);
+}
+
 //************************************************************************************ */
 
 //------TR-StaticBase
@@ -73,17 +98,5 @@ export const updateAlertMsg = async(msg)=>{
     const payload = {message: msg};
     await setDoc(docRef,payload);
 }
-
 //************************************************************************************ */
 
-//------TR-DynamicBase-5
-
-//Signal for Send Coords from Participants Devices
-
-export const sendCoordsSignal = async()=>{
-    let randomNum = Math.floor(Math.random()*1000); //Snapshot signal on every participant Device so it can react by sendimg its live location
-    const docRef = doc(dbDynamic5,"sendCoords","fromParticipants");
-    const docSnap = await getDoc(docRef);
-    const payload  = {...docSnap.data(),sendOrNot: randomNum};    //Here we want any random number to be updated so we can get 
-    await setDoc(docRef,payload);
-}

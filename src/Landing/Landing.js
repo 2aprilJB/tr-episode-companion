@@ -72,7 +72,7 @@ class NewMay extends Component{
                 </Showcase> */}
                 <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/homePage'} />
                 
-                <LeaderBoard/>
+                <LeaderBoard leaderBoardName = {"OCTOBER - FEST"} ptsOcoins = {"Coins"} baseUrl = {this.props.baseUrl.dynamicBase3 + 'points.json'}/>
 
                 <ArTech videoIds = {this.state.videoIds} />
 

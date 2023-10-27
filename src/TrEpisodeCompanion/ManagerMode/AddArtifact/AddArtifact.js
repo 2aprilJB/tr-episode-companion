@@ -23,7 +23,7 @@ class AddArtifact extends Component{
             let artifactCode = this.state.currValue.currCode;
             let dCoords = this.props.draggedCoords;
             dCoords = [dCoords[0]+0.00002,dCoords[1]]
-            newArtifact = [dCoords,false];
+            newArtifact = this.props.forAll?[this.props.activeTeamCoords,false]:[dCoords,false];
             if(window.confirm("Are You Sure to Add this Artifact??") && newArtifact[0].length!==1){
                 axios.get(this.props.baseUrl + 'artifacts/planes.json')
                      .then(resp=>{
