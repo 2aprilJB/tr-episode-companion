@@ -2,7 +2,6 @@ import React from "react";
 import "./TrEpisode.css"
 import { Component } from "react";
 import Loader from "../../Assets/Loader/Loader";
-import ChitCount from "../ChitCount/ChitCount";
 import TeamBanner from "../../Assets/Images/teamBanner.png"
 import ArtifactCheck from "./ArtifactCheck/ArtifactCheck";
 import Modal from "../../Containers/Modal/Modal";
@@ -19,7 +18,6 @@ import axios from "axios";
 import ActualChit from './ArtifactCheck/ActualChit/ActualChit';
 import DummyChit from './ArtifactCheck/DummyChit/DummyChit';
 import TheMap from "../../MapCvm/TheMap/TheMap";
-import ArtifactCheckBanner from "../../Assets/Images/artifactCheckBanner.png"
 
 class TrEpisode extends Component{
     state = {
@@ -127,13 +125,12 @@ class TrEpisode extends Component{
                 <ShowChitsButt showChit = {this.state.showChit} showChitCount = {showChitCount} baseUrl = {this.props.baseUrl} />
                 
                 <div className="TeamDetails">
-                    <img className="TeamBanner" src={TeamBanner}></img>
+                    {/* <img className="TeamBanner" src={TeamBanner}></img> */}
                     <h5>TEAM</h5>
                     <h3 className="TeamCode">{this.props.activeTeam}</h3>
                 </div>
                 
                 <ShowPointsButt activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
-                
                 <h3 className="CoinsHead">TR COINS</h3>
                 <div className="CoinsCollectedWrapper">
                     <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
@@ -178,7 +175,7 @@ class TrEpisode extends Component{
                 
                 <h4 className="ChitTypeHeading">Type - {this.state.chitType.toUpperCase()}</h4>
                 <div className="ChitContainer">
-                    {this.state.bought?<ActualChit chitType = {this.state.chitType} activeTeam = {this.state.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
+                    {this.state.bought?<ActualChit chitType = {this.state.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
                 </div>
                 <div className="RefreshDiv">
                     Press This

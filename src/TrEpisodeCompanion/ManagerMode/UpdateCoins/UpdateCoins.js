@@ -33,14 +33,20 @@ class UpdateCoins extends Component{
             })
         }
         let onSubmitHandler = ()=>{
-            axios.get(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins.json')
+            let urlPC = this.props.baseUrl.dynamicBase4 + 'backUpTrCoins';
+            if(prompt('Coins or points?')==='points'){
+                urlPC = this.props.baseUrl.dynamicBase3 + 'points'
+            }
+            else{}
+            if(window.confirm('You sure want to add/Subtract')){
+                axios.get(urlPC + '.json')
                  .then(resp=>{
                     if(resp.data)
                     resp.data.map((ele,ind)=>{
                         if(ele[0]===this.state.currTeamCode){
                             let updatedCoins = this.state.currAddSubVal + ele[1]
 
-                            axios.put(this.props.baseUrl.dynamicBase4 + 'backUpTrCoins/' + ind +'.json',ele)
+                            axios.put(urlPC + '/' + ind +'.json',[ele[0],updatedCoins])
                                  .catch(err=>{
                                     console.log(err);
                                     alert('There is a Network Error that is unbelievable')
@@ -56,6 +62,8 @@ class UpdateCoins extends Component{
                     console.log(err);
                     alert("Here comes the ultimate crappy error!! YIKESSS");
                  })
+            }
+            else{}
         }
         return(
             <div className="AddWrapper">

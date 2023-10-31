@@ -60,19 +60,20 @@
         color: #ff0044;
         transform: scale(0.8);
         font-size: 1.6rem;
-        box-shadow: 0 0 10px #ff0044;
+        box-shadow: 0 2px 10px #2b2b2b;
     }
     50%{
         color: #ff7e14;
         transform: scale(1.1);
+        transform: translateY(-10%);
         font-size: 2rem;
-        box-shadow: 0 0 10px #be0808;
+        box-shadow: 0 5px 10px #676767;
     }
     100%{
         color: #ff0044;
         transform: scale(0.8);
         font-size: 1.6rem;
-        box-shadow: 0 0 10px #ff0044;
+        box-shadow: 0 2px 10px #2b2b2b;
     }
 }
 

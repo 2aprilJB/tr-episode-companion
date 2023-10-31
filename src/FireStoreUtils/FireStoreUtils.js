@@ -62,7 +62,7 @@ export const isItDanger = async(activeTeam)=>{
 export const addArtifactToFs = async(coordsArr,artifactCode,idArtifact)=>{
     const docRef = doc(dbDynamic4,"vArtifacts",artifactCode);
     const docSnap = await getDoc(docRef);
-    const payload = {...docSnap.data(),coords:coordsArr[0],validated:coordsArr[1],idArtifact:idArtifact,proxyZone:[docRef.id,{boundColor:'white',color:'white',radius:2,weight:2}]};
+    const payload = {...docSnap.data(),coords:coordsArr[0],validated:coordsArr[1],idArtifact:idArtifact,proxyZone:[docRef.id,{boundColor:'white',color:'white',radius:5,weight:2}]};
     await setDoc(docRef,payload);
 }
 //Updating validation to true

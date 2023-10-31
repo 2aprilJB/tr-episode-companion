@@ -11,7 +11,7 @@ const showChitsButt = (props)=>{
                 {/*ChitCount Module*/}
                 <ChitCount baseUrl = {props.baseUrl.dynamicBase2}/>
             </Modal>
-            <img className="UtilsButt" src={UtilsButtBanner}></img>
+            {/* <img className="UtilsButt" src={UtilsButtBanner}></img> */}
             <div onClick={()=>props.showChitCount(true)} className="ShowChit">
                 <ion-icon name="checkbox-outline"></ion-icon>
             </div>

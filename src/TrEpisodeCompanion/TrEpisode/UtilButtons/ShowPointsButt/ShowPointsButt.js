@@ -43,7 +43,7 @@ class ShowPointsButt extends Component{
     render(){
         return(
             <div className="ShowPointsContainer">
-                <img className="UtilsButt" src={UtilsButtBanner}></img>
+                {/* <img className="UtilsButt" src={UtilsButtBanner}></img> */}
                 <div onClick={this.setActivePts} className="ShowPoints">
                     <ion-icon name="checkmark-done-circle-outline"></ion-icon>
                 </div>
@@ -53,7 +53,7 @@ class ShowPointsButt extends Component{
                     </div>
                     {/* Displaying Current Active Team's Points */}
                     <div className="TeamDetails">
-                        <img className="TeamBanner" src={TeamBanner}></img>
+                        {/* <img className="TeamBanner" src={TeamBanner}></img> */}
                         <h5>YOUR SCORE</h5>
                         <h3 className="TeamCode">{this.state.activePts}</h3>
                     </div>

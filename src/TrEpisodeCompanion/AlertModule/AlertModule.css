@@ -31,7 +31,15 @@
     color: crimson;
 }
 .AlertModContainer{
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
     width: 100%;
+    background-color: #fff;
+    min-height: 5rem;
+    box-shadow: 0 6px 10px #0000006a;
+    padding: 0.4rem;
+    background-image: linear-gradient(#000000d5,#00000000), url('https://img.freepik.com/free-vector/halloween-background-flat-design_52683-43845.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais');
 }
 .AlertSymb{
     position: relative;
@@ -40,4 +48,33 @@
     background-color: aqua;
     width: 5rem;
     margin-top: 0.4rem;
+}
+.AlertMainText{
+    color: #fff;
+    text-shadow: 0 0 4px #9d9d9d;
+    font-family: 'Yellowtail';
+    font-size: 2.4rem;
+    font-weight: lighter;
+    letter-spacing: 0.2rem;
+    animation: chameleon 3s infinite;
+}
+.AlertSubText{
+    font-family: 'Oswald';
+    color: rgb(70, 133, 250);
+    text-shadow: 1px 0.5px 1px #ffffff;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+}
+.AlertDescription{
+    margin-top: 2rem;
+    font-family: 'Oswald';
+    letter-spacing: 0.1rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    background-image: linear-gradient(45deg,#fb5266c1,#d53030a8);
+    width: 18rem;
+    color: #ffffff;
+    padding: 1rem;
 }

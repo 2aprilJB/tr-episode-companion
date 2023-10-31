@@ -34,10 +34,11 @@ class LeaderBoard extends Component{
                     <div className="LeaderBoardPlayersContainer">
                         {
                             srtPts?srtPts.map((ele,ind)=>{
+                                if(ele[1]>0)
                                 return(
                                     <div key={ind + 'PlayerDet'} className="LeaderBoardPlayerDet">
                                         <div className="LeaderBoardPlayerRank">{ind+1}</div>
-                                        <div className="LeaderBoardPlayerName"><div>{ele[3]?ele[3]:ele[0]}</div><div className="LeaderBoardTeamCode">{ele[0]}</div></div>
+                                        <div className="LeaderBoardPlayerName"><div>{ele[2]?ele[2]:ele[0]}</div><div className="LeaderBoardTeamCode">{ele[0]}</div></div>
                                         <div className="LeaderBoardPlayerCoins"><div>{ele[1]}</div><p className="LeaderBoardCoins">{this.props.ptsOcoins}</p></div>
                                     </div>
                                 );

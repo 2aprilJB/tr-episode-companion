@@ -72,13 +72,18 @@ class ManagerMode extends Component{
             <div className="ManagerContainer">
                 <h2 className="ManagerTitle">MR. Manager</h2>
                 <AlertUpdate/>
-                <AddUser baseUrl = {this.props.baseUrl}/>
-                <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
-                <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
-                <AddProxyZone forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.staticBase} />
-                <UpdateCoins baseUrl = {this.props.baseUrl} />
-                <div className="DangerButt" onClick={hideAllProxies}><ion-icon name="color-filter-outline"></ion-icon></div>
-                <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>
+                <div className="ManagerWrapper2">
+                    <AddUser baseUrl = {this.props.baseUrl}/>
+                    <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
+                    <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
+                    <AddProxyZone forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.staticBase} />
+                    <UpdateCoins baseUrl = {this.props.baseUrl} />
+                </div>
+                <div className="ProminentButts">
+                    <div className="DangerButt" onClick={hideAllProxies}><ion-icon name="color-filter-outline"></ion-icon></div>
+                    <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>
+                </div>
+                
                 {this.state.updateArtifactsCode?<CodeNull baseUrl = {this.props.baseUrl} />:null}
             </div>
         );

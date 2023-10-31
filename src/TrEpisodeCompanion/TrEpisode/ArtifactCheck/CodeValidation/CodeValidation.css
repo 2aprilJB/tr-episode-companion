@@ -37,10 +37,11 @@
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    background-color: rgb(47, 137, 255);
-    border: 5px solid rgb(255, 132, 0);
+    background-color: rgb(37, 37, 37);
+    border: 5px solid rgb(0, 149, 255);
     border-radius: 15px;
     padding: 1rem 0;
+    animation: chameleon 3s infinite;
 }
 .Enter{
     font-size: 1.5rem;
