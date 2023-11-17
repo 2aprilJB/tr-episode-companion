@@ -6,7 +6,7 @@
     align-items: center;
     height: max-content;
     width: 100%;
-    animation: appear 0.3s;
+    animation: appear 0.5s;
     z-index: 10000;
     top: 1rem;
     left: 0;
@@ -33,7 +33,7 @@
     justify-content: center;
 }
 .ModalWrapper{
-    top:0%;
+    top:2rem;
     position: relative;
     min-height: 7rem;
     height: max-content;
@@ -47,16 +47,15 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    overflow: scroll;
 }
 
 @keyframes appear{
     0%{
         opacity: 0;
-        transform: translateY(100%);
+        transform: translateY(900%) scale(0.8);
     }
     100%{
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }

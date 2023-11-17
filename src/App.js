@@ -321,6 +321,7 @@ logoutHandler=(loggedIn)=>{
   //   },1000)
   // }
   render(){
+    console.log('Primary Zone: ' + this.state.activeProxyZone + ' , SecondaryZone: ' + this.state.secondaryProxy)
     //This is for Handling DangerZone Point deduction
     // if(this.state.activeProxyZone==='Danger'){
     //   let countDown = 3;
@@ -358,8 +359,6 @@ logoutHandler=(loggedIn)=>{
             <div className='AppBarContainer'>
               {/* <AlertMsgPopUp/> */}
               {this.state.activeTeam!=='?'?<ProxyZonePopUp activeTeam = {this.state.activeTeam} baseUrl = {this.state.baseUrls} zoneCode = {this.state.activeProxyZone} show = {this.state.popUpValidator} onBackDrop = {this.onValidatorBackDrop} />:null}
-              <AlertModule/>
-
               <AppBar hawkClick = {this.onHawkClick} menuClick = {this.showMenuHandler} newsClick = {this.showNewsHandler} />
             </div>
             <Routes>

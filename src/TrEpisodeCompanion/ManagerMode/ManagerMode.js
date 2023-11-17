@@ -9,6 +9,7 @@ import AddArtifact from "./AddArtifact/AddArtifact";
 import AddProxyZone from "./AddProxyZone/AddProxyZone";
 import { sendCoordsSignal, updateAlertMsg } from "../../FireStoreUtils/FireStoreUtils";
 import UpdateCoins from "./UpdateCoins/UpdateCoins";
+import Showcase2 from "../../Containers/Showcase2/Showcase2";
 
 class ManagerMode extends Component{
     state = {
@@ -72,13 +73,15 @@ class ManagerMode extends Component{
             <div className="ManagerContainer">
                 <h2 className="ManagerTitle">MR. Manager</h2>
                 <AlertUpdate/>
-                <div className="ManagerWrapper2">
-                    <AddUser baseUrl = {this.props.baseUrl}/>
-                    <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
-                    <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
-                    <AddProxyZone forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.staticBase} />
-                    <UpdateCoins baseUrl = {this.props.baseUrl} />
-                </div>
+                    <Showcase2 colors = {['#c70039','#1eb2a6']} activeSub = {0} modules = {['Add User','Add Chit','Add Artifact','Add Proxy Zone', 'Coins - Up','Points - Up']}>
+                        <AddUser baseUrl = {this.props.baseUrl}/>
+                        <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
+                        <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
+                        <AddProxyZone forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.staticBase} />
+                        <UpdateCoins baseUrl = {this.props.baseUrl} />
+                        <UpdateCoins updatePointsInsteadCoins = {true} baseUrl = {this.props.baseUrl} />
+                    </Showcase2>
+                    
                 <div className="ProminentButts">
                     <div className="DangerButt" onClick={hideAllProxies}><ion-icon name="color-filter-outline"></ion-icon></div>
                     <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>

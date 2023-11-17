@@ -100,15 +100,19 @@ class AddProxyZone extends Component{
                 <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'zoneCode'} currValue = {this.state.currValue.zoneCode} enterWhat = "Zone-Code" />
                 {this.props.forAll?<EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'centerCoordsX'} currValue = {this.state.currValue.centerCoordsX} enterWhat = "Center-X" />:null}
                 {this.props.forAll?<EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'centerCoordsY'} currValue = {this.state.currValue.centerCoordsY} enterWhat = "Center-Y" />:null}
-                <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'radius'} currValue = {this.state.currValue.radius} enterWhat = "Radius" />
-                <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'weight'} currValue = {this.state.currValue.weight} enterWhat = "Weight" />
-                <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'color'} currValue = {this.state.currValue.color} enterWhat = "Fill-Color" />
-                <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'boundColor'} currValue = {this.state.currValue.boundColor} enterWhat = "Boundary-Color" />
+                <div style={{display:"flex",flexDirection:"row"}}>
+                    <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'radius'} currValue = {this.state.currValue.radius} enterWhat = "Radius" />
+                    <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'weight'} currValue = {this.state.currValue.weight} enterWhat = "Weight" />
+                </div>
+
+                <div style={{display:"flex",flexDirection:"row"}}>
+                    <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'color'} currValue = {this.state.currValue.color} enterWhat = "Fill-Color" />
+                    <EnterData onChangeHandler = {this.onChangeHandler} currValIn = {'boundColor'} currValue = {this.state.currValue.boundColor} enterWhat = "Boundary-Color" />
+                </div>
                 
-                
-                {!this.state.updating?<button className="SubmitUser" onClick={this.onSubmitHandler}><ion-icon name="caret-forward-outline"></ion-icon></button>:null}
-                <div style={{display:"flex"}}>
-                    {!this.state.updating?<button style={{color:"green",marginRight:"1rem"}} className="SubmitUser" onClick={()=>this.onSpecificHandler('Safe','green')}><ion-icon name="compass-outline"></ion-icon></button>:null}
+                <div style={{display:"flex",justifyContent:"space-evenly",width:"100%"}}>
+                    {!this.state.updating?<button style={{color:"green"}} className="SubmitUser" onClick={()=>this.onSpecificHandler('Safe','green')}><ion-icon name="compass-outline"></ion-icon></button>:null}
+                    {!this.state.updating?<button className="SubmitUser" onClick={this.onSubmitHandler}><ion-icon name="caret-forward-outline"></ion-icon></button>:null}
                     {!this.state.updating?<button style={{color:"red"}} className="SubmitUser" onClick={()=>this.onSpecificHandler('Danger','red')}><ion-icon name="skull-outline"></ion-icon></button>:null}
                 </div>
                 

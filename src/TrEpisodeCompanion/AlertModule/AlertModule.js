@@ -5,13 +5,15 @@ import {dbStatic}from '../../firebase';
 import { useEffect, useState } from 'react';
 import Modal2 from '../../Containers/Modal2/Modal2';
 
-const AlertModule = ()=>{
+const AlertModule = (props)=>{
     const [alertMsg,setAlertMsg] = useState();
     const [showModal,setShowModal] = useState();
-
+    let tempSnap = null;
     useEffect(()=>{
         onSnapshot(collection(dbStatic,"TRalerts"), (snapshot)=>{
-            setAlertMsg(snapshot.docs.map(doc=>({...doc.data(), id:doc.id})));
+            tempSnap = snapshot.docs.map(doc=>({...doc.data(), id:doc.id}));
+            setAlertMsg(tempSnap);
+            props.setAlertState(tempSnap[0].message.split('#'));
             setShowModal(true);
         })
     },[])
@@ -40,10 +42,10 @@ const AlertModule = ()=>{
                        -- SCORE {alArr[2]} pts --
                        <br/>
                        <p style={{fontWeight: 'lighter',width:'100%',color:'white'}}>
-                            Reach the marked Zone fast<br/>
-                            Place Your Bet with TR Coins<br/>
-                            After The Zone's Countdown ends<br/>
-                            Highest bidder will get Bonus Riddle
+                            Stop Killer before he<br/>
+                            Reaches the character's zone<br/>
+                            If Killer reaches character<br/>
+                            Danger Zone will be activated
                        </p>
                     </div>
                     </div>
@@ -72,6 +74,25 @@ const AlertModule = ()=>{
                     </div>
                 </div>
     }
+    else if(alArr[0]==='calm'){
+        alDisp = <div className="AlertModContainer">
+
+                    <div className="AlertSymb">
+                        <h3 className="DangerAlert">{alSym}</h3> 
+                    </div>
+                    <div className="AlertDisp">
+                    <h4 className="AlertMainText">Alert</h4>   
+                    <h5 className="AlertSubText">{alArr[1]}</h5>
+                    <div style={{color: "#D2DE32",fontWeight:"600",fontSize:"1.2rem"}} className="AlertDescription">
+                       -- INFORMATION --
+                       <br/>
+                       <p style={{color: "yellow",fontWeight: 'lighter',width:'100%',fontWeight:'400',fontSize:"1rem"}}>
+                            Everything is Calm, Keep checking for Alerts
+                       </p>
+                    </div>
+                    </div>
+                </div>
+    }
     else if(alArr.length===1){
         alDisp = <div className="AlertModContainer">
 
@@ -93,10 +114,10 @@ const AlertModule = ()=>{
     }
     return(
         <div>
-            {alertMsg?
-            <Modal2 show={showModal} onBackDrop = {()=>setShowModal(false)}>
+            {props.display?alertMsg?
+            <Modal2 noCross = {props.noCross} show={showModal} onBackDrop = {()=>setShowModal(false)}>
                 {alDisp}
-            </Modal2>:null}
+            </Modal2>:null:null}
         </div>
     );
 }

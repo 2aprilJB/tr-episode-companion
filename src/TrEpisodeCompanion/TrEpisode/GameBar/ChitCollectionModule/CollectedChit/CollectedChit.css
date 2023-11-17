@@ -1,0 +1,19 @@
+.CollectedChitContainer{
+    margin-top: 1rem;
+    width: 19rem;
+    min-height: 16rem;
+    background-color: aquamarine;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px #0000005d;
+    animation: chameleon 4s infinite;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.CollectedChitTrLogo{
+    width: 4rem;
+    filter: drop-shadow(0 0px 9px #ffffffc5);
+}

@@ -34,7 +34,7 @@ class UpdateCoins extends Component{
         }
         let onSubmitHandler = ()=>{
             let urlPC = this.props.baseUrl.dynamicBase4 + 'backUpTrCoins';
-            if(prompt('Coins or points?')==='points'){
+            if(this.props.updatePointsInsteadCoins){
                 urlPC = this.props.baseUrl.dynamicBase3 + 'points'
             }
             else{}

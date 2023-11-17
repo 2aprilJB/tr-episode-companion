@@ -1,0 +1,11 @@
+.ResourcesModuleContainer{
+    height: 30rem;    
+    width: 120%;
+    border-radius: 17px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -18,6 +18,7 @@ import axios from "axios";
 import ActualChit from './ArtifactCheck/ActualChit/ActualChit';
 import DummyChit from './ArtifactCheck/DummyChit/DummyChit';
 import TheMap from "../../MapCvm/TheMap/TheMap";
+import GameBar from "./GameBar/GameBar";
 
 class TrEpisode extends Component{
     state = {
@@ -191,7 +192,7 @@ class TrEpisode extends Component{
                 <div style={{position:'relative',marginTop: '4rem'}}>
                     <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
                 </div>
-                
+                <GameBar activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
             </div>
         );
     }

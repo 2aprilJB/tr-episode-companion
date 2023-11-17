@@ -1,0 +1,37 @@
+.About{
+    font-family: 'Lato';
+    width: 100%;
+    color: #000;
+}    
+.Heading{
+    margin: 0;
+    font-weight: 300;
+    font-family: 'Oswald';
+    letter-spacing: 0.2rem;
+    text-align: center;
+    font-size: 2.8rem;
+}
+.Heading ion-icon{
+    font-size: 2rem;
+}
+.ImageContent{
+    width: 70%;
+    height: 10rem;
+    background-position: center;
+    background-size: cover;
+    margin: 1rem auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.589);
+}
+.InfoContent{
+    width: 80%;
+    margin: 2rem auto;
+    line-height: 2rem;
+    letter-spacing: 0.18rem;
+    text-align: center;
+    height: 15rem;
+    overflow: scroll;
+}
+.InfoContent::-webkit-scrollbar{
+    width: 0.1rem;
+}

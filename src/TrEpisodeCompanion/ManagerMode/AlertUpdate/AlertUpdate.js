@@ -48,6 +48,11 @@ class AlertUpdate extends Component{
             alert('Okay wise choice, or you missed, try again');
         }
     }
+    onCalmButtonClick = ()=>{
+        if(window.confirm('Wanna Calm The Crap?')){
+            updateAlertMsg('calm#Treasure Royale#' +34);
+        }
+    }
     render(){
         return(
             <div className="IssueAlert">
@@ -57,7 +62,7 @@ class AlertUpdate extends Component{
                             <button onClick={this.onClickHandler} className="SubmitAlert"><ion-icon name="caret-forward-outline"></ion-icon></button>
                             <button onClick={this.onKButtonClick} className="SubmitAlert">K</button>
                             <button onClick={this.onBetButtonClick} className="SubmitAlert">B</button>
-                            <button onClick={this.onBetButtonClick} className="SubmitAlert">P</button>
+                            <button onClick={this.onCalmButtonClick} className="SubmitAlert">C</button>
                         </div>
                         
             </div>

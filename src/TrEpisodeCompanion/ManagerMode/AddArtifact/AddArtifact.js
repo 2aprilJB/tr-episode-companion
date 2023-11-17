@@ -82,8 +82,8 @@ class AddArtifact extends Component{
                 {/* <EnterData onChangeHandler = {onArtifactChangeHandler} currValIn = {'currArtifact'} currValue = {this.state.currValue.currArtifact} enterWhat = "Coords"/> */}
                 <EnterData onChangeHandler = {onArtifactChangeHandler} currValIn = {'currCode'} currValue = {this.state.currValue.currCode} enterWhat = "ArtifactCode"/>
                 <div style={{display:"flex",flexDirection:"row"}}>
-                    <button className="SubmitUser" onClick={()=>onClickHandler('tilt')}><ion-icon name="caret-forward-outline"></ion-icon></button>
-                    <button className="SubmitUser" onClick={()=>onClickHandler('guess')}><ion-icon name="skull-outline"></ion-icon></button>
+                    <button className="SubmitUser" onClick={()=>onClickHandler('tilt')}><ion-icon name="file-tray-full-outline"></ion-icon></button>
+                    <button className="SubmitUser" onClick={()=>onClickHandler('guess')}><ion-icon name="game-controller-outline"></ion-icon></button>
                 </div>
             </div>
         );
