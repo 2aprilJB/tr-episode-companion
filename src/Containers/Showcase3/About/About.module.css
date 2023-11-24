@@ -29,7 +29,6 @@
     line-height: 2rem;
     letter-spacing: 0.18rem;
     text-align: center;
-    height: 15rem;
     overflow: scroll;
 }
 .InfoContent::-webkit-scrollbar{

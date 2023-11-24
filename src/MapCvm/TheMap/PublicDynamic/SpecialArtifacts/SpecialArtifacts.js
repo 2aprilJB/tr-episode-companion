@@ -3,7 +3,7 @@ import "./SpecialArtifacts.css";
 import { iconVartifacts } from "../../Icon/Icon";
 import { Circle, Marker } from "react-leaflet";
 import TiltCodeGen from "./TiltCodeGen/TiltCodeGen";
-import Modal2 from "../../../../Containers/Modal2/Modal2";
+import Modal3 from "../../../../Containers/Modal3/Modal3";
 import GuessNumGen from "./GuessNumGen/GuessNumGen";
 
 const SpecialArtifacts = (props)=>{
@@ -32,7 +32,7 @@ const SpecialArtifacts = (props)=>{
             else{}
         }):null}
         
-        {props.activeProxyZone.length>9?<Modal2 noCross = {true} show = {showModal} onBackDrop = {()=>setShowModal(false)}>
+        {props.activeProxyZone.length>9?<Modal3 noCross = {true} show = {showModal} onBackDrop = {()=>setShowModal(false)}>
             <div className="SpecialArtifactModalContainer">
             {guessNum===0?
                 <div className="TiltCodeModalContainer">
@@ -44,7 +44,7 @@ const SpecialArtifacts = (props)=>{
                 <GuessNumGen correctResult = {props.activeProxyZone} num = {guessNum} range = {guessRange} />
             }
             </div>
-            </Modal2>:null}
+            </Modal3>:null}
     
     </div>
     )

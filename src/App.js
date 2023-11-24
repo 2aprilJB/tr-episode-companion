@@ -321,7 +321,7 @@ logoutHandler=(loggedIn)=>{
   //   },1000)
   // }
   render(){
-    console.log('Primary Zone: ' + this.state.activeProxyZone + ' , SecondaryZone: ' + this.state.secondaryProxy)
+    // console.log('Primary Zone: ' + this.state.activeProxyZone + ' , SecondaryZone: ' + this.state.secondaryProxy)
     //This is for Handling DangerZone Point deduction
     // if(this.state.activeProxyZone==='Danger'){
     //   let countDown = 3;

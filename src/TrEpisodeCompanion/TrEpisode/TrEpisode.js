@@ -153,12 +153,12 @@ class TrEpisode extends Component{
                     </div>
                     
                 </div>
-                <div className="BackToMapContainer">
+                {this.props.activeTeam!=="Z0"?<div className="BackToMapContainer"> 
                         <div className="BackToHome">
                         <a style={{marginTop:"0.4rem"}} href="/mapCVM"><ion-icon name="expand-outline"></ion-icon></a>
                         </div>
                         <h3 className="ButtText2">Back</h3>
-                </div>
+                </div>:null}
                 
                 {/*Alert Module, works currently on refresh click*/}
 

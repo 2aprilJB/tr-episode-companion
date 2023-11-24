@@ -2,10 +2,10 @@ import React from 'react';
 import classes from './Alerts.module.css';
 
 const alerts = (props)=>{
-    let noAlert = '!!No Alerts Yet!!';
+    let noAlert = "Hey Its LINTT's fault it will soon be";
     return(
         <div className = {classes.Alerts}>
-            <h2 className = {classes.Alerts__heading}>Alerts</h2>
+            <h2 className = {classes.Alerts__heading}>Possible Answers</h2>
             <div className = {classes.StylingLine}></div>
 
             {

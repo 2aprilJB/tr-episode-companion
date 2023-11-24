@@ -10,10 +10,14 @@ import AddProxyZone from "./AddProxyZone/AddProxyZone";
 import { sendCoordsSignal, updateAlertMsg } from "../../FireStoreUtils/FireStoreUtils";
 import UpdateCoins from "./UpdateCoins/UpdateCoins";
 import Showcase2 from "../../Containers/Showcase2/Showcase2";
+import AddResources from "./AddResources/AddResources";
 
 class ManagerMode extends Component{
     state = {
-        updateArtifactsCode: false
+        updateArtifactsCode: false,
+        showAddMapZones: false,
+        showAddOther: false,
+        showAddArtifacts: false
     }
     render(){
         let sB = this.props.baseUrl.staticBase;
@@ -69,24 +73,56 @@ class ManagerMode extends Component{
             }
             else{}
         }
+        let onShowAddMapZones = ()=>{
+            this.setState({
+                showAddMapZones: !this.state.showAddMapZones
+            })
+        }
+        let onShowAddArtifacts = ()=>{
+            this.setState({
+                showAddArtifacts: !this.state.showAddArtifacts
+            })
+        }
+        let onShowAddOther = ()=>{
+            this.setState({
+                showAddOther: !this.state.showAddOther
+            })
+        }
         return(
             <div className="ManagerContainer">
-                <h2 className="ManagerTitle">MR. Manager</h2>
+                <h2 className="ManagerTitle">Mr. Manager</h2>
                 <AlertUpdate/>
-                    <Showcase2 colors = {['#c70039','#1eb2a6']} activeSub = {0} modules = {['Add User','Add Chit','Add Artifact','Add Proxy Zone', 'Coins - Up','Points - Up']}>
+                <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly", width:"100%"}}>
+                     <button style={{color:"skyblue",borderRadius:"10px",border:"2px solid black"}} className="DangerButt" onClick={onShowAddOther}><ion-icon name="document-outline"></ion-icon></button>
+                     <button style={{color:"skyblue",borderRadius:"10px",border:"2px solid black"}} className="DangerButt" onClick={onShowAddMapZones}><ion-icon name="locate-outline"></ion-icon></button>
+                     <button style={{color:"skyblue",borderRadius:"10px",border:"2px solid black"}} className="DangerButt" onClick={onShowAddArtifacts}><ion-icon name="locate-outline"></ion-icon></button>
+                </div>
+
+                {this.state.showAddOther?
+                    <Showcase2 colors = {['#c70039','#1eb2a6']} activeSub = {0} modules = {['Add User','Add Chit','Coins - Up','Points - Up']}>
                         <AddUser baseUrl = {this.props.baseUrl}/>
                         <AddChit baseUrl = {this.props.baseUrl.dynamicBase2}/>
-                        <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
-                        <AddProxyZone forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.staticBase} />
                         <UpdateCoins baseUrl = {this.props.baseUrl} />
                         <UpdateCoins updatePointsInsteadCoins = {true} baseUrl = {this.props.baseUrl} />
                     </Showcase2>
-                    
+                :null}
+
+                {this.state.showAddMapZones?
+                    <div>
+                        <AddProxyZone forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.staticBase} />
+                    </div>
+                :null}
+                {this.state.showAddArtifacts?
+                    <div>
+                        <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
+                    </div>
+                :null}
+                <AddResources baseUrl = {this.props.baseUrl.staticBase}/>
                 <div className="ProminentButts">
                     <div className="DangerButt" onClick={hideAllProxies}><ion-icon name="color-filter-outline"></ion-icon></div>
                     <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>
-                </div>
-                
+                </div>     
+
                 {this.state.updateArtifactsCode?<CodeNull baseUrl = {this.props.baseUrl} />:null}
             </div>
         );

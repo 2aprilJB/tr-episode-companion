@@ -54,6 +54,7 @@ class AddProxyZone extends Component{
             let values = this.state.currValue;
             //This below line is when manual input of coords can happen i.e when LS is querried
             let coords = this.props.forAll?[parseFloat(values.centerCoordsX),parseFloat(values.centerCoordsY)]:this.props.draggedCoords;
+            console.log(this.props.draggedCoords);
             let nProxyZone = [
                 values.zoneCode,
                 {

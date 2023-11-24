@@ -1,0 +1,335 @@
+{
+  "characters": [
+    [
+      "  ",
+      [
+        "Z1",
+        "Hulk"
+      ],
+      [
+        "Z2",
+        "Aquaman"
+      ],
+      [
+        "Z3",
+        "Flash"
+      ],
+      [
+        "Z4",
+        "Kalia"
+      ],
+      [
+        "Z5",
+        "Tiara"
+      ]
+    ],
+    [
+      "Hulk",
+      [
+        "95832",
+        "i",
+        true
+      ],
+      [
+        "97267",
+        "i",
+        false
+      ],
+      [
+        "97483",
+        "i",
+        false
+      ],
+      [
+        "97745",
+        "ii",
+        false
+      ],
+      [
+        "443832",
+        "ii",
+        false
+      ]
+    ],
+    [
+      "Tiara",
+      [
+        "83989",
+        "i",
+        false
+      ],
+      [
+        "84625",
+        "i",
+        false
+      ],
+      [
+        "88685",
+        "i",
+        true
+      ],
+      [
+        "89457",
+        "ii",
+        false
+      ],
+      [
+        "89939",
+        "ii",
+        false
+      ]
+    ],
+    [
+      "Flash",
+      [
+        "58849",
+        "i",
+        true
+      ],
+      [
+        "64338",
+        "i",
+        true
+      ],
+      [
+        "69394",
+        "i",
+        false
+      ],
+      [
+        "75957",
+        "ii",
+        false
+      ],
+      [
+        "76355",
+        "ii",
+        false
+      ]
+    ],
+    [
+      "Kalia",
+      [
+        "36243",
+        "i",
+        false
+      ],
+      [
+        "37223",
+        "i",
+        false
+      ],
+      [
+        "43399",
+        "i",
+        true
+      ],
+      [
+        "44848",
+        "ii",
+        false
+      ],
+      [
+        "55435",
+        "ii",
+        true
+      ]
+    ],
+    [
+      "Aquaman",
+      [
+        "24485",
+        "i",
+        false
+      ],
+      [
+        "26637",
+        "i",
+        true
+      ],
+      [
+        "33855",
+        "i",
+        true
+      ],
+      [
+        "34754",
+        "ii",
+        false
+      ],
+      [
+        "34788",
+        "ii",
+        false
+      ]
+    ]
+  ],
+  "chits": {
+    "i": [
+      [
+        "\"Waise toh kahani mei zada bada role nhi Mera, ab jidhar hu udhar se jaane ka goal nhi mera\"",
+        "88685",
+        "Z",
+        false
+      ],
+      [
+        "\"Naam se राजतंत्र छलकता hai, ek he Dil hai na jaane kitne baar dhadakta hai\"",
+        "84625",
+        "H",
+        false
+      ],
+      [
+        "\"Koi Jaan jitna chaahe aur samaan k samaan bhi na समझे। --- kisne kaha होगा ye\"",
+        "83989",
+        "Z",
+        false
+      ],
+      [
+        "\"गीला गीला पानी मछली जल की रानी,mujhe hai aaj ye har haal में खानी, chal be Kaalia...\"",
+        "69394",
+        "Z",
+        false
+      ],
+      [
+        "\"भाग दौड़ se bhaag kar aaya tha मैं kuchh यादें fir se jeene ko, phonchte he paani मिल gya पीने ko\"",
+        "64338",
+        "Z",
+        false
+      ],
+      [
+        "\"Na dhakka na mukka,aur na hi laat, मैंने khaayi paani ki बौछार se मात\"",
+        "58849",
+        "H",
+        false
+      ],
+      [
+        "\"Neele aur hare ka istemal kiya, fir toh dono ko aisa chakma Diya, 20 Points dunga agar mera naam bata diya\"",
+        "43399",
+        "Z",
+        false
+      ],
+      [
+        "\"dekha unhone mujhe matka sa samay lagaa par laga unko mujhse ek jhatka sa\"",
+        "37223",
+        "Z",
+        false
+      ],
+      [
+        "\"Dekhoge toh mujhe samjhoge nhi, agar samjhoge mujhe toh fir dobara dekhoge nhi,hu mein kuchh shakuni mama sa karta hu natkhat drama sa\"",
+        "36243",
+        "Z",
+        false
+      ],
+      [
+        "\"Pyaas nhi thi fir bhi taalab mei kud gya, pyaas jiski thi whi mujhse dur gya\"",
+        "33855",
+        "Z",
+        false
+      ],
+      [
+        "\"Mein gussa bhi aur udaas bhi, gussa hai toh is baat ka ki koi mujhse kuchh chhin gya aur udaasi hai kyuki mein bus taakte reh gya..\"",
+        "26637",
+        "Z",
+        false
+      ],
+      [
+        "\"Har samasya ka हल, बल nhi hota, jo laut aaye wo guzara कल nhi hota, aur Jo mujhse galti Hui kaash uska jawab paani ya जल nhi hota...\"",
+        "24485",
+        "Z",
+        false
+      ],
+      [
+        "\"Ye saza nhi दिलेरी hai uski,dimag ka pata nhi raftaar tezz hai jiski, mujhse bhot he मामूली kaam karvaya aur sahi raah pe chalna sikhaya, कौन हूं मैं\"",
+        "44848",
+        "Z",
+        false
+      ],
+      [
+        "\"SMASH....agar tum jaante ho toh, tum jaante ho kaun hu मैं\"",
+        "97483",
+        "Z",
+        false
+      ],
+      [
+        "\"गुस्से par toh kaabu tha Mera, बस khud pe naa rha, iska कारण tha kuchh rangeela sa, चमकीला aur पथरीला sa..\"",
+        "97267",
+        "J",
+        false
+      ],
+      [
+        "\"गाजर, मुली से न कोई मेल मेरा, पालक के बारे मे सोचने से क्या जाता है तेरा????\"",
+        "95832",
+        "Z",
+        false
+      ]
+    ],
+    "ii": [
+      [
+        "\"Ye saza nhi दिलेरी hai uski,dimag ka pata nhi raftaar tezz hai jiski, mujhse bhot he मामूली kaam karvaya aur sahi raah pe chalna sikhaya, कौन हूं मैं\"",
+        "44848",
+        "Z",
+        false
+      ],
+      [
+        "\"Mein bhaga toh apni Jaan se pyaari chiz k liye magar jaan bhul gya, aur fir us hero k saamne apna Maan samaan bhul gya\"",
+        "34788",
+        "Z",
+        false
+      ],
+      [
+        "\"Ek baar toh meine raftaar ko maat de di magar fir pata chala jise maat deni thi wo toh...\"",
+        "34754",
+        "Z",
+        false
+      ],
+      [
+        "\"Ye saza nhi दिलेरी hai uski,dimag ka pata nhi raftaar tezz hai jiski, mujhse bhot he मामूली kaam karvaya aur sahi raah pe chalna sikhaya, कौन हूं मैं\"",
+        "44848",
+        "Z",
+        false
+      ],
+      [
+        "\"Wholesale mei samaan kis \"quantity\" खरीद ते हैं?? मेरा नाम कुछ उसी \"quantity\" se milta hai!! कौन हूं मैं??\"",
+        "443832",
+        "Z",
+        false
+      ],
+      [
+        "\"Pehle mei toh tha mein खलनायक sa,na koi actor na he गायक sa, par kahani समाप्त Hui meri मासूमियत पर्याप्त हुई मैं हूं.....\"",
+        "97745",
+        "H",
+        false
+      ],
+      [
+        "\"Aakhir में doobne ki baat aayi toh chain ki saans aayi, Ishq mennu le dooba..\"",
+        "89939",
+        "Z",
+        false
+      ],
+      [
+        "\"Waise toh duniya mujhe nhi janti, par fir bhi मैं jaha waha mere rehne se he aayi thi शांति\"",
+        "89457",
+        "Z",
+        false
+      ],
+      [
+        "\"पंद्रह जुन को रिलीज़ हो रही है मेरी पिक्चर, पता नही क्या??? इसीलिए कह रहा हूं ये प्रश्न गूगल करो लिखकर।।\"",
+        "76355",
+        "Z",
+        false
+      ],
+      [
+        "\"Mere wajah se he kahani ka शीर्षक pada, zara dekhe toh tumne kahani kitna padha hai\"",
+        "75957",
+        "Z",
+        false
+      ],
+      [
+        "\"Shin Chan, Doraemon, Pokemon, inhi mei hoti mere चलचित्र ki bhi ginti, पहचानो कौन hu मैं\"",
+        "55435",
+        "J",
+        false
+      ]
+    ]
+  }
+}

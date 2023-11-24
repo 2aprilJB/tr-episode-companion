@@ -23,7 +23,7 @@ class AddArtifact extends Component{
             let artifactCode = '';
             let dCoords = this.props.draggedCoords;
             dCoords = [dCoords[0]+0.00002,dCoords[1]]; //So the new artifact is not right above the draggable marker -- FIX
-
+            console.log(dCoords)
             if(tiltOrGuess==='tilt'){
                 artifactCode = this.state.currValue.currCode;
             }
