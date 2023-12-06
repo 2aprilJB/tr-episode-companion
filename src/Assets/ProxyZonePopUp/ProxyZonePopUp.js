@@ -9,7 +9,7 @@ const proxyZonePopUp = (props)=>{
     
     return(
         <Fragment>
-                <Modal3 show = {props.show} onBackDrop = {props.onBackDrop}> {/*This below check is for ZoneCode: Z + 'number', if it is then its a charZone and HawkMode will Open*/}
+                <Modal3 noCross show = {props.show} onBackDrop = {props.onBackDrop}> {/*This below check is for ZoneCode: Z + 'number', if it is then its a charZone and HawkMode will Open*/}
                     <HawkMode baseUrl = {props.baseUrl} activeChar = {props.zoneCode} activeTeam = {props.activeTeam} />
                 </Modal3>
         </Fragment>

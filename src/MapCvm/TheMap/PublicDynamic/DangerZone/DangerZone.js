@@ -58,7 +58,7 @@ const DangerZone = (props)=>{
     }
     return(
         <Fragment>
-            {props.activeProxyZone==='Danger'?
+            {props.activeProxyZone==='Danger'&&props.secondaryProxy!=='Safe'?
             <Modal2 noCross = {true} show = {showModal} onBackDrop = {setShowModal}>
                 <div className="DangerModalDisplay">
                 <h3 className="DangerAlert"><ion-icon name="warning-outline"></ion-icon></h3> 

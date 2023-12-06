@@ -67,7 +67,7 @@ class TheMap extends Component{
         return(
             this.props.activeTeamCoords?<div className="TheMapContainer">
                 <Modal show = {this.state.showModal} onBackDrop = {this.onBackDrop}>{this.state.activeProxy==='Z3'?<div>Brij</div>:this.state.activeProxy==='Z2'?<div>siba</div>:null}</Modal>
-                <LeafletMap center={this.props.activeTeamCoords} zoom={15}>
+                <LeafletMap center={this.props.activeTeamCoords} zoomControl = {false} zoom={15}>
                     <TileLayer
                     maxZoom={21}
                     url='https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' 

@@ -28,6 +28,7 @@ class Showcase3 extends Component{
                     </div>
                     <h3 className = {classes.SubjectName}>{subObjects[activeSub].subject}</h3>
                     <div style = {{borderBottom: "5px solid "+ navColor}} className = {classes.StylingLine}></div>
+                    {this.props.children}
                     {/* Modules to show on Active/Clicked Subject */}
                     {this.props.alerts?<Alerts alerts = {subObjects[activeSub].alerts } />:null}
                     {this.props.about?<About about = {subObjects[activeSub].about} />:null}

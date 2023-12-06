@@ -38,17 +38,20 @@ class GuessNumGen extends Component{
         }
         return(
             <div className="GuessNumContainer">
+                <div className="GuessNumTitle">
+                    Guess The Best
+                </div>
                 {/* <div className="GuessNumHead">
                     ?? GUESS THE NUMBER ??
                 </div> */}
-                <h3 className="GuessNumText">Guess the number from 0 to {this.props.range}</h3>
+                <h3 className="GuessNumText">Guess the number <br/> from 0 to {this.props.range}</h3>
                 <div className="GuessNumInpDiv">
                     <input onChange={onChangeHandler} className="GuessNumInpText" type="number" />
                     <button onClick={onCheckHandler} className="GuessNumCheckButt">Check</button>
                 </div>
 
                 <div className="GuessNumText2">{this.state.show?this.state.show==='correct'?
-                    <h2 style={{color:"green",userSelect:"none"}}>
+                    <h2 style={{color:"lime",userSelect:"none"}}>
                         {this.props.correctResult}
                     </h2>
                     :

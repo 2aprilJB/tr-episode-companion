@@ -359,7 +359,7 @@ logoutHandler=(loggedIn)=>{
             <div className='AppBarContainer'>
               {/* <AlertMsgPopUp/> */}
               {this.state.activeTeam!=='?'?<ProxyZonePopUp activeTeam = {this.state.activeTeam} baseUrl = {this.state.baseUrls} zoneCode = {this.state.activeProxyZone} show = {this.state.popUpValidator} onBackDrop = {this.onValidatorBackDrop} />:null}
-              <AppBar hawkClick = {this.onHawkClick} menuClick = {this.showMenuHandler} newsClick = {this.showNewsHandler} />
+              <AppBar activeTeam = {this.state.activeTeam} hawkClick = {this.onHawkClick} menuClick = {this.showMenuHandler} newsClick = {this.showNewsHandler} />
             </div>
             <Routes>
               <Route path='/' exact element = {landing}/>

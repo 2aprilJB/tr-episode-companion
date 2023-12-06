@@ -122,21 +122,36 @@ class TrEpisode extends Component{
         return(
             <div className="TrEpisodeMainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true}/>}
+               
+                {/* <h3 className="CoinsHead">TR COINS</h3> */}
                 
-                <ShowChitsButt showChit = {this.state.showChit} showChitCount = {showChitCount} baseUrl = {this.props.baseUrl} />
+
                 
-                <div className="TeamDetails">
-                    {/* <img className="TeamBanner" src={TeamBanner}></img> */}
-                    <h5>TEAM</h5>
-                    <h3 className="TeamCode">{this.props.activeTeam}</h3>
+
+                <div className="TreasureMapContainer">
+                    {/* <img className="MapWallPaper" src={treasureMapWallpaper}></img> */}
+                    <div className="TMapContainer">
+                        <TheMap secondaryProxy = {this.props.secondaryProxy} publicCoords = {this.props.publicCoords} draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords} setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeProxyZoneHandler = {this.props.activeProxyZoneHandler} activeProxyZone ={this.props.activeProxyZone} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
+                    </div>
+                    
                 </div>
-                
-                <ShowPointsButt activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
-                <h3 className="CoinsHead">TR COINS</h3>
+
                 <div className="CoinsCollectedWrapper">
                     <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
                     <CoinsCollected baseUrl = {this.props.baseUrl} stateCoins = {this.state.coinCount} updateCoinState = {updateCoinState} activeTeam = {this.props.activeTeam}/>
                     <p className="AboutCoins1"><ion-icon name="scan-circle"></ion-icon></p>
+                </div>
+
+                <div className="TeEpisodeMainBlockI">
+                    <ShowChitsButt showChit = {this.state.showChit} showChitCount = {showChitCount} baseUrl = {this.props.baseUrl} />
+                    
+                    <div className="TeamDetails">
+                        {/* <img className="TeamBanner" src={TeamBanner}></img> */}
+                        <h5>TEAM</h5>
+                        <h3 className="TeamCode">{this.props.activeTeam}</h3>
+                    </div>
+                    
+                    <ShowPointsButt activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
                 </div>
 
                 {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
@@ -146,19 +161,12 @@ class TrEpisode extends Component{
                     <HawkMode baseUrl = {this.props.baseUrl} activeChar = {this.props.activeTeam} />
                 }
 
-                <div className="TreasureMapContainer">
-                    {/* <img className="MapWallPaper" src={treasureMapWallpaper}></img> */}
-                    <div className="TMapContainer">
-                        <TheMap secondaryProxy = {this.props.secondaryProxy} publicCoords = {this.props.publicCoords} draggedCoords = {this.props.draggedCoords} setDraggedCoords = {this.props.setDraggedCoords} setPublicCoordsForProxies ={this.props.setPublicCoordsForProxies} activeProxyZoneHandler = {this.props.activeProxyZoneHandler} activeProxyZone ={this.props.activeProxyZone} activeTeamCoords = {this.props.activeTeamCoords} activeTeam = {this.props.activeTeam} baseUrls = {this.props.baseUrl} />
-                    </div>
-                    
-                </div>
-                {this.props.activeTeam!=="Z0"?<div className="BackToMapContainer"> 
+                {/* {this.props.activeTeam!=="Z0"?<div className="BackToMapContainer">    Button reaching out to only "Map page"
                         <div className="BackToHome">
                         <a style={{marginTop:"0.4rem"}} href="/mapCVM"><ion-icon name="expand-outline"></ion-icon></a>
                         </div>
                         <h3 className="ButtText2">Back</h3>
-                </div>:null}
+                </div>:null} */}
                 
                 {/*Alert Module, works currently on refresh click*/}
 

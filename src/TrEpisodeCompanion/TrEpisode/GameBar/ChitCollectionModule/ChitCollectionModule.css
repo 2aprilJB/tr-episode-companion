@@ -1,12 +1,13 @@
 .CollectedChitsModuleContainer{
     background-color: azure;
-    height: 30rem;    
+    height: 70vh;
+    min-height: 30rem;    
     width: 100%;
     box-shadow: 0 10px 15px #000000dd;
     border-radius: 17px;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(10deg,#ff006f57,#0686d081),url("https://static.vecteezy.com/system/resources/previews/030/329/816/original/witch-black-and-gold-seamless-pattern-flat-illustration-halloween-background-witch-vibes-lettering-and-magic-items-pattern-for-background-printing-on-wrapping-paper-wallpaper-or-fabric-vector.jpg");
+    background-image: linear-gradient(10deg,#ff006f57,#0686d081),url("https://img.freepik.com/free-vector/gradient-zoom-effect-background_23-2149735600.jpg");
 }
 .ChitsCollectedHead{
     border-bottom: 5px solid #000;

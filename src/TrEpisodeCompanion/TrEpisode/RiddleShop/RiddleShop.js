@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./RiddleShop.css";
 // import { updateCoins } from "../../../FireStoreUtils/FireStoreUtils";
-import Modal2 from '../../../Containers/Modal2/Modal2';
+import Modal3 from '../../../Containers/Modal3/Modal3';
 import billImg from '../../../Assets/Images/board.png';
 import axios from "axios";
 
 
 const RiddleShop = (props)=>{
+
+    const [showModal,setShowModal] = useState(); //Only For showModal that's going to pop when when specaialArtifactZone is stepped on
+    useEffect(()=>{
+        setShowModal(true)
+    },[])
+
     const onBuy = (price,type)=>{
-        let remainder = props.coinCount[1]-price;
+        let remainder = Number(props.coinCount[1]-price);
         if(remainder>=0){
             if(window.confirm("Are You sure to buy Type -" + type + " ?")){
                 // updateCoins(props.activeTeam,remainder);   //This will be used when we are storing TrCoins in Our FireStore
-                axios.put(props.baseUrl.dynamicBase4 + 'backUpTrCoins/' + props.coinCount[0] + '/1.json',[remainder])
+                axios.put(props.baseUrl.dynamicBase4 + 'backUpTrCoins/' + props.coinCount[0] + '/1.json',remainder)
                      .catch(err=>{
                         console.log(err);
                         alert('Network Error')
@@ -34,7 +40,7 @@ const RiddleShop = (props)=>{
             {/* PASTE HERE WHEN **TR COIN HUNT** IS Going On */}
             {
                 props.activeProxyZone!=='ZRS'?null:
-                <Modal2 show = {true} onBackDrop = {()=>{console.log()}}>
+                <Modal3 noCross = {true} show = {showModal} onBackDrop = {()=>setShowModal(false)}>
                     <img className="BillImg" src={billImg}></img>
                     <div className="RiddleShopHead">
                         Riddle Shop
@@ -52,7 +58,7 @@ const RiddleShop = (props)=>{
                             </div>
                         </div>
                     </div>
-                </Modal2>
+                </Modal3>
             }
             
         </div>
