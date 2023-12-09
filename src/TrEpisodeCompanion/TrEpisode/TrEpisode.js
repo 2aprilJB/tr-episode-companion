@@ -4,7 +4,7 @@ import { Component } from "react";
 import Loader from "../../Assets/Loader/Loader";
 import TeamBanner from "../../Assets/Images/teamBanner.png"
 import ArtifactCheck from "./ArtifactCheck/ArtifactCheck";
-import Modal from "../../Containers/Modal/Modal";
+import Modal2 from "../../Containers/Modal2/Modal2";
 import HeroDisplay from "../HeroDisplay/HeroDisplay";
 import HawkMode from "../HawkMode/HawkMode";
 import ManagerMode from "../ManagerMode/ManagerMode";
@@ -19,10 +19,14 @@ import ActualChit from './ArtifactCheck/ActualChit/ActualChit';
 import DummyChit from './ArtifactCheck/DummyChit/DummyChit';
 import TheMap from "../../MapCvm/TheMap/TheMap";
 import GameBar from "./GameBar/GameBar";
+import Countdown from "../../Assets/CountDown/CountDown";
+import GameOver from "./GameOver/GameOver";
 
 class TrEpisode extends Component{
     state = {
         artifactsCodesUrl: this.props.baseUrl.dynamicBase1 + 'artifacts/',
+        mainCountdown: this.props.mainCountdown,
+        timesUp:false,
         chitType: '-',
         showChit: false,
         bought: false,
@@ -48,7 +52,7 @@ class TrEpisode extends Component{
         axios.get(this.props.baseUrl.staticBase + '/storeOptions.json')
              .then(resp=>{
                 this.setState({
-                    riddleBuyOptions: resp.data.buyRiddlesOptions
+                    riddleBuyOptions: resp.data.buyRiddlesOptions,
                 })
              })
              .catch(err=>{
@@ -58,6 +62,13 @@ class TrEpisode extends Component{
         
     }
     render(){
+        let mC = this.state.mainCountdown;
+
+        let onTimesUp = ()=>{
+            this.setState({
+                timesUp: true
+            })
+        }    
         let buyHandler =(typeOfChit)=>{
             if(typeOfChit==='i'){
                 this.setState({
@@ -122,7 +133,7 @@ class TrEpisode extends Component{
         return(
             <div className="TrEpisodeMainContainer">
                 {this.state.loading?<Loader loaded = {false} />:<Loader loaded = {true}/>}
-               
+                {this.state.timesUp?<Modal2 noCross show = {true}><GameOver/></Modal2>:null}
                 {/* <h3 className="CoinsHead">TR COINS</h3> */}
                 
 
@@ -154,6 +165,10 @@ class TrEpisode extends Component{
                     <ShowPointsButt activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
                 </div>
 
+                {mC?<div style = {{marginBottom:"1rem",marginLeft:"auto",marginRight:"auto",width:"8rem",height:"3rem"}}>
+                    <Countdown options = {mC} timesUpAction = {onTimesUp} />
+                </div>:null}
+
                 {this.props.activeTeam.split("").length===1||this.props.activeTeam.split("").length===3?
                     UserMode:
                     this.props.activeTeam==="Z0"?
@@ -182,7 +197,7 @@ class TrEpisode extends Component{
 
                 {/* <div style={{position: "relative",width: "100%"}}><img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div> */}
                 
-                <h4 className="ChitTypeHeading">Type - {this.state.chitType.toUpperCase()}</h4>
+                {/* <h4 className="ChitTypeHeading">Type - {this.state.chitType.toUpperCase()}</h4>
                 <div className="ChitContainer">
                     {this.state.bought?<ActualChit chitType = {this.state.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
                 </div>
@@ -193,13 +208,14 @@ class TrEpisode extends Component{
                     </button>
                     To Refresh
                 </div>
+                 */}
                 
+                {/* <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/> */}
                 
-                <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/>
-                
-                <div style={{position:'relative',marginTop: '4rem'}}>
+                <div style={{position:'relative',marginTop: '-2rem'}}>
                     <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
                 </div>
+                
                 <GameBar activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl}/>
             </div>
         );

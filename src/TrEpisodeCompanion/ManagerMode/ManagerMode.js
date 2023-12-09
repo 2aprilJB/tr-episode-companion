@@ -91,7 +91,7 @@ class ManagerMode extends Component{
         return(
             <div className="ManagerContainer">
                 <h2 className="ManagerTitle">Mr. Manager</h2>
-                <AlertUpdate/>
+                <AlertUpdate baseUrl = {this.props.baseUrl}/>
                 <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly", width:"100%"}}>
                      <button style={{color:"skyblue",borderRadius:"10px",border:"2px solid black"}} className="DangerButt" onClick={onShowAddOther}><ion-icon name="document-outline"></ion-icon></button>
                      <button style={{color:"skyblue",borderRadius:"10px",border:"2px solid black"}} className="DangerButt" onClick={onShowAddMapZones}><ion-icon name="locate-outline"></ion-icon></button>
@@ -117,7 +117,7 @@ class ManagerMode extends Component{
                         <AddArtifact activeTeamCoords = {this.props.activeTeamCoords} forAll = {this.props.forAll} draggedCoords = {this.props.draggedCoords} baseUrl = {this.props.baseUrl.dynamicBase1}/>
                     </div>
                 :null}
-                <AddResources baseUrl = {this.props.baseUrl.staticBase}/>
+                <AddResources baseUrl = {this.props.baseUrl}/>
                 <div className="ProminentButts">
                     <div className="DangerButt" onClick={hideAllProxies}><ion-icon name="color-filter-outline"></ion-icon></div>
                     <div className="DangerButt" onClick={updateArtifacts}><ion-icon name="warning-outline"></ion-icon></div>

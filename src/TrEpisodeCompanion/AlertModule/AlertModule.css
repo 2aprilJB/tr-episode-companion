@@ -78,3 +78,9 @@
     color: #ffffff;
     padding: 1rem;
 }
+.AlertModuleCountdown{
+    height: 4rem;
+    width: 8rem;
+    margin: auto;
+    margin-bottom: -2rem;
+}

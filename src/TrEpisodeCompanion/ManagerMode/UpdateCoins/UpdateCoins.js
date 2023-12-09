@@ -69,6 +69,7 @@ class UpdateCoins extends Component{
             <div className="AddWrapper">
                 <h4>Update Coins</h4>
                 <select onChange={onTeamCodeSelectHandler} className="CharSelector">
+                    <option>Select Team</option>
                     {this.state.credsArr?this.state.credsArr.map((ele,ind)=>{
                         return(
                             <option key={ind + 65} >{ele[0]}</option>

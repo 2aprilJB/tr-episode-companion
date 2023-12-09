@@ -136,7 +136,7 @@ const PublicMarkers = (props)=>{
             {/* Special Markers going to popup and dynamic in nature*/}
             <SpecialCoords baseUrl = {props.baseUrls.dynamicBase3} activeCoords={activeCoords} specCoords = {specCoords} />
             {vArtifacts?<SpecialArtifacts activeProxyZone = {props.activeProxyZone} vArtifacts = {vArtifacts} />:null}
-            <DangerZone secondaryProxy = {props.secondaryProxy} dangerMinus = {2} baseUrls = {props.baseUrls} countDown = {3} activeTeam = {props.activeTeam} activeProxyZone = {props.activeProxyZone} />
+            <DangerZone secondaryProxy = {props.secondaryProxy} dangerMinus = {2} baseUrls = {props.baseUrls} countDown = {6} activeTeam = {props.activeTeam} activeProxyZone = {props.activeProxyZone} />
 
             {/* <ShowUserCoords showUsers = {showUsers} usersCoords = {usersCoords} /> */}
 

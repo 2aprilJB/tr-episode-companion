@@ -98,5 +98,10 @@ export const updateAlertMsg = async(msg)=>{
     const payload = {message: msg};
     await setDoc(docRef,payload);
 }
+export const updatePopMsg = async(msg)=>{
+    const docRef = doc(dbStatic,"TRpops","mainMsg");
+    const payload = {message: msg};
+    await setDoc(docRef,payload);
+}
 //************************************************************************************ */
 

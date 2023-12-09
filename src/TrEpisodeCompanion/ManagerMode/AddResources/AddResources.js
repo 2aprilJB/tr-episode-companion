@@ -11,11 +11,12 @@ class AddResources extends Component{
         showAdd: false,
         currValue : {
             currSaying:'',
+            currActiveTeams:''
         },
         currSubject:''
     }
     componentDidMount(){
-        axios.get(this.props.baseUrl + 'resources.json')
+        axios.get(this.props.baseUrl.staticBase + 'resources.json')
              .then(resp=>{
                 this.setState({
                     resources: resp.data
@@ -48,7 +49,7 @@ class AddResources extends Component{
                             alerts = [newAlertInfo];
                         }
                         alert("Wait till updation is completed")
-                        axios.put(this.props.baseUrl + 'resources/' + ind + '/alerts.json',alerts)
+                        axios.put(this.props.baseUrl.staticBase + 'resources/' + ind + '/alerts.json',alerts)
                             .then(resp=>{
                                 alert("Updated!!")
                             })
@@ -59,6 +60,17 @@ class AddResources extends Component{
                     }
                 })
             }
+        }
+        let onActiveUserListSubmit = ()=>{
+            if(window.confirm("Are you Sure to submit this list")){
+                let list = ['blank',...this.state.currValue.currActiveTeams.split(",")];
+                axios.put(this.props.baseUrl.dynamicBase3 + 'activeCreds.json',list)
+                    .catch(err=>{
+                        console.log(err);
+                        alert("There's an Error going to disrupt today's events so brace yourself, and Amen to my dear Developer");
+                    })
+            }
+            else{}
         }
         let onSubjectSelect = (e)=>{
             this.setState({
@@ -78,15 +90,21 @@ class AddResources extends Component{
                 <button style={{color:"skyblue",borderRadius:"10px",border:"2px solid black"}} className = {"DangerButt"} onClick={onShowClick}><ion-icon name="book-outline"></ion-icon></button>
 
                 {this.state.showAdd?
-                    <div className="AddWrapper">
-                        <select defaultValue={"Select Subject"} onChange={onSubjectSelect}>
-                            <option>Select Subject</option>
-                            {res?res.map((ele,ind)=>{
-                                return <option key = {ind + "ResSub"}>{ele.subject}</option>
-                            }):null}
-                        </select>
-                        <EnterData onChangeHandler = {onInpChangeHandler} currValIn = {'currSaying'} currValue = {this.state.currValue.currSaying} enterWhat = "Possible Saying:" />
-                        <button className="SubmitUser" onClick = {onSubmit}><ion-icon name="caret-forward-outline"></ion-icon></button>
+                    <div>
+                        <div className="AddWrapper">
+                            <select defaultValue={"Select Subject"} onChange={onSubjectSelect}>
+                                <option>Select Subject</option>
+                                {res?res.map((ele,ind)=>{
+                                    return <option key = {ind + "ResSub"}>{ele.subject}</option>
+                                }):null}
+                            </select>
+                            <EnterData onChangeHandler = {onInpChangeHandler} currValIn = {'currSaying'} currValue = {this.state.currValue.currSaying} enterWhat = "Possible Saying:" />
+                            <button className="SubmitUser" onClick = {onSubmit}><ion-icon name="caret-forward-outline"></ion-icon></button>
+                        </div>
+                        <div className="AddWrapper">
+                            <EnterData onChangeHandler = {onInpChangeHandler} currValIn = {'currActiveTeams'} currValue = {this.state.currValue.currActiveTeams} enterWhat = "All Active Teams with ',' and no spaces:" />
+                            <button className="SubmitUser" onClick = {onActiveUserListSubmit}><ion-icon name="caret-forward-outline"></ion-icon></button>
+                        </div>
                     </div>
                 :null}
             </div>

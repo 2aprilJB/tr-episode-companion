@@ -1,0 +1,21 @@
+.GameOverWrapper{
+    height: 77vh;
+    background-color: aliceblue;
+    border-radius: 20px;
+    width: 100%;
+    margin: auto;
+    background-position: center;
+    background-size: cover;
+    background-image: url("https://www.shutterstock.com/image-illustration/animated-watch-tower-island-digital-600nw-2340249065.jpg");
+}
+.GameOverVid{
+    margin-left: auto;
+    margin-right: auto;
+}
+.GameOverTrLogo{
+    width: 10rem;
+    height: 14.5rem;
+    margin: auto;
+    filter: drop-shadow(0 3px 5px #000000c3);
+    animation: float 3s infinite;
+}

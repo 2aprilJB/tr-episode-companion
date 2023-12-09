@@ -11,7 +11,9 @@ class GameBar extends Component{
         showChits: false,
         showAlert: false,
         alertMsg: [],
-        resources:[]
+        resources:[],
+        allRiddles:{},
+        collectedChits:[]
     }
     
     setAlertMsg = (snapShot)=>{
@@ -22,6 +24,37 @@ class GameBar extends Component{
 
 
     componentDidMount(){
+        axios.get(this.props.baseUrl.dynamicBase2 + '.json')
+             .then(resp=>{
+                // this.setState({
+                //     allRiddles: resp.data.chits
+                // })
+                let aR = resp.data.chits;
+                let collectedRiddlesByTeam = [];
+                if(aR){
+                    
+                    aR.i.map(ele=>{
+                        if(ele[2]===this.props.activeTeam){
+                            ele.push('I');
+                            collectedRiddlesByTeam.push(ele);
+                        }
+                    })
+                    aR.ii.map(ele=>{
+                        if(ele[2]===this.props.activeTeam){
+                            ele.push('II');
+                            collectedRiddlesByTeam.push(ele);
+                        }
+                    })
+                    this.setState({
+                        collectedChits: collectedRiddlesByTeam
+                    })
+                }
+             })
+             .catch(err=>{
+                console.log(err);
+                alert("There's Some Serious Network Crap Goin Arround,Nigerrro!!");
+             })
+
         axios.get(this.props.baseUrl.staticBase + 'resources.json')
              .then(resp=>{
                 this.setState({
@@ -32,6 +65,7 @@ class GameBar extends Component{
                 console.log(err);
                 alert("There is some seroius network error on the way..Hey Morty its me...brrrp i'm stuckkk");
              })
+
     }
     render(){
         let alertButtStyle,chitsButtStyle,resourcesButtStyle,alertIcon,chitsIcon,resourcesIcon;
@@ -92,7 +126,7 @@ class GameBar extends Component{
                     <div style={resourcesButtStyle} className="GameBarShowButt" onClick={onResourcesClick}><ion-icon name={resourcesIcon}></ion-icon></div>
                 </div>
                 <AlertModule noCross={true} display = {this.state.showAlert} setAlertState = {this.setAlertMsg} />
-                {this.state.showChits?<ChitCollectionModule activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl} display = {this.state.showChits} />:null}
+                {this.state.showChits?<ChitCollectionModule collectedChits = {this.state.collectedChits} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl} display = {this.state.showChits} />:null}
                 {this.state.showResources?<ResourcesModule display = {this.state.showResources} resources = {this.state.resources} />:null}
             </Fragment>
         );
