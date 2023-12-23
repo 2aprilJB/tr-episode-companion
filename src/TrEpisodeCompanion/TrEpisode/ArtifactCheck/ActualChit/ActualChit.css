@@ -10,6 +10,23 @@
     justify-content: space-evenly;
     font-size: 0.9rem;
 }
-.ActualChitContainer div{
+.ActualChitTrLogo{
     width: 100%;
+    height: 1rem;
+    margin-top: -3rem;
+    margin-bottom: 1rem;
+}
+.ActualChitLogo{
+    width: 4rem;
+}
+.Riddle{
+    font-family: 'Oswald';
+    letter-spacing: 0.1rem;
+    font-size: 1.3rem;
+    width: 90%;
+}
+.ChitCode{
+    margin-bottom: -2rem;
+    font-family: 'Lato';
+    font-weight: bolder;
 }

@@ -9,6 +9,7 @@
     justify-content: space-evenly;
     margin-bottom: 1rem;
     border: 3px solid orangered;
+    position: relative;
 }
 .CoinsContainer ion-icon{
     font-size: 1.4rem;
@@ -18,4 +19,11 @@
     font-family: 'Lato';
     font-size: 1.4rem;
     font-weight: bolder;
+}
+.CoinsRefresh{
+    position: absolute;
+    bottom: -1.4rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 4rem;
 }

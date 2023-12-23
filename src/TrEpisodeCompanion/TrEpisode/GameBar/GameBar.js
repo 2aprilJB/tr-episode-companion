@@ -85,7 +85,37 @@ class GameBar extends Component{
             let prev = this.state.showChits;
             this.setState({
                 showChits: !prev
-            })
+            });
+            axios.get(this.props.baseUrl.dynamicBase2 + '.json')
+             .then(resp=>{
+                // this.setState({
+                //     allRiddles: resp.data.chits
+                // })
+                let aR = resp.data.chits;
+                let collectedRiddlesByTeam = [];
+                if(aR){
+                    
+                    aR.i.map(ele=>{
+                        if(ele[2]===this.props.activeTeam){
+                            ele.push('I');
+                            collectedRiddlesByTeam.push(ele);
+                        }
+                    })
+                    aR.ii.map(ele=>{
+                        if(ele[2]===this.props.activeTeam){
+                            ele.push('II');
+                            collectedRiddlesByTeam.push(ele);
+                        }
+                    })
+                    this.setState({
+                        collectedChits: collectedRiddlesByTeam
+                    })
+                }
+             })
+             .catch(err=>{
+                console.log(err);
+                alert("There's Some Serious Network Crap Goin Arround,Nigerrro!!");
+             })
         }
         let onResourcesClick = ()=>{
             let prev = this.state.showResources;

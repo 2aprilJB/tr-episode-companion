@@ -50,5 +50,5 @@ class TrCompanion extends Component{
             }
 }
 
-export default TrCompanion
+export default TrCompanion;
 

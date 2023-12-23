@@ -17,7 +17,22 @@ const CoinsCollected = (props)=>{
             
     //     }
     // }
-
+    let fetchCoins = ()=>{
+        axios.get(props.baseUrl.dynamicBase4 + '.json')
+             .then(resp=>{
+                let allCoins = resp.data.backUpTrCoins;
+                allCoins.map((ele,ind)=>{
+                    if(ele[0]===props.activeTeam){
+                        props.updateCoinState([ind,ele[1]])
+                    }
+                    else{}
+                })
+             })
+             .catch(err=>{
+                console.log(err);
+                alert('Network issue');
+             })
+    }
     useEffect(()=>{
 
         //Below method is used when data is being stored in firestore 
@@ -43,26 +58,13 @@ const CoinsCollected = (props)=>{
         // else{}
 
         //Below method is ought to be used when data is being store in rtdb
-
-        axios.get(props.baseUrl.dynamicBase4 + '.json')
-             .then(resp=>{
-                let allCoins = resp.data.backUpTrCoins;
-                allCoins.map((ele,ind)=>{
-                    if(ele[0]===props.activeTeam){
-                        props.updateCoinState([ind,ele[1]])
-                    }
-                    else{}
-                })
-             })
-             .catch(err=>{
-                console.log(err);
-                alert('Network issue');
-             })
+        fetchCoins();
+        
     },[])
 
     return(
         
-        <div className="CoinsContainer">
+        <div onClick={()=>{fetchCoins()}} className="CoinsContainer">
             <div className="CoinContainer"><ion-icon name="logo-bitcoin"></ion-icon></div>
             <div className="CoinCount">{props.stateCoins[1]}</div>
         </div>

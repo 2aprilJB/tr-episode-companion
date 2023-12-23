@@ -22,8 +22,7 @@ const Modal = (props)=>{
     },[])
     let onShowContent = ()=>{
         if(!showContent){
-            console.log("Green")
-            setButtSyle({position:"relative",bottom:"-1rem",width:"2.5rem",height:"2.5rem",backgroundColor:"transparent",animation:"none",backgroundImage:"url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flat_cross_icon.svg/1024px-Flat_cross_icon.svg.png')"});
+                setButtSyle({position:"relative",bottom:"-1rem",width:"2.5rem",height:"2.5rem",backgroundColor:"transparent",animation:"none",backgroundImage:"url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flat_cross_icon.svg/1024px-Flat_cross_icon.svg.png')"});
         }
         else{
             if(props.top){

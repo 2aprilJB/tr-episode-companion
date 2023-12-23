@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: max-content;
+    height: 80vh;
     width: 100%;
     animation: appear 0.5s;
     z-index: 10000;

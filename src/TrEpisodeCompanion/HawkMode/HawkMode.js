@@ -205,7 +205,7 @@ class HawkMode extends Component{
                     </select></div>:null}
                     
                     <h3>Riddle Code Verification</h3>
-                    <h2 className="CurrCharName">{this.state.currTeam}</h2>
+                    <h2 style={{marginTop:"-2rem"}} className="CurrCharName">{this.state.currTeam}</h2>
                     {!this.props.activeTeam?<select onChange={onSelectHandler} className="TeamSelector">
                         {teamOptions}
                     </select>:null}

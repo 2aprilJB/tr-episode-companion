@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./ActualChit.css";
 import axios from "axios";
+import trLogo from '../../../../Assets/Images/trLogo.png';
 import { toBeRequired } from "@testing-library/jest-dom/matchers";
 
 class ActualChit extends Component{
@@ -38,11 +39,11 @@ class ActualChit extends Component{
     render(){
         return(
             <div className="ActualChitContainer">
-                <div className="TrLogo">TR</div>
+                <div className="ActualChitTrLogo"><img className="ActualChitLogo" src={trLogo}></img></div>
                 <div className="Riddle">
                     {this.state.chitsFinished?<div>Sorry These Type of chits are finished</div>:this.state.theRiddle}
                 </div>
-                <div className="ChitCode">{this.state.riddleCode}</div>
+                <div className="ChitCode"><i style={{color:"crimson"}}>Riddle Code : </i>{this.state.riddleCode}</div>
             </div>
         );
     }

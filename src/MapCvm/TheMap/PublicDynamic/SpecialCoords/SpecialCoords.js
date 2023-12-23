@@ -10,7 +10,7 @@ const specialCoords = (props)=>{
             {props.specCoords?props.specCoords.map(ele=>{
                 // proxyCircleDetector(props.activeCoords,ele.coords,7)
                 return(
-                    <Circle key={ele.id} center = {ele.coords} fillColor='Yellow' color='red' weight={1} opacity={10} radius={7}></Circle>
+                    <Circle key={ele.id} center = {ele.coords} fillColor='Yellow' color='white' weight={1} opacity={10} radius={7}></Circle>
                 )
                 }):null}
         </div>)

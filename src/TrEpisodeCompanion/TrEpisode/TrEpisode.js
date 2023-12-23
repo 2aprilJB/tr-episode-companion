@@ -30,7 +30,7 @@ class TrEpisode extends Component{
         chitType: '-',
         showChit: false,
         bought: false,
-        refreshBoat: false,
+        refreshBoat: true,
         colorScheme: ['#4FC0D0','#FF8989'],
         planeValidation: false,
         refreshPlane: false,
@@ -82,7 +82,28 @@ class TrEpisode extends Component{
                     chitType: typeOfChit
                 })
             }
-                
+            axios.get(this.props.baseUrl.dynamicBase2 + 'chits/' + this.state.chitType + '.json')
+            .then(response=>{
+                let chits = response.data;
+                // if(chits[0][2]==='Z')
+                // {
+                //     this.setState({
+                //         theRiddle: chits[0][0],
+                //         riddleCode: chits[0][1]
+                //     });
+                //     chits[0][2] = this.props.activeTeam;
+                //     let tempChit = chits[0];
+                //     chits.shift();
+                //     chits.push(tempChit);
+                //     axios.put(this.props.baseUrl.dynamicBase2 + 'chits/' + this.state.chitType + '.json',chits)
+                //         .catch(err=>{
+                //             alert('Network error, Contact Desk');
+                //         })
+                // }
+                // else{
+                //     alert('No more chits Availabe')
+                // }
+            })    
         }
         
         let onBoatRefresh=()=>{
@@ -187,6 +208,9 @@ class TrEpisode extends Component{
 
                 {/* Lets buy some Riddles */}
                 {this.state.riddleBuyOptions?<RiddleShop 
+                refreshState = {this.state.refreshBoat}
+                boatRefresh = {onBoatRefresh}
+                boatRefreshed = {boatRefreshed}
                 activeProxyZone = {this.props.activeProxyZone}
                 buyHandler = {buyHandler} 
                 activeTeam = {this.props.activeTeam} 
@@ -197,7 +221,7 @@ class TrEpisode extends Component{
 
                 {/* <div style={{position: "relative",width: "100%"}}><img className="ArtifactCheckBanner" src = {ArtifactCheckBanner}></img></div> */}
                 
-                {/* <h4 className="ChitTypeHeading">Type - {this.state.chitType.toUpperCase()}</h4>
+                <h4 className="ChitTypeHeading">Type - {this.state.chitType.toUpperCase()}</h4>
                 <div className="ChitContainer">
                     {this.state.bought?<ActualChit chitType = {this.state.chitType} activeTeam = {this.props.activeTeam} baseUrl = {this.props.baseUrl.dynamicBase2}/>:<DummyChit/>}
                 </div>
@@ -208,11 +232,11 @@ class TrEpisode extends Component{
                     </button>
                     To Refresh
                 </div>
-                 */}
+                
                 
                 {/* <HeroDisplay baseUrl = {this.props.baseUrl.staticBase + 'billBoards/gamePage'}/> */}
                 
-                <div style={{position:'relative',marginTop: '-2rem'}}>
+                <div style={{position:'relative',marginTop: '0'}}>
                     <LogoutButt logoutHandler = {()=>this.props.logoutHandler(this.props.loggedIn)} />
                 </div>
                 

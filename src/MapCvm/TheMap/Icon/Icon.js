@@ -33,7 +33,7 @@ const iconChar = new L.Icon({
     shadowSize: null,
     shadowAnchor: null,
     border: 0,
-    iconSize: new L.Point(20,20)
+    iconSize: new L.Point(30, 30)
 });
 const iconChar1 = new L.Icon({
     iconUrl: require('../../../Assets/Images/char1.png'),
@@ -44,7 +44,7 @@ const iconChar1 = new L.Icon({
     shadowSize: null,
     shadowAnchor: null,
     border: 0,
-    iconSize: new L.Point(20,20),
+    iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
 const iconChar2 = new L.Icon({
@@ -68,7 +68,7 @@ const iconChar3 = new L.Icon({
     shadowSize: null,
     shadowAnchor: null,
     border: 0,
-    iconSize: new L.Point(20,20),
+    iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
 const iconChar4 = new L.Icon({
@@ -80,7 +80,7 @@ const iconChar4 = new L.Icon({
     shadowSize: null,
     shadowAnchor: null,
     border: 0,
-    iconSize: new L.Point(20,20),
+    iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
 const iconChar5 = new L.Icon({
@@ -92,7 +92,7 @@ const iconChar5 = new L.Icon({
     shadowSize: null,
     shadowAnchor: null,
     border: 0,
-    iconSize: new L.Point(20,20),
+    iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
 const iconKiller1 = new L.Icon({

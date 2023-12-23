@@ -115,18 +115,18 @@ class CodeValidation extends Component{
 
     
 
-    componentDidUpdate(){
-        if(this.props.refresh){
-            console.log('Here for refresh  ' + this.state.validated);
-            this.setState({
-                validated: 0,
-                bought: false,
-                disableSubmit: false,
-            });
-            this.props.refreshed();
-        }
-        else{}
-    }
+    // componentDidUpdate(){
+    //     if(this.props.refresh){
+    //         console.log('Here for refresh  ' + this.state.validated);
+    //         this.setState({
+    //             validated: 0,
+    //             bought: false,
+    //             disableSubmit: false,
+    //         });
+    //         this.props.refreshed();
+    //     }
+    //     else{}
+    // }
     render(){
         
         let submitButton = <button onClick={()=>this.onSubmitHandler(this.state.currCode)} className="codeSubmit"><ion-icon name="arrow-forward-outline"></ion-icon></button>
