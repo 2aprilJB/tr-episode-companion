@@ -14,26 +14,49 @@ const RiddleShop = (props)=>{
     },[])
 
     const onBuy = (price,type)=>{
-        props.boatRefreshed();
 
-        let remainder = Number(props.coinCount[1]-price);
-        if(remainder>=0){
-            if(window.confirm("Are You sure to buy Type -" + type + " ?")){
-                // updateCoins(props.activeTeam,remainder);   //This will be used when we are storing TrCoins in Our FireStore
-                axios.put(props.baseUrl.dynamicBase4 + 'backUpTrCoins/' + props.coinCount[0] + '/1.json',remainder)
-                     
-                     .catch(err=>{
-                        console.log(err);
-                        alert('Network Error')
-                     })
-                props.updateCoinState([props.coinCount[0],remainder]);
-                props.buyHandler(type);
-            }
-            else{}
-        }
-        else{
-            alert('OOPss, You do not have enough coins!!');
-        }
+        //Lets add a check to ensure the state's coinCount matches with the server's
+        axios.get(props.baseUrl.dynamicBase4 + '.json')
+             .then(resp=>{
+                let allCoins = resp.data.backUpTrCoins;
+                allCoins.map((ele,ind)=>{
+                    if(ele[0]===props.activeTeam){
+                        if(ele[1]===props.coinCount[1]){    //If props coinCount matches with with server's coin count Buying will proceed
+
+                            let remainder = Number(props.coinCount[1]-price);   
+                            if(remainder>=0){
+                                if(window.confirm("Are You sure to buy Type -" + type + " ?")){
+                                    props.boatRefreshed();
+                                    // updateCoins(props.activeTeam,remainder);   //This will be used when we are storing TrCoins in Our FireStore
+                                    axios.put(props.baseUrl.dynamicBase4 + 'backUpTrCoins/' + props.coinCount[0] + '/1.json',remainder)
+                                        
+                                        .catch(err=>{
+                                            console.log(err);
+                                            alert('Network Error')
+                                        })
+                                    props.updateCoinState([props.coinCount[0],remainder]);
+                                    props.buyHandler(type);
+                                }
+                                else{}
+                            }
+                            else{
+                                alert('OOPss, You do not have enough coins!!');
+                            }
+
+                        }
+                        else{
+                            alert('Refresh Coins To buy');
+                        }
+                    }
+                    else{}
+                })
+             })
+             .catch(err=>{
+                console.log(err);
+                alert('Network issue');
+             })
+
+        
 
     }
     return(

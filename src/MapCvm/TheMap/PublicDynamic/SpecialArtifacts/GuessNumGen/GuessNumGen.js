@@ -36,6 +36,14 @@ class GuessNumGen extends Component{
                 })
             }
         }
+        let onCopyThatCode = ()=>{
+            let copyCode = document.getElementById("CorrectGuess");
+            // copyCode.select();
+            // copyCode.setSelectionRange(0, 99999); // For mobile devices
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyCode.innerText);
+        }
+
         return(
             <div className="GuessNumContainer">
                 <div className="GuessNumTitle">
@@ -51,9 +59,10 @@ class GuessNumGen extends Component{
                 </div>
 
                 <div className="GuessNumText2">{this.state.show?this.state.show==='correct'?
-                    <h2 style={{color:"lime",userSelect:"none"}}>
-                        {this.props.correctResult}
-                    </h2>
+                    <div>
+                        <button className="CopyThatCode" onClick={onCopyThatCode}>COPY <ion-icon name="clipboard-outline"></ion-icon> CODE</button>
+                        <h1 id="CorrectGuess" style={{color:"lime", fontSize:"1.3rem"}}>{this.props.correctResult}</h1>
+                    </div>
                     :
                     this.state.show:null}
                 </div>
